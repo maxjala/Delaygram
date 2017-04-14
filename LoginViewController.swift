@@ -22,13 +22,13 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var facebookLoginButton: UIButton! {
         didSet {
-            facebookLoginButton.addTarget(self, action: #selector(facebookLoginButtonTapped), for: .touchUpInside)
+//            facebookLoginButton.addTarget(self, action: #selector(facebookLoginButtonTapped), for: .touchUpInside)
         }
     }
     
     @IBOutlet weak var googleLoginButton: UIButton! {
         didSet {
-            googleLoginButton.addTarget(self, action: #selector(googleLoginButtonTapped), for: .touchUpInside)
+//            googleLoginButton.addTarget(self, action: #selector(googleLoginButtonTapped), for: .touchUpInside)
         }
     }
     
@@ -41,8 +41,12 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      
+        
+        if let currentUser = FIRAuth.auth()?.currentUser {
+            //indicating that someone is logged in
+            print("A user has logged in")
+            //go to the main page
+        }
     }
 
     func loginButtonTapped () {
@@ -72,7 +76,10 @@ class LoginViewController: UIViewController {
             print("User Logged In")
             print("email : \(user.email)")
             print("uid : \(user.uid)")
+            
+//            self.directToMainController()
     }
+}
     
     func facebookLoginButtonTapped () {
         
@@ -82,14 +89,18 @@ class LoginViewController: UIViewController {
         
     }
     
-    func registerButtonTapped () {
+    func registerButtonTapped() {
         if let goToSignup = storyboard?.instantiateViewController(withIdentifier: "SignupViewController") {
             navigationController?.pushViewController(goToSignup, animated: true)
             }
         }
+    
+    func directToMainController () {
+        if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "ViewController") {
+            present(mainNavi, animated: true, completion: nil)
+        }
     }
-    
-    
+
     
     
 //End of LoginViewController

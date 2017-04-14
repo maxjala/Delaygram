@@ -11,7 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class SignupViewController: UIViewController {
-    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     var ref: FIRDatabaseReference!
@@ -38,7 +38,7 @@ class SignupViewController: UIViewController {
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
-        guard let email = userNameTextField.text,
+        guard let email = emailTextField.text,
             let password = passwordTextField.text,
             let confirmPassword = confirmPasswordTextField.text else {return}
         

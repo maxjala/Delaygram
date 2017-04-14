@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A3E910B1EA0CC0A00769DCC /* LoginStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A3E910A1EA0CC0A00769DCC /* LoginStoryBoard.storyboard */; };
+		1A3E910D1EA0CC2300769DCC /* ProfileStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A3E910C1EA0CC2300769DCC /* ProfileStoryBoard.storyboard */; };
 		1A4DF3591EA0BD54005B76EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4DF3581EA0BD54005B76EF /* AppDelegate.swift */; };
 		1A4DF35B1EA0BD54005B76EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4DF35A1EA0BD54005B76EF /* ViewController.swift */; };
 		1A4DF35E1EA0BD54005B76EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4DF35C1EA0BD54005B76EF /* Main.storyboard */; };
@@ -18,6 +20,8 @@
 
 /* Begin PBXFileReference section */
 		16542BBE5D7CD165DD8D2B63 /* Pods_Delaygram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Delaygram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A3E910A1EA0CC0A00769DCC /* LoginStoryBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LoginStoryBoard.storyboard; path = Delaygram/LoginStoryBoard.storyboard; sourceTree = "<group>"; };
+		1A3E910C1EA0CC2300769DCC /* ProfileStoryBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileStoryBoard.storyboard; sourceTree = "<group>"; };
 		1A4DF3551EA0BD54005B76EF /* Delaygram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delaygram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A4DF3581EA0BD54005B76EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A4DF35A1EA0BD54005B76EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +46,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A3E910E1EA0CC5F00769DCC /* LoginFolder */ = {
+			isa = PBXGroup;
+			children = (
+				1A3E910A1EA0CC0A00769DCC /* LoginStoryBoard.storyboard */,
+			);
+			name = LoginFolder;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		1A3E91101EA0CCC600769DCC /* MainFolder */ = {
+			isa = PBXGroup;
+			children = (
+				1A4DF35C1EA0BD54005B76EF /* Main.storyboard */,
+				1A4DF35A1EA0BD54005B76EF /* ViewController.swift */,
+			);
+			name = MainFolder;
+			sourceTree = "<group>";
+		};
+		1A3E91111EA0CCD200769DCC /* ProfileFolder */ = {
+			isa = PBXGroup;
+			children = (
+				1A3E910C1EA0CC2300769DCC /* ProfileStoryBoard.storyboard */,
+			);
+			name = ProfileFolder;
+			sourceTree = "<group>";
+		};
 		1A4DF34C1EA0BD54005B76EF = {
 			isa = PBXGroup;
 			children = (
@@ -64,8 +94,9 @@
 			isa = PBXGroup;
 			children = (
 				1A4DF3581EA0BD54005B76EF /* AppDelegate.swift */,
-				1A4DF35A1EA0BD54005B76EF /* ViewController.swift */,
-				1A4DF35C1EA0BD54005B76EF /* Main.storyboard */,
+				1A3E910E1EA0CC5F00769DCC /* LoginFolder */,
+				1A3E91111EA0CCD200769DCC /* ProfileFolder */,
+				1A3E91101EA0CCC600769DCC /* MainFolder */,
 				1A4DF35F1EA0BD54005B76EF /* Assets.xcassets */,
 				1A4DF3611EA0BD54005B76EF /* LaunchScreen.storyboard */,
 				1A4DF3641EA0BD54005B76EF /* Info.plist */,
@@ -157,7 +188,9 @@
 				1A4DF3631EA0BD54005B76EF /* LaunchScreen.storyboard in Resources */,
 				1A4DF36B1EA0C027005B76EF /* GoogleService-Info.plist in Resources */,
 				1A4DF3601EA0BD54005B76EF /* Assets.xcassets in Resources */,
+				1A3E910B1EA0CC0A00769DCC /* LoginStoryBoard.storyboard in Resources */,
 				1A4DF35E1EA0BD54005B76EF /* Main.storyboard in Resources */,
+				1A3E910D1EA0CC2300769DCC /* ProfileStoryBoard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +416,7 @@
 				1A4DF3691EA0BD54005B76EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

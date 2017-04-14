@@ -11,7 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class SignupViewController: UIViewController {
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     var ref: FIRDatabaseReference!
@@ -38,7 +38,7 @@ class SignupViewController: UIViewController {
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
-        guard let email = emailTextField.text,
+        guard let email = userNameTextField.text,
             let password = passwordTextField.text,
             let confirmPassword = confirmPasswordTextField.text else {return}
         
@@ -70,14 +70,13 @@ class SignupViewController: UIViewController {
             let post : [String : String] = ["email": user.email!, "screenName": "ANONYMOUS", "desc": "Add a Description", "imageURL" : defaultImageURL]
             self.ref.child("users").child("\(user.uid)").updateChildValues(post)
             
-            self.directToMainNaviController()
+            self.directToMainViewController()
         }
     }
     func directToMainViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        if let mainNavi = storyboard.instantiateViewController(withIdentifier: "TabBarController") {
-            present(mainNavi, animated: true, completion: nil)
-        }
+        let viewController = storyboard.instantiateViewController(withIdentifier:"ViewController") as! ViewController
+        self.present(viewController, animated: true)
     }
 }
 

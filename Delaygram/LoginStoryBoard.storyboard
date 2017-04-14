@@ -12,7 +12,7 @@
         <!--Delaygram-->
         <scene sceneID="A0O-Rb-ouq">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="so2-YK-beu" customClass="LoginViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="so2-YK-beu" customClass="LoginViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Wav-Eo-utc"/>
                         <viewControllerLayoutGuide type="bottom" id="U2q-Oc-cE4"/>
@@ -75,7 +75,7 @@
         <!--Delaygram-->
         <scene sceneID="fyc-ek-fjU">
             <objects>
-                <viewController storyboardIdentifier="SignupViewController" id="Pws-ZJ-BQS" customClass="SignupViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignupViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pws-ZJ-BQS" customClass="SignupViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nl7-gh-u6k"/>
                         <viewControllerLayoutGuide type="bottom" id="kZa-an-23s"/>
@@ -102,6 +102,9 @@
                                 <rect key="frame" x="160" y="406" width="55" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Sign Up"/>
+                                <connections>
+                                    <action selector="signUpButtonTapped:" destination="Pws-ZJ-BQS" eventType="touchUpInside" id="5da-0k-PmY"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fNv-3z-AoN">
                                 <rect key="frame" x="52" y="300" width="271" height="30"/>
@@ -113,8 +116,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Delaygram" id="aLV-sU-0dk"/>
+                    <navigationItem key="navigationItem" title="Delaygram" id="aLV-sU-0dk">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Uwn-dA-9HL">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="Pws-ZJ-BQS" id="Bep-s2-BO9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="fNv-3z-AoN" id="GjU-vz-BQg"/>
+                        <outlet property="passwordTextField" destination="ADH-7u-n9n" id="EAT-4h-hfs"/>
+                        <outlet property="userNameTextField" destination="bgZ-2a-xsi" id="dow-zi-FuF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bKQ-Py-TKZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -77,7 +77,7 @@ class LoginViewController: UIViewController {
             print("email : \(user.email)")
             print("uid : \(user.uid)")
             
-//            self.directToMainController()
+            self.directToViewController()
     }
 }
     
@@ -95,10 +95,10 @@ class LoginViewController: UIViewController {
             }
         }
     
-    func directToMainController () {
-        if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "ViewController") {
-            present(mainNavi, animated: true, completion: nil)
-        }
+    func directToViewController () {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let viewController = storyboard.instantiateViewController(withIdentifier:"ViewController") as! ViewController
+        self.present(viewController, animated: true)
     }
 
     

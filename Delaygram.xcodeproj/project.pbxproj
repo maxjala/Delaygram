@@ -12,9 +12,12 @@
 		1A4DF35E1EA0BD54005B76EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4DF35C1EA0BD54005B76EF /* Main.storyboard */; };
 		1A4DF3601EA0BD54005B76EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A4DF35F1EA0BD54005B76EF /* Assets.xcassets */; };
 		1A4DF3631EA0BD54005B76EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4DF3611EA0BD54005B76EF /* LaunchScreen.storyboard */; };
+		1A4DF36B1EA0C027005B76EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A4DF36A1EA0C027005B76EF /* GoogleService-Info.plist */; };
+		D315A1FDFE78D09AF8162430 /* Pods_Delaygram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16542BBE5D7CD165DD8D2B63 /* Pods_Delaygram.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16542BBE5D7CD165DD8D2B63 /* Pods_Delaygram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Delaygram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A4DF3551EA0BD54005B76EF /* Delaygram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delaygram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A4DF3581EA0BD54005B76EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A4DF35A1EA0BD54005B76EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,9 @@
 		1A4DF35F1EA0BD54005B76EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A4DF3621EA0BD54005B76EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A4DF3641EA0BD54005B76EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A4DF36A1EA0C027005B76EF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DB353FD1B3DBA1CA0D489731 /* Pods-Delaygram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Delaygram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Delaygram/Pods-Delaygram.debug.xcconfig"; sourceTree = "<group>"; };
+		FBD213D75B21E2DE02EF2D5B /* Pods-Delaygram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Delaygram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Delaygram/Pods-Delaygram.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D315A1FDFE78D09AF8162430 /* Pods_Delaygram.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,8 @@
 			children = (
 				1A4DF3571EA0BD54005B76EF /* Delaygram */,
 				1A4DF3561EA0BD54005B76EF /* Products */,
+				D240DC45B8B09449D0AB292B /* Pods */,
+				D50CE68CD0563EC5D74D8499 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +69,26 @@
 				1A4DF35F1EA0BD54005B76EF /* Assets.xcassets */,
 				1A4DF3611EA0BD54005B76EF /* LaunchScreen.storyboard */,
 				1A4DF3641EA0BD54005B76EF /* Info.plist */,
+				1A4DF36A1EA0C027005B76EF /* GoogleService-Info.plist */,
 			);
 			path = Delaygram;
+			sourceTree = "<group>";
+		};
+		D240DC45B8B09449D0AB292B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DB353FD1B3DBA1CA0D489731 /* Pods-Delaygram.debug.xcconfig */,
+				FBD213D75B21E2DE02EF2D5B /* Pods-Delaygram.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D50CE68CD0563EC5D74D8499 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				16542BBE5D7CD165DD8D2B63 /* Pods_Delaygram.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A4DF3671EA0BD54005B76EF /* Build configuration list for PBXNativeTarget "Delaygram" */;
 			buildPhases = (
+				530AB5BAE1BDF6313AA384FB /* [CP] Check Pods Manifest.lock */,
 				1A4DF3511EA0BD54005B76EF /* Sources */,
 				1A4DF3521EA0BD54005B76EF /* Frameworks */,
 				1A4DF3531EA0BD54005B76EF /* Resources */,
+				BACA6EA7CDFB7452C30F8E93 /* [CP] Embed Pods Frameworks */,
+				CC83E6D98971E00C4D02E40C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,12 +155,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A4DF3631EA0BD54005B76EF /* LaunchScreen.storyboard in Resources */,
+				1A4DF36B1EA0C027005B76EF /* GoogleService-Info.plist in Resources */,
 				1A4DF3601EA0BD54005B76EF /* Assets.xcassets in Resources */,
 				1A4DF35E1EA0BD54005B76EF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		530AB5BAE1BDF6313AA384FB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BACA6EA7CDFB7452C30F8E93 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Delaygram/Pods-Delaygram-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CC83E6D98971E00C4D02E40C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Delaygram/Pods-Delaygram-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1A4DF3511EA0BD54005B76EF /* Sources */ = {
@@ -259,6 +338,7 @@
 		};
 		1A4DF3681EA0BD54005B76EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB353FD1B3DBA1CA0D489731 /* Pods-Delaygram.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZQ547JDPVM;
@@ -272,6 +352,7 @@
 		};
 		1A4DF3691EA0BD54005B76EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBD213D75B21E2DE02EF2D5B /* Pods-Delaygram.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZQ547JDPVM;

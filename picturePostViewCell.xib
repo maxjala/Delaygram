@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="506"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="506"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="505.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ibf-o2-o3e">
@@ -53,14 +53,12 @@
                             <action selector="likeButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="EmL-xd-moO"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6e-PV-rVc">
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6e-PV-rVc">
                         <rect key="frame" x="54" y="375" width="49" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="49" id="LyY-hQ-rDc"/>
                             <constraint firstAttribute="height" constant="20" id="dKu-wg-iOi"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="7"/>
-                        <state key="normal" title="Comment"/>
                         <connections>
                             <action selector="CommentButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="AYh-EO-Fdb"/>
                         </connections>

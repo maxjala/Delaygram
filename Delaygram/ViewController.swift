@@ -43,11 +43,15 @@ class ViewController: UIViewController {
             currentUserID = id
         }
         
-        var testURL = "https://firebasestorage.googleapis.com/v0/b/delaygram-b862a.appspot.com/o/foodPantry.png?alt=media&token=d33ae4bc-c9f8-457c-9baa-a783b000c57e"
+        let testURL = "https://firebasestorage.googleapis.com/v0/b/delaygram-b862a.appspot.com/o/foodPantry.png?alt=media&token=d33ae4bc-c9f8-457c-9baa-a783b000c57e"
         
-        var testPost = PicturePost(anID: 1, aUserEmail: (currentUser?.email)!, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "Now")
+        let testPost = PicturePost(anID: 1, aUserEmail: (currentUser?.email)!, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "Now")
         
         self.pictureFeed.append(testPost)
+        
+        let testPost2 = PicturePost(anID: 1, aUserEmail: (currentUser?.email)!, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "Now")
+        
+        self.pictureFeed.append(testPost2)
         
     }
     
@@ -135,6 +139,11 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         return pictureFeed.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 600.0;//Choose your custom row height
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: picturePostViewCell.cellIdentifier) as? picturePostViewCell
@@ -149,6 +158,8 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)
             cell.captionTextView.text = currentPost.caption
             cell.userNameLabel.text = currentPost.userScreenName
+        
+            cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 200)
             
             //cell..text = currentMessage.timestamp
             

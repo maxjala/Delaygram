@@ -42,10 +42,11 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let currentUser = FIRAuth.auth()?.currentUser {
-            //indicating that someone is logged in
-            print("A user has logged in")
-            //go to the main page
+
+        if (FIRAuth.auth()?.currentUser) != nil {
+            print("User already logged in")
+            // go to main page
+            directToViewController()
         }
     }
 

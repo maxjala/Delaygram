@@ -56,6 +56,9 @@
                             <constraint firstItem="pyN-YD-ycq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="t9W-AM-Uq5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="pictureFeedTableView" destination="4Vd-uM-86U" id="bOd-xq-Xgf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -20,6 +20,10 @@
 		1AECA3421EA1E651003236F1 /* picturePostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AECA3401EA1E651003236F1 /* picturePostViewCell.xib */; };
 		1AECA3441EA1FE18003236F1 /* picturePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AECA3431EA1FE18003236F1 /* picturePost.swift */; };
 		1AECA3481EA20D4D003236F1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AECA3471EA20D4D003236F1 /* User.swift */; };
+		3D2DA31B1EA33D5F00F77298 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2DA3171EA33D5F00F77298 /* Bolts.framework */; };
+		3D2DA31C1EA33D6000F77298 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2DA3181EA33D5F00F77298 /* FBSDKCoreKit.framework */; };
+		3D2DA31D1EA33D6000F77298 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2DA3191EA33D5F00F77298 /* FBSDKLoginKit.framework */; };
+		3D2DA31E1EA33D6000F77298 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2DA31A1EA33D5F00F77298 /* FBSDKShareKit.framework */; };
 		3D7E9A141EA0D28300492761 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E9A131EA0D28300492761 /* LoginViewController.swift */; };
 		3D7E9A161EA0D2B600492761 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E9A151EA0D2B600492761 /* SignupViewController.swift */; };
 		D315A1FDFE78D09AF8162430 /* Pods_Delaygram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16542BBE5D7CD165DD8D2B63 /* Pods_Delaygram.framework */; };
@@ -42,6 +46,10 @@
 		1AECA3401EA1E651003236F1 /* picturePostViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = picturePostViewCell.xib; path = ../picturePostViewCell.xib; sourceTree = "<group>"; };
 		1AECA3431EA1FE18003236F1 /* picturePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = picturePost.swift; sourceTree = "<group>"; };
 		1AECA3471EA20D4D003236F1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3D2DA3171EA33D5F00F77298 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../Programs/FacebookSDKs-iOS-4.21.0/Bolts.framework"; sourceTree = "<group>"; };
+		3D2DA3181EA33D5F00F77298 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../Programs/FacebookSDKs-iOS-4.21.0/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		3D2DA3191EA33D5F00F77298 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../Programs/FacebookSDKs-iOS-4.21.0/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		3D2DA31A1EA33D5F00F77298 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../../Programs/FacebookSDKs-iOS-4.21.0/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		3D7E9A131EA0D28300492761 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3D7E9A151EA0D2B600492761 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		DB353FD1B3DBA1CA0D489731 /* Pods-Delaygram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Delaygram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Delaygram/Pods-Delaygram.debug.xcconfig"; sourceTree = "<group>"; };
@@ -54,6 +62,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D315A1FDFE78D09AF8162430 /* Pods_Delaygram.framework in Frameworks */,
+				3D2DA31C1EA33D6000F77298 /* FBSDKCoreKit.framework in Frameworks */,
+				3D2DA31E1EA33D6000F77298 /* FBSDKShareKit.framework in Frameworks */,
+				3D2DA31D1EA33D6000F77298 /* FBSDKLoginKit.framework in Frameworks */,
+				3D2DA31B1EA33D5F00F77298 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +159,10 @@
 			isa = PBXGroup;
 			children = (
 				16542BBE5D7CD165DD8D2B63 /* Pods_Delaygram.framework */,
+				3D2DA3171EA33D5F00F77298 /* Bolts.framework */,
+				3D2DA3181EA33D5F00F77298 /* FBSDKCoreKit.framework */,
+				3D2DA3191EA33D5F00F77298 /* FBSDKLoginKit.framework */,
+				3D2DA31A1EA33D5F00F77298 /* FBSDKShareKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -409,10 +425,24 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DB353FD1B3DBA1CA0D489731 /* Pods-Delaygram.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZQ547JDPVM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GTMSessionFetcher\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GoogleToolboxForMac\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseDatabase/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
+					"~/Documents/Programs/FacebookSDKs-iOS-4.21.0",
+				);
 				INFOPLIST_FILE = Delaygram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "/Documents/Programs/FacebookSDKs-iOS-4.21.0";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nextacademy.Delaygram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -423,10 +453,23 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FBD213D75B21E2DE02EF2D5B /* Pods-Delaygram.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZQ547JDPVM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GTMSessionFetcher\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/GoogleToolboxForMac\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseDatabase/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
+				);
 				INFOPLIST_FILE = Delaygram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "/Documents/Programs/FacebookSDKs-iOS-4.21.0";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nextacademy.Delaygram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

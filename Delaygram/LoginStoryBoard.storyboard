@@ -40,11 +40,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Log In"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Etn-oI-7zY">
-                                <rect key="frame" x="115" y="341" width="145" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Log in with Facebook"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onm-MV-qRC">
                                 <rect key="frame" x="159" y="617" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -61,7 +56,6 @@
                     <navigationItem key="navigationItem" title="Delaygram" id="Kv8-De-BhU"/>
                     <connections>
                         <outlet property="emailSigninLabel" destination="aM7-Ii-VEQ" id="wst-fR-BK1"/>
-                        <outlet property="facebookLoginButton" destination="Etn-oI-7zY" id="zyx-5S-3ey"/>
                         <outlet property="googleLoginButton" destination="U9R-JS-YUO" id="f6f-tO-tx5"/>
                         <outlet property="loginButton" destination="4gd-8s-lFx" id="bh5-Qk-NMV"/>
                         <outlet property="passwordSigninLabel" destination="yWQ-di-7gV" id="MiT-uu-Y2F"/>
@@ -139,7 +133,7 @@
             <objects>
                 <navigationController storyboardIdentifier="AuthNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tj5-QO-jRg" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EiU-ai-dUw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EiU-ai-dUw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

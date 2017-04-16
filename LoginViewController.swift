@@ -98,7 +98,7 @@ class LoginViewController: UIViewController {
     
     func directToViewController () {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let viewController = storyboard.instantiateViewController(withIdentifier:"ViewController") as! ViewController
+        let viewController = storyboard.instantiateViewController(withIdentifier:"TabBarController") as! UITabBarController
         self.present(viewController, animated: true)
     }
 

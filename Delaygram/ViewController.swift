@@ -57,11 +57,12 @@ class ViewController: UIViewController {
         
         let testURL = "https://firebasestorage.googleapis.com/v0/b/delaygram-b862a.appspot.com/o/foodPantry.png?alt=media&token=d33ae4bc-c9f8-457c-9baa-a783b000c57e"
         
-        let testPost = PicturePost(anID: 1, aUserEmail: (currentUser?.email)!, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "Now")
+//        let testPost = PicturePost(anID: 1, aUserEmail: (currentUser?.email)!, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "Now")
+        let testPost = PicturePost(anID: 1, aUserID: currentUserID, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "now")
         
         self.pictureFeed.append(testPost)
         
-        let testPost2 = PicturePost(anID: 1, aUserEmail: (currentUser?.email)!, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "Now")
+        let testPost2 = PicturePost(anID: 1, aUserID: currentUserID, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "now")
         
         self.pictureFeed.append(testPost2)
         
@@ -130,7 +131,8 @@ class ViewController: UIViewController {
             let postID = id as? String, //remember to do postID +=1
             let imagePostURL = ["imagePostURL"] as? String,
             let currentPostID = Int(postID) {
-            let newPost = PicturePost(anID: currentPostID, aUserEmail: email, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: imagePostURL, aCaption: caption, aTimeStamp: timeStamp)
+
+//            let newPost = PicturePost(anID: <#T##Int#>, aUserID: <#T##String#>, aUserScreenName: <#T##String#>, aUserProfileImageURL: <#T##String#>, anImagePostURL: <#T##String#>, aCaption: <#T##String#>, aTimeStamp: <#T##String#>)
 
             
         }

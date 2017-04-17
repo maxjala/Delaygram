@@ -42,7 +42,11 @@ class UploadViewController: UIViewController {
     var ref: FIRDatabaseReference!
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var currentUserID : String = ""
+    var currentUserEmail : String = ""
     var uploadImageURL : String = ""
+    var newPost : PicturePost?
+    var personalPosts : [PicturePost] = []
+    var lastID = 0
     
 
     override func viewDidLoad() {
@@ -56,9 +60,11 @@ class UploadViewController: UIViewController {
         ref = FIRDatabase.database().reference()
         // Do any additional setup after loading the view, typically from a nib.
         
-        if let id = currentUser?.uid {
+        if let id = currentUser?.uid,
+            let email = currentUser?.email {
             print(id)
             currentUserID = id
+            currentUserEmail = email
         }
     }
     
@@ -75,9 +81,74 @@ class UploadViewController: UIViewController {
     
 
 
-
+    func listenToFirebase() {
+        ref.child("users").child(currentUserID).child("uploads").observe(.value, with: { (snapshot) in
+            print("Value : " , snapshot)
+        })
+        
+        // 2. get the snapshot
+        ref.child("users").child(currentUserID).child("uploads").observe(.childAdded, with: { (snapshot) in
+            print("Value : " , snapshot)
+            
+            // 3. convert snapshot to dictionary
+            guard let info = snapshot.value as? NSDictionary else {return}
+            // 4. add student to array of messages
+            self.addToPosts(id: snapshot.key, postInfo: info)
+            
+            // sort
+            self.personalPosts.sort(by: { (post1, post2) -> Bool in
+                return post1.imagePostID < post2.imagePostID
+            })
+            
+            // set last message id to last id
+            if let lastPost = self.personalPosts.last {
+                self.lastID = lastPost.imagePostID
+            }
+            
+//            // 5. update table view
+//            self.chatTableView.reloadData()
+//            self.tableViewScrollToBottom()
+            
+        })
+        
+    }
+    
+    func addToPosts(id : Any, postInfo : NSDictionary) {
+        
+        if let userID = postInfo["userID"] as? String,
+            let userScreenName = postInfo["userScreenName"] as? String,
+            let caption = postInfo["caption"] as? String,
+            let imageURL = postInfo["imageURL"] as? String,
+            let postID = id as? String,
+            let timeStamp = postInfo["timestamp"] as? String,
+            let currentPostID = Int(postID) {
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: userScreenName, aUserProfileImageURL: self.uploadImageURL, anImagePostURL: imageURL, aCaption: caption, aTimeStamp: timeStamp)
+            self.personalPosts.append(newPost)
+            
+        }
+        
+        
+    }
     
     @IBAction func postButtonTapped(_ sender: Any) {
+        
+        let currentDate = NSDate()
+        let dateFormatter:DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd HH:mm"
+        let timeCreated = dateFormatter.string(from: currentDate as Date)
+        
+        
+           if let caption = captionTextView.text {
+            // write to firebase
+            lastID = lastID + 1
+            let post : [String : Any] = ["userID": currentUserID, "userEmail": currentUserEmail, "body": caption, "imageURL" : self.uploadImageURL, "timestamp": timeCreated]
+            
+            ref.child("users").child(currentUserID).child("uploads").updateChildValues(post)
+            
+
+        }
+        
+        
     }
 
 

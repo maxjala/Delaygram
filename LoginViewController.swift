@@ -46,7 +46,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         
         //MARK Google loggin
         GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance().signIn()
         
         // MARK Email loggin
         if (FIRAuth.auth()?.currentUser) != nil {
@@ -94,7 +93,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         }
     }
 
-    // MARK Facebook loggin
+    // MARK - Facebook loggin
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error == nil {
             print("Log in complete")
@@ -108,11 +107,26 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("User logged out")
     }
-     //--------------------
     
+     // MARK - Google loggin
     @IBAction func signInGoogleView(_ sender: GIDSignInButton) {
-        
+        GIDSignIn.sharedInstance().signIn()
     }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if error == nil {
+            print("Log in complete")
+            directToViewController()
+        }
+        else if let err = error {
+            print("SignIn Error : \(err.localizedDescription)")
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        print("User logged out")
+    }
+
     
     func directToViewController () {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)

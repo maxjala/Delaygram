@@ -82,7 +82,7 @@
                                     <constraint firstAttribute="height" constant="30" id="9Kg-2H-VFI"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="signInGoogleView:" destination="so2-YK-beu" eventType="valueChanged" id="Kto-TA-rve"/>
+                                    <action selector="signInGoogleView:" destination="so2-YK-beu" eventType="touchUpInside" id="1Yg-Ft-a9s"/>
                                 </connections>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="5Za-Xw-nu8">
@@ -377,9 +377,8 @@
                                     <action selector="backButtonTapped:" destination="Pws-ZJ-BQS" eventType="touchUpInside" id="frW-7m-KLc"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" fixedFrame="YES" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="s4N-Hm-YM1">
-                                <rect key="frame" x="0.0" y="622" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="s4N-Hm-YM1">
+                                <rect key="frame" x="0.0" y="662" width="375" height="5"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -391,9 +390,12 @@
                             <constraint firstItem="tKJ-YG-UjZ" firstAttribute="trailing" secondItem="Cfe-v3-7B7" secondAttribute="trailingMargin" id="6d8-YG-3Bt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Oyn-nG-fgU" secondAttribute="trailing" constant="78" id="9bN-eo-gCJ"/>
                             <constraint firstItem="hrT-lu-Kqd" firstAttribute="leading" secondItem="1RH-CT-6KJ" secondAttribute="trailing" constant="4" id="AAU-bg-ygf"/>
+                            <constraint firstItem="GFS-A7-mwz" firstAttribute="top" secondItem="s4N-Hm-YM1" secondAttribute="bottom" id="ACD-kl-tHm"/>
+                            <constraint firstItem="s4N-Hm-YM1" firstAttribute="top" secondItem="k0j-ed-9PB" secondAttribute="bottom" constant="40" id="FQ2-q7-bEz"/>
                             <constraint firstItem="1RH-CT-6KJ" firstAttribute="leading" secondItem="Cfe-v3-7B7" secondAttribute="leadingMargin" id="GF8-vS-rbb"/>
                             <constraint firstItem="yCB-lv-nsS" firstAttribute="leading" secondItem="hrT-lu-Kqd" secondAttribute="trailing" constant="4" id="Me1-eY-JPL"/>
                             <constraint firstItem="rQh-u4-7Rl" firstAttribute="leading" secondItem="Cfe-v3-7B7" secondAttribute="leadingMargin" id="O2C-Z5-DIL"/>
+                            <constraint firstAttribute="trailing" secondItem="s4N-Hm-YM1" secondAttribute="trailing" id="OeC-K8-BOC"/>
                             <constraint firstItem="tKJ-YG-UjZ" firstAttribute="top" secondItem="DLs-Wn-aKB" secondAttribute="bottom" constant="45" id="PEX-mH-Ln1"/>
                             <constraint firstItem="tKJ-YG-UjZ" firstAttribute="leading" secondItem="Cfe-v3-7B7" secondAttribute="leadingMargin" id="QwB-fq-kev"/>
                             <constraint firstItem="Oyn-nG-fgU" firstAttribute="top" secondItem="rQh-u4-7Rl" secondAttribute="bottom" constant="35" id="U8B-Gv-g4B"/>
@@ -401,6 +403,7 @@
                             <constraint firstItem="hrT-lu-Kqd" firstAttribute="top" secondItem="IEh-Iw-z9H" secondAttribute="bottom" id="XJV-SD-yRD"/>
                             <constraint firstItem="yCB-lv-nsS" firstAttribute="top" secondItem="IEh-Iw-z9H" secondAttribute="bottom" id="Zii-nx-hRl"/>
                             <constraint firstItem="1QN-9P-HZr" firstAttribute="top" secondItem="tKJ-YG-UjZ" secondAttribute="bottom" constant="35" id="fc8-2m-f9b"/>
+                            <constraint firstItem="s4N-Hm-YM1" firstAttribute="leading" secondItem="Cfe-v3-7B7" secondAttribute="leading" id="g9a-h1-INK"/>
                             <constraint firstItem="jMk-lZ-cai" firstAttribute="leading" secondItem="Cfe-v3-7B7" secondAttribute="leadingMargin" constant="96.5" id="gpD-lo-i4P"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yCB-lv-nsS" secondAttribute="trailing" id="htc-nL-7LV"/>
                             <constraint firstItem="k0j-ed-9PB" firstAttribute="leading" secondItem="Cfe-v3-7B7" secondAttribute="leadingMargin" constant="127" id="i5o-en-gTX"/>
@@ -435,7 +438,7 @@
             <objects>
                 <navigationController storyboardIdentifier="AuthNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tj5-QO-jRg" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EiU-ai-dUw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EiU-ai-dUw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

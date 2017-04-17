@@ -55,17 +55,6 @@ class ViewController: UIViewController {
             currentUserID = id
         }
         
-        let testURL = "https://firebasestorage.googleapis.com/v0/b/delaygram-b862a.appspot.com/o/foodPantry.png?alt=media&token=d33ae4bc-c9f8-457c-9baa-a783b000c57e"
-        
-//        let testPost = PicturePost(anID: 1, aUserEmail: (currentUser?.email)!, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "Now")
-        let testPost = PicturePost(anID: 1, aUserID: currentUserID, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "now")
-        
-        self.pictureFeed.append(testPost)
-        
-        let testPost2 = PicturePost(anID: 2, aUserID: currentUserID, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "now")
-        
-        self.pictureFeed.append(testPost2)
-        
         listenToFirebase()
         
     }
@@ -86,7 +75,7 @@ class ViewController: UIViewController {
             
             // sort
             self.pictureFeed.sort(by: { (picture1, picture2) -> Bool in
-                return picture1.imagePostID < picture2.imagePostID
+                return picture1.imagePostID > picture2.imagePostID
                 
                 //LATER NEED TO CHANGE TO SORT BY POST TIME
             })
@@ -102,39 +91,7 @@ class ViewController: UIViewController {
         })
         
     }
-    
-    
-//    func addToPersonalFeed(id : Any, postInfo : NSDictionary) {
-//        let strTime = "2015-07-27 19:29:50 +0000"
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "MM-dd HH:mm"
-//        formatter.date(from: strTime) // Returns "Jul 27, 2015, 12:29 PM" PST
-//        
-//
-//            if let screenName = postInfo["screenName"] as? String,
-//            let caption = postInfo["caption"] as? String,
-//            let profilePictureURL = postInfo["profileImageURL"] as? String,
-//            let timeStamp = postInfo["timestamp"] as? String,
-//            let postID = id as? String, //remember to do postID +=1
-//            let userID = ["userID"] as? String,
-//            let imagePostURL = ["imagePostURL"] as? String,
-//                
-//            let strTime = id as? String,
-//            let formatter = DateFormatter(),
-//            formatter.dateFormat = "MM-dd HH:mm",
-//            let currentPostID = formatter {
-//
-////            let newPost = PicturePost(anID: <#T##Int#>, aUserID: <#T##String#>, aUserScreenName: <#T##String#>, aUserProfileImageURL: <#T##String#>, anImagePostURL: <#T##String#>, aCaption: <#T##String#>, aTimeStamp: <#T##String#>)
-//            
-//            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: imagePostURL, anImagePostURL: imagePostURL, aCaption: caption, aTimeStamp: timeStamp)
-//                
-//                //need to edit this later
-//
-//            
-//        }
-//        
-//        
-//    }
+
     
     func addToPersonalFeed(id : Any, postInfo : NSDictionary) {
         
@@ -142,7 +99,7 @@ class ViewController: UIViewController {
                     let caption = postInfo["caption"] as? String,
                     let profilePictureURL = postInfo["profileImageURL"] as? String,
                     let timeStamp = postInfo["timestamp"] as? String,
-                    let postID = id as? String, //remember to do postID +=1
+                    let postID = id as? String,
                     let currentPostID = Int(postID),
                     let postedImageURL =  postInfo["postedImageURL"] as? String,
                     let screenName = postInfo["screenName"] as? String {
@@ -198,8 +155,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             
             let pictureURL = currentPost.imagePostURL
             let profilePicURL = currentPost.userProfileImageURL
-            //cell.i.loadImageUsingCacheWithUrlString(urlString: messageURL)
-            //cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: messageURL)
+
             cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)
             cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: profilePicURL)
             cell.captionTextView.text = currentPost.caption

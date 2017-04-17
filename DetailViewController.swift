@@ -12,7 +12,12 @@ import Firebase
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var shortBioTextView: UITextView!
+    @IBOutlet weak var shortBioTextView: UITextView! {
+        didSet {
+            shortBioTextView.layer.borderColor = UIColor.black.cgColor
+            shortBioTextView.layer.borderWidth = 2.0
+        }
+    }
     @IBOutlet weak var displayPictureImageView: UIImageView!
     @IBOutlet weak var uploadDisplayPictureButton: UIButton! {
         didSet {
@@ -48,7 +53,7 @@ class DetailViewController: UIViewController {
     
     func directToMainViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let viewController = storyboard.instantiateViewController(withIdentifier:"ViewController") as! ViewController
+        let viewController = storyboard.instantiateViewController(withIdentifier:"TabBarController") as! UITabBarController
         self.present(viewController, animated: true)
     }
     

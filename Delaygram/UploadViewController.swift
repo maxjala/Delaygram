@@ -19,7 +19,7 @@ class UploadViewController: UIViewController {
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(enableImagePicker))
             uploadImageView.isUserInteractionEnabled = true
             uploadImageView.addGestureRecognizer(tapGestureRecognizer)
-            uploadImageView.loadImageUsingCacheWithUrlString(urlString: uploadImageURL)
+            //uploadImageView.loadImageUsingCacheWithUrlString(urlString: uploadImageURL)
         }
     }
     
@@ -43,6 +43,9 @@ class UploadViewController: UIViewController {
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var currentUserID : String = ""
     var currentUserEmail : String = ""
+    var profileScreenName : String = ""
+    var profileImageURL : String = ""
+    
     var uploadImageURL : String = ""
     var newPost : PicturePost?
     var personalPosts : [PicturePost] = []
@@ -86,8 +89,20 @@ class UploadViewController: UIViewController {
             print("Value : " , snapshot)
         })
         
+        ref.child("users").child(currentUserID).observe(.value, with: { (snapshot) in
+            print("Value : " , snapshot)
+            
+            let dictionary = snapshot.value as? [String: String]
+            
+            self.profileScreenName = (dictionary?["screenName"])!
+            self.profileImageURL = (dictionary?["imageURL"])!
+            
+            //self.setUpPersonalisedUI()
+            
+         })
+        
         // 2. get the snapshot
-        ref.child("users").child(currentUserID).child("uploads").observe(.childAdded, with: { (snapshot) in
+        ref.child("posts").child(currentUserID).child("uploads").observe(.childAdded, with: { (snapshot) in
             print("Value : " , snapshot)
             
             // 3. convert snapshot to dictionary
@@ -143,7 +158,7 @@ class UploadViewController: UIViewController {
             lastID = lastID + 1
             let post : [String : Any] = ["userID": currentUserID, "userEmail": currentUserEmail, "body": caption, "imageURL" : self.uploadImageURL, "timestamp": timeCreated]
             
-            ref.child("users").child(currentUserID).child("uploads").updateChildValues(post)
+            ref.child("posts").child("\(currentUserID)-\(lastID)").updateChildValues(post)
             
 
         }
@@ -178,8 +193,8 @@ class UploadViewController: UIViewController {
                 //save to firebase database
                 self.saveImagePath(downloadPath)
                 self.uploadImageURL = downloadPath
+                self.uploadImageView.loadImageUsingCacheWithUrlString(urlString: self.uploadImageURL)
                 
-                print("")
             }
             
         }

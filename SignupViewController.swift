@@ -15,6 +15,8 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     var ref: FIRDatabaseReference!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

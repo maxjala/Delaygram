@@ -33,6 +33,7 @@ class DetailViewController: UIViewController {
     var ref: FIRDatabaseReference!
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var currentUserID : String = ""
+    var newProfileImageURL : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,15 +82,36 @@ class DetailViewController: UIViewController {
         return _dateFormatter
     }()
     
-    func saveImagePath (downloadPath: String, referencePath: String) {
+    func saveImagePath (_ path: String) {
         
-        let dbRef = FIRDatabase.database().reference()
-        let imageValue : [String : Any] = [
-            "timeStamp" : dateFormat.string(from : Date()),
-            "imageUrl" : downloadPath,
-            "referencePath" : referencePath]
+        let imageValue : [String: Any] = ["imageURL": path]
         
-        dbRef.child("users").child(currentUserID).child("imageURL").setValue(imageValue)
+        ref.child("users").child(currentUserID).updateChildValues(imageValue)
+        
+    }
+    
+    func uploadImage (_ image: UIImage) {
+        
+        let ref = FIRStorage.storage().reference()
+        
+        //convert image to data
+        guard let imageData = UIImageJPEGRepresentation(image, 0.5)
+            else { return }
+        let metaData = FIRStorageMetadata ()
+        
+        metaData.contentType = "image/JPEG"
+        ref.child(uniqueFileForUser("Yohan")).put(imageData, metadata: metaData) {
+            (meta, error) in
+            
+            if let downloadPath = meta?.downloadURL()?.absoluteString {
+                
+                //save to Firebase
+                self.saveImagePath(downloadPath)
+                self.newProfileImageURL = downloadPath
+                
+                self.displayPictureImageView.loadImageUsingCacheWithUrlString(urlString: self.newProfileImageURL)
+            }
+        }
     }
 
     //End of DetailViewController
@@ -108,29 +130,7 @@ extension DetailViewController : UIImagePickerControllerDelegate, UINavigationCo
             else { return }
         
         //display and store
-        uploadImage(image)
-    }
-    
-    func uploadImage (_ image: UIImage) {
-        
-        let ref = FIRStorage.storage().reference()
-        
-        //convert image to data
-        guard let imageData = UIImageJPEGRepresentation(image, 0.5)
-            else { return }
-        let metaData = FIRStorageMetadata ()
-        
-        metaData.contentType = "image/JPEG"
-        ref.child(uniqueFileForUser("Yohan")).put(imageData, metadata: metaData) {
-            (meta, error) in
-            
-            if let downloadPath = meta?.downloadURL()?.absoluteString,
-                let referencePath = meta?.storageReference?.fullPath {
-                
-                //save to Firebase
-                self.saveImagePath(downloadPath: downloadPath, referencePath: referencePath)
-            }
-        }
+        self.uploadImage(image)
     }
     
     //create unique file name

@@ -36,7 +36,13 @@
                             <constraint firstItem="4Vd-uM-86U" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="lYb-t1-PXM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Delaygram" id="HcF-3c-oed"/>
+                    <navigationItem key="navigationItem" title="Delaygram" id="HcF-3c-oed">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="T7k-80-SDG">
+                            <connections>
+                                <action selector="tempLogoutButton:" destination="BYZ-38-t0r" id="Pk4-7g-pv8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="pictureFeedTableView" destination="4Vd-uM-86U" id="bOd-xq-Xgf"/>
                     </connections>

@@ -331,6 +331,16 @@
                                     <color key="titleColor" red="0.88860016320000001" green="0.136139017" blue="0.1102035165" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0j-ed-9PB">
+                                <rect key="frame" x="143" y="582" width="89" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="29g-7A-Fzf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="25"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" red="0.88860016320000001" green="0.136139017" blue="0.1102035165" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="DLs-Wn-aKB">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
                             </imageView>
@@ -367,16 +377,10 @@
                                     <action selector="backButtonTapped:" destination="Pws-ZJ-BQS" eventType="touchUpInside" id="frW-7m-KLc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0j-ed-9PB">
-                                <rect key="frame" x="143" y="582" width="89" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="29g-7A-Fzf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Baskerville" family="Baskerville" pointSize="25"/>
-                                <state key="normal" title="Sign Up">
-                                    <color key="titleColor" red="0.88860016320000001" green="0.136139017" blue="0.1102035165" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" fixedFrame="YES" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="s4N-Hm-YM1">
+                                <rect key="frame" x="0.0" y="622" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -431,7 +435,7 @@
             <objects>
                 <navigationController storyboardIdentifier="AuthNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tj5-QO-jRg" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EiU-ai-dUw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EiU-ai-dUw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

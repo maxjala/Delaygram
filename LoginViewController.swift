@@ -115,7 +115,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     func directToViewController () {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let viewController = storyboard.instantiateViewController(withIdentifier:"TabBarController") as! UITabBarController
+        let viewController = storyboard.instantiateViewController(withIdentifier:"TabBarController")
         self.present(viewController, animated: true)
     }
     

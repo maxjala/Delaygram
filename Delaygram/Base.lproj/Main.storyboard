@@ -186,7 +186,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="8QS-es-Oiq" customClass="testCollectionViewCell" customModule="Delaygram" customModuleProvider="target">
-                                        <rect key="frame" x="81" y="0.0" width="214" height="168"/>
+                                        <rect key="frame" x="80.5" y="0.0" width="214" height="168"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="214" height="168"/>

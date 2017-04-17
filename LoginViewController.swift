@@ -39,7 +39,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK Facebook loggin
+         //MARK Facebook loggin
         if (FBSDKAccessToken.current() == nil) { print("Not logged in") }
         else { print("Logged in") }
         
@@ -110,7 +110,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("User logged out")
     }
-    // --------------------
+     //--------------------
     
     func googleLoginButtonTapped () {
 //     googleLoginButton = GIDSignIn()              still can't change the design 
@@ -122,7 +122,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     func directToViewController () {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let viewController = storyboard.instantiateViewController(withIdentifier:"ViewController") as! ViewController
+        let viewController = storyboard.instantiateViewController(withIdentifier:"TabBarController") as! UITabBarController
         self.present(viewController, animated: true)
     }
     

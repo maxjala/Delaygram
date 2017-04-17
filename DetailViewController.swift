@@ -113,7 +113,11 @@ class DetailViewController: UIViewController {
             }
         }
     }
-
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     //End of DetailViewController
 }
 

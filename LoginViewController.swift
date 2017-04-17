@@ -23,21 +23,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         }
     }
     
-    @IBOutlet weak var googleLoginButton: GIDSignInButton! {
-        didSet {
-            googleLoginButton.addTarget(self, action: #selector(googleLoginButtonTapped), for: .touchUpInside)
-        }
-    }
-    
     @IBOutlet weak var registerButton: UIButton! {
         didSet {
             registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
          //MARK Facebook loggin
         if (FBSDKAccessToken.current() == nil) { print("Not logged in") }
@@ -45,10 +39,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         
         let facebookLoginButton = FBSDKLoginButton()
         facebookLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
-        facebookLoginButton.center = self.view.center
+        facebookLoginButton.frame = CGRect(x: 107, y: 417, width: 200, height: 42)
         
         facebookLoginButton.delegate = self
         self.view.addSubview(facebookLoginButton)
+        
+        //MARK Google loggin
+        GIDSignIn.sharedInstance().uiDelegate = self
         
         // MARK Email loggin
         if (FIRAuth.auth()?.currentUser) != nil {
@@ -92,7 +89,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     func registerButtonTapped() {
         if let goToSignup = storyboard?.instantiateViewController(withIdentifier: "SignupViewController") {
-            navigationController?.pushViewController(goToSignup, animated: true)
+            present(goToSignup, animated: true, completion: nil)
         }
     }
 
@@ -112,13 +109,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     }
      //--------------------
     
-    func googleLoginButtonTapped () {
-//     googleLoginButton = GIDSignIn()              still can't change the design 
-        GIDSignIn.sharedInstance().uiDelegate = self
+    @IBAction func signInGoogleView(_ sender: GIDSignInButton) {
         GIDSignIn.sharedInstance().signIn()
-        
     }
-    
     
     func directToViewController () {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)

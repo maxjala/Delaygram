@@ -33,10 +33,8 @@ class SignupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func cancelButtonTapped(_ sender: Any) {
-        if let logInVC = storyboard?.instantiateViewController(withIdentifier: "AuthNavigationController") {
-            present(logInVC, animated: true, completion: nil)
-        }
+    @IBAction func backButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
@@ -77,7 +75,7 @@ class SignupViewController: UIViewController {
     }
     func directToDetailViewController() {
         let viewController = storyboard?.instantiateViewController(withIdentifier:"DetailViewController") as! DetailViewController
-        navigationController?.pushViewController(viewController, animated: true)
+        present(viewController, animated: true, completion: nil)
     }
 }
 

@@ -55,8 +55,10 @@ class UploadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setCurrentUser()
+        enableImagePicker()
 
         // Do any additional setup after loading the view.
+
     }
     
     func setCurrentUser() {
@@ -83,85 +85,36 @@ class UploadViewController: UIViewController {
     }
     
 
-
-    func listenToFirebase() {
-        ref.child("users").child(currentUserID).child("uploads").observe(.value, with: { (snapshot) in
-            print("Value : " , snapshot)
-        })
-        
-        ref.child("users").child(currentUserID).observe(.value, with: { (snapshot) in
-            print("Value : " , snapshot)
-            
-            let dictionary = snapshot.value as? [String: String]
-            
-            self.profileScreenName = (dictionary?["screenName"])!
-            self.profileImageURL = (dictionary?["imageURL"])!
-            
-            //self.setUpPersonalisedUI()
-            
-         })
-        
-        // 2. get the snapshot
-        ref.child("posts").child(currentUserID).child("uploads").observe(.childAdded, with: { (snapshot) in
-            print("Value : " , snapshot)
-            
-            // 3. convert snapshot to dictionary
-            guard let info = snapshot.value as? NSDictionary else {return}
-            // 4. add student to array of messages
-            self.addToPosts(id: snapshot.key, postInfo: info)
-            
-            // sort
-            self.personalPosts.sort(by: { (post1, post2) -> Bool in
-                return post1.imagePostID < post2.imagePostID
-            })
-            
-            // set last message id to last id
-            if let lastPost = self.personalPosts.last {
-                self.lastID = lastPost.imagePostID
-            }
-            
-//            // 5. update table view
-//            self.chatTableView.reloadData()
-//            self.tableViewScrollToBottom()
-            
-        })
-        
-    }
-    
-    func addToPosts(id : Any, postInfo : NSDictionary) {
-        
-        if let userID = postInfo["userID"] as? String,
-            let userScreenName = postInfo["userScreenName"] as? String,
-            let caption = postInfo["caption"] as? String,
-            let imageURL = postInfo["imageURL"] as? String,
-            let postID = id as? String,
-            let timeStamp = postInfo["timestamp"] as? String,
-            let currentPostID = Int(postID) {
-            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: userScreenName, aUserProfileImageURL: self.uploadImageURL, anImagePostURL: imageURL, aCaption: caption, aTimeStamp: timeStamp)
-            self.personalPosts.append(newPost)
-            
-        }
-        
-        
-    }
     
     @IBAction func postButtonTapped(_ sender: Any) {
+        
+        self.ref.child("users").child(currentUserID).observe(.value, with: { (userSS) in
+            print("Value : " , userSS)
+
+            let dictionary = userSS.value as? [String: String]
+
+            self.profileScreenName = (dictionary?["screenName"])!
+            self.profileImageURL = (dictionary?["imageURL"])!
+        
+        
         
         let currentDate = NSDate()
         let dateFormatter:DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd HH:mm"
+        let uniqueTimeID = Int(currentDate.timeIntervalSince1970)
         let timeCreated = dateFormatter.string(from: currentDate as Date)
         
         
-           if let caption = captionTextView.text {
+           if let caption = self.captionTextView.text {
             // write to firebase
-            lastID = lastID + 1
-            let post : [String : Any] = ["userID": currentUserID, "userEmail": currentUserEmail, "body": caption, "imageURL" : self.uploadImageURL, "timestamp": timeCreated]
+            let post : [String : Any] = ["userID": self.currentUserID, "screenName": self.profileScreenName, "caption": caption, "profileImageURL": self.profileImageURL, "postedImageURL" : self.uploadImageURL, "timestamp": timeCreated]
             
-            ref.child("posts").child("\(currentUserID)-\(lastID)").updateChildValues(post)
+            self.ref.child("posts").child("\(uniqueTimeID)").updateChildValues(post)
             
 
         }
+            
+        })
         
         
     }
@@ -183,7 +136,7 @@ class UploadViewController: UIViewController {
     func uploadImage(_ image: UIImage) {
         
         let ref = FIRStorage.storage().reference()
-        guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
+        guard let imageData = UIImageJPEGRepresentation(image, 0.1) else {return}
         let metaData = FIRStorageMetadata()
         metaData.contentType = "image/jpeg"
         ref.child("\(currentUser?.email)-\(createTimeStamp()).jpeg").put(imageData, metadata: metaData) { (meta, error) in
@@ -191,7 +144,7 @@ class UploadViewController: UIViewController {
             if let downloadPath = meta?.downloadURL()?.absoluteString {
                 
                 //save to firebase database
-                self.saveImagePath(downloadPath)
+                //self.saveImagePath(downloadPath)
                 self.uploadImageURL = downloadPath
                 self.uploadImageView.loadImageUsingCacheWithUrlString(urlString: self.uploadImageURL)
                 
@@ -213,12 +166,7 @@ class UploadViewController: UIViewController {
         
     }
     
-    func saveImagePath(_ path: String) {
-        
-        let profileValue : [String: Any] = ["imageURL": path]
-        
-        ref.child("users").child(currentUserID).child("uploads").updateChildValues(profileValue)
-    }
+
 }
 
 

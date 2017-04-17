@@ -10,7 +10,12 @@ import UIKit
 
 class SearchTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var userImageView: UIImageView! {
+        didSet{
+            userImageView.layer.cornerRadius = userImageView.frame.width/2
+            userImageView.layer.masksToBounds = true
+        }
+    }
     @IBOutlet weak var userLabel: UILabel!
     
     static let cellIdentifier = "SearchTableViewCell"

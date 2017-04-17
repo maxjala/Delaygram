@@ -11,7 +11,6 @@ import Foundation
 class PicturePost {
     var imagePostID: Int = 0
     var userID : String = ""
-    var userEmail : String = ""
     var userScreenName : String = ""
     var userProfileImageURL : String = ""
     
@@ -19,10 +18,9 @@ class PicturePost {
     var caption : String = ""
     var timestamp : String = ""
     
-    init(anID: Int, aUserEmail: String, aUserScreenName: String, aUserProfileImageURL: String, anImagePostURL: String, aCaption: String, aTimeStamp: String) {
+    init(anID: Int, aUserID: String, aUserScreenName: String, aUserProfileImageURL: String, anImagePostURL: String, aCaption: String, aTimeStamp: String) {
         imagePostID = anID
-        //userID = aUserID
-        userEmail = aUserEmail
+        userID = aUserID
         userScreenName = aUserScreenName
         userProfileImageURL = aUserProfileImageURL
         imagePostURL = anImagePostURL

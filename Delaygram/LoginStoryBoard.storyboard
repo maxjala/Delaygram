@@ -435,7 +435,7 @@
             <objects>
                 <navigationController storyboardIdentifier="AuthNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tj5-QO-jRg" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EiU-ai-dUw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EiU-ai-dUw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

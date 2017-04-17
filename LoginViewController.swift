@@ -46,6 +46,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         
         //MARK Google loggin
         GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signIn()
         
         // MARK Email loggin
         if (FIRAuth.auth()?.currentUser) != nil {
@@ -110,7 +111,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
      //--------------------
     
     @IBAction func signInGoogleView(_ sender: GIDSignInButton) {
-        GIDSignIn.sharedInstance().signIn()
+        
     }
     
     func directToViewController () {

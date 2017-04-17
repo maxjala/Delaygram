@@ -58,13 +58,13 @@ class ViewController: UIViewController {
         let testURL = "https://firebasestorage.googleapis.com/v0/b/delaygram-b862a.appspot.com/o/foodPantry.png?alt=media&token=d33ae4bc-c9f8-457c-9baa-a783b000c57e"
         
 //        let testPost = PicturePost(anID: 1, aUserEmail: (currentUser?.email)!, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "Now")
-        let testPost = PicturePost(anID: 1, aUserID: currentUserID, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "now")
-        
-        self.pictureFeed.append(testPost)
-        
-        let testPost2 = PicturePost(anID: 2, aUserID: currentUserID, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "now")
-        
-        self.pictureFeed.append(testPost2)
+//        let testPost = PicturePost(anID: 1, aUserID: currentUserID, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "now")
+//        
+//        self.pictureFeed.append(testPost)
+//        
+//        let testPost2 = PicturePost(anID: 2, aUserID: currentUserID, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "now")
+//        
+//        self.pictureFeed.append(testPost2)
         
         listenToFirebase()
         

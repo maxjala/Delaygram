@@ -100,7 +100,7 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		1A3E91101EA0CCC600769DCC /* MainFolder */ = {
+		1A3E91101EA0CCC600769DCC /* MainFolder  */ = {
 			isa = PBXGroup;
 			children = (
 				1A4DF35C1EA0BD54005B76EF /* Main.storyboard */,
@@ -111,7 +111,7 @@
 				1A4DF35A1EA0BD54005B76EF /* ViewController.swift */,
 				7AC3F4341EA4A4B90023A22F /* testing(nick) */,
 			);
-			name = MainFolder;
+			name = "MainFolder ";
 			sourceTree = "<group>";
 		};
 		1A3E91111EA0CCD200769DCC /* ProfileFolder */ = {
@@ -146,7 +146,7 @@
 				1AECA3491EA20DA8003236F1 /* Universal Classes */,
 				1A3E910E1EA0CC5F00769DCC /* LoginFolder */,
 				1A3E91111EA0CCD200769DCC /* ProfileFolder */,
-				1A3E91101EA0CCC600769DCC /* MainFolder */,
+				1A3E91101EA0CCC600769DCC /* MainFolder  */,
 				1A4DF35F1EA0BD54005B76EF /* Assets.xcassets */,
 				1A4DF3611EA0BD54005B76EF /* LaunchScreen.storyboard */,
 				1A4DF3641EA0BD54005B76EF /* Info.plist */,

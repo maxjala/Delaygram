@@ -37,7 +37,7 @@ class SignupViewController: UIViewController {
         }
     }
     
-    @IBAction func signUpButtonTapped(_ sender: Any) {
+    @IBAction func nextButtonTapped(_ sender: Any) {
         guard let email = emailTextField.text,
             let password = passwordTextField.text,
             let confirmPassword = confirmPasswordTextField.text else {return}
@@ -67,15 +67,14 @@ class SignupViewController: UIViewController {
             
             print("User ID \(user.uid) with email: \(String(describing: user.email)) created")
             
-            let post : [String : String] = ["email": user.email!, "screenName": "ANONYMOUS", "desc": "Add a Description", "imageURL" : defaultImageURL]
+            let post : [String : String] = ["email": user.email!, "imageURL" : defaultImageURL]
             self.ref.child("users").child("\(user.uid)").updateChildValues(post)
             
-            self.directToMainViewController()
+            self.directToDetailViewController()
         }
     }
-    func directToMainViewController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let viewController = storyboard.instantiateViewController(withIdentifier:"ViewController") as! ViewController
+    func directToDetailViewController() {
+        let viewController = storyboard?.instantiateViewController(withIdentifier:"DetailViewController") as! DetailViewController
         self.present(viewController, animated: true)
     }
 }

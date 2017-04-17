@@ -11,5 +11,8 @@ target 'Delaygram' do
     pod 'Firebase/Auth'
     pod 'Firebase/Storage'
     pod 'GoogleSignIn'
+    pod 'FBSDKCoreKit'
+    pod 'FBSDKLoginKit'
+    pod 'FBSDKShareKit'
 
 end

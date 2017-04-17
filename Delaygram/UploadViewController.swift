@@ -16,9 +16,10 @@ class UploadViewController: UIViewController {
     
     @IBOutlet weak var uploadImageView: UIImageView! {
         didSet {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(enableImagePicker))
-        uploadImageView.isUserInteractionEnabled = true
-        uploadImageView.addGestureRecognizer(tapGestureRecognizer)
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(enableImagePicker))
+            uploadImageView.isUserInteractionEnabled = true
+            uploadImageView.addGestureRecognizer(tapGestureRecognizer)
+            uploadImageView.loadImageUsingCacheWithUrlString(urlString: uploadImageURL)
         }
     }
     
@@ -41,6 +42,7 @@ class UploadViewController: UIViewController {
     var ref: FIRDatabaseReference!
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var currentUserID : String = ""
+    var uploadImageURL : String = ""
     
 
     override func viewDidLoad() {
@@ -107,6 +109,7 @@ class UploadViewController: UIViewController {
                 
                 //save to firebase database
                 self.saveImagePath(downloadPath)
+                self.uploadImageURL = downloadPath
                 
                 print("")
             }
@@ -131,7 +134,7 @@ class UploadViewController: UIViewController {
         
         let profileValue : [String: Any] = ["imageURL": path]
         
-        ref.child("users").child(currentUserID).updateChildValues(profileValue)
+        ref.child("users").child(currentUserID).child("uploads").updateChildValues(profileValue)
     }
 }
 

@@ -55,10 +55,10 @@ class UploadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setCurrentUser()
+        enableImagePicker()
 
         // Do any additional setup after loading the view.
-        
-        //listenToFirebase()
+
     }
     
     func setCurrentUser() {
@@ -85,72 +85,6 @@ class UploadViewController: UIViewController {
     }
     
 
-
-    func listenToFirebase() {
-
-        
-        // 2. get the snapshot
-        ref.child("posts").observe(.childAdded, with: { (snapshot) in
-            print("Value : " , snapshot)
-            
-            
-            // 3. convert snapshot to dictionary
-            guard let info = snapshot.value as? NSDictionary else {return}
-            
-            // 4. add student to array of messages
-            //self.addToPosts(id: snapshot.key, postInfo: info)
-            
-            // sort
-            self.personalPosts.sort(by: { (post1, post2) -> Bool in
-                return post1.imagePostID < post2.imagePostID
-            })
-            
-            // set last message id to last id
-            if let lastPost = self.personalPosts.last {
-                self.lastID = lastPost.imagePostID
-            }
-                
-            })
-            
-//            // 5. update table view
-//            self.chatTableView.reloadData()
-//            self.tableViewScrollToBottom()
-        
-        
-    }
-    
-//    func addToPosts(id : Any, postInfo : NSDictionary) {
-//        
-////        self.ref.child("users").child(currentUserID).observe(.value, with: { (userSS) in
-////            print("Value : " , userSS)
-////            
-////            let dictionary = userSS.value as? [String: String]
-////            
-////            self.profileScreenName = (dictionary?["screenName"])!
-////            self.profileImageURL = (dictionary?["imageURL"])!
-//        
-//        
-//
-//            
-//            //self.setUpPersonalisedUI()
-//            
-//            if let userID = postInfo["userID"] as? String,
-//                let userScreenName = postInfo["userScreenName"] as? String,
-//                let caption = postInfo["caption"] as? String,
-//                let imageURL = postInfo["imageURL"] as? String,
-//                let postID = id as? String,
-//                let timeStamp = postInfo["timestamp"] as? String,
-//                let profileImageURL = postInfo["profileImageURL"] as? String,
-//                let currentPostID = Int(postID) {
-//                let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: userScreenName, aUserProfileImageURL: profileImageURL, anImagePostURL: imageURL, aCaption: caption, aTimeStamp: timeStamp)
-//                self.personalPosts.append(newPost)
-//                
-//            }
-//            
-//        //})
-//        
-//        
-//    }
     
     @IBAction func postButtonTapped(_ sender: Any) {
         

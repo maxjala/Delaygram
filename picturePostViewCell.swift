@@ -14,7 +14,12 @@ class picturePostViewCell: UITableViewCell {
     static let cellNib = UINib(nibName: picturePostViewCell.cellIdentifier, bundle: Bundle.main)
     
     
-    @IBOutlet weak var profilePicImageView: UIImageView!
+    @IBOutlet weak var profilePicImageView: UIImageView! {
+        didSet{
+        profilePicImageView.layer.cornerRadius = profilePicImageView.frame.width/2
+        profilePicImageView.layer.masksToBounds = true
+        }
+    }
     
     @IBOutlet weak var userNameLabel: UILabel!
     
@@ -29,7 +34,7 @@ class picturePostViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-    self.frame = CGRect(x: 0, y: 0, width: 100, height: 10)
+    //self.frame = CGRect(x: 0, y: 0, width: 100, height: 10)
    // self.frame = CGRect(
     }
 

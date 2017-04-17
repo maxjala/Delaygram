@@ -186,7 +186,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 600.0;//Choose your custom row height
+        return 550.0;//Choose your custom row height
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -205,7 +205,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             cell.captionTextView.text = currentPost.caption
             cell.userNameLabel.text = currentPost.userScreenName
         
-            cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 200)
+            cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 300)
             
             //cell..text = currentMessage.timestamp
             

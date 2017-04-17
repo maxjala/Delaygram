@@ -9,7 +9,6 @@
 import Foundation
 
 class User {
-    var userPostId: Int = 0
     var id: String
     var email : String
     var screenName : String

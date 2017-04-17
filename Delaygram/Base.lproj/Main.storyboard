@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -51,7 +52,7 @@
             </objects>
             <point key="canvasLocation" x="2015.2" y="137.18140929535232"/>
         </scene>
-        <!--Item-->
+        <!--Upload-->
         <scene sceneID="NyF-cR-9tS">
             <objects>
                 <viewController storyboardIdentifier="UploadViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mZF-yc-Egh" customClass="UploadViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
@@ -63,44 +64,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose an Image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPO-TV-k8I">
-                                <rect key="frame" x="16" y="174" width="90" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose an Image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPO-TV-k8I">
+                                <rect key="frame" x="62" y="126" width="250" height="250"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oDN-o2-fxp">
-                                <rect key="frame" x="16" y="174" width="90" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oDN-o2-fxp">
+                                <rect key="frame" x="62" y="126" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="Tcw-Ez-5Fa"/>
+                                </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Write a caption..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NFO-O0-EhT">
-                                <rect key="frame" x="114" y="183" width="245" height="72"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.93389095510295794" green="1" blue="0.91958230124692797" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcQ-kz-zki">
+                                <rect key="frame" x="0.0" y="20" width="375" height="52"/>
+                                <items>
+                                    <navigationItem title="Title" id="wKl-Ii-IdS">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="FHI-Tn-2fk">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xGX-1P-7yr">
+                                                <rect key="frame" x="287" y="11" width="72" height="38"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <state key="normal" title="Post"/>
+                                                <connections>
+                                                    <action selector="postButtonTapped:" destination="mZF-yc-Egh" eventType="touchUpInside" id="ZR3-2F-OcT"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write a caption..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NFO-O0-EhT">
+                                <rect key="frame" x="65" y="384" width="245" height="72"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="QTV-my-h0W"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UPLOAD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TLB-vE-Kkk">
-                                <rect key="frame" x="102" y="126" width="170" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGX-1P-7yr">
-                                <rect key="frame" x="151" y="314" width="72" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="POST"/>
-                                <connections>
-                                    <action selector="postButtonTapped:" destination="mZF-yc-Egh" eventType="touchUpInside" id="ZR3-2F-OcT"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NFO-O0-EhT" firstAttribute="top" secondItem="oDN-o2-fxp" secondAttribute="bottom" constant="8" symbolic="YES" id="4wA-PP-44J"/>
+                            <constraint firstItem="zcQ-kz-zki" firstAttribute="leading" secondItem="IK3-99-HMR" secondAttribute="leading" id="9Tf-d5-AUE"/>
+                            <constraint firstItem="oDN-o2-fxp" firstAttribute="leading" secondItem="IK3-99-HMR" secondAttribute="leadingMargin" constant="46" id="CQv-7k-rb5"/>
+                            <constraint firstItem="NFO-O0-EhT" firstAttribute="leading" secondItem="IK3-99-HMR" secondAttribute="leadingMargin" constant="49" id="KyE-9f-2mo"/>
+                            <constraint firstItem="oDN-o2-fxp" firstAttribute="trailing" secondItem="ZPO-TV-k8I" secondAttribute="trailing" id="OBe-bL-APc"/>
+                            <constraint firstAttribute="trailing" secondItem="zcQ-kz-zki" secondAttribute="trailing" id="TkC-Bg-ya0"/>
+                            <constraint firstItem="8ew-WE-1gR" firstAttribute="top" secondItem="NFO-O0-EhT" secondAttribute="bottom" constant="162" id="XLT-vx-0mu"/>
+                            <constraint firstItem="oDN-o2-fxp" firstAttribute="top" secondItem="ZPO-TV-k8I" secondAttribute="top" id="ZvF-5t-R5z"/>
+                            <constraint firstItem="oDN-o2-fxp" firstAttribute="leading" secondItem="ZPO-TV-k8I" secondAttribute="leading" id="b9k-bl-vEq"/>
+                            <constraint firstItem="zcQ-kz-zki" firstAttribute="top" secondItem="Fjv-bp-Oef" secondAttribute="bottom" id="bsB-b6-dvO"/>
+                            <constraint firstItem="oDN-o2-fxp" firstAttribute="top" secondItem="zcQ-kz-zki" secondAttribute="bottom" constant="54" id="faa-ST-DFV"/>
+                            <constraint firstItem="NFO-O0-EhT" firstAttribute="centerX" secondItem="ZPO-TV-k8I" secondAttribute="centerX" id="gsD-Bd-MgS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oDN-o2-fxp" secondAttribute="trailing" constant="47" id="qzE-AG-4vW"/>
+                            <constraint firstItem="NFO-O0-EhT" firstAttribute="top" secondItem="ZPO-TV-k8I" secondAttribute="bottom" constant="8" symbolic="YES" id="rJU-Uh-BQc"/>
+                            <constraint firstItem="zcQ-kz-zki" firstAttribute="top" secondItem="Fjv-bp-Oef" secondAttribute="bottom" id="zYY-bx-vf3"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="6uw-tA-Enn"/>
+                    <tabBarItem key="tabBarItem" title="Upload" id="6uw-tA-Enn"/>
                     <connections>
                         <outlet property="captionTextView" destination="NFO-O0-EhT" id="VNY-me-J6h"/>
                         <outlet property="chooseImageLabel" destination="ZPO-TV-k8I" id="BlB-SX-Pht"/>
@@ -111,7 +134,7 @@
             </objects>
             <point key="canvasLocation" x="1076" y="912.5937031484259"/>
         </scene>
-        <!--Item-->
+        <!--Search-->
         <scene sceneID="dnl-XB-oM0">
             <objects>
                 <viewController storyboardIdentifier="SearchViewController" id="hRE-rc-TeQ" customClass="SearchViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
@@ -146,7 +169,7 @@
                             <constraint firstAttribute="trailing" secondItem="e9u-AL-uDB" secondAttribute="trailing" id="rX8-u7-BKu"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="d47-l5-G0c"/>
+                    <tabBarItem key="tabBarItem" title="Search" id="d47-l5-G0c"/>
                     <connections>
                         <outlet property="userSearchBar" destination="e9u-AL-uDB" id="Qku-7F-5Da"/>
                         <outlet property="userTableView" destination="iS7-3G-Q82" id="bG7-g8-Ge7"/>
@@ -156,7 +179,7 @@
             </objects>
             <point key="canvasLocation" x="2095.1999999999998" y="918.89055472263874"/>
         </scene>
-        <!--Item-->
+        <!--Explore-->
         <scene sceneID="VSE-f3-eU8">
             <objects>
                 <viewController storyboardIdentifier="testSearchViewController" id="cX8-iZ-Guj" customClass="testSearchViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
@@ -221,7 +244,7 @@
                             <constraint firstAttribute="trailing" secondItem="RB6-9d-nv8" secondAttribute="trailing" id="wEO-eB-hVf"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="fNh-A7-h6S"/>
+                    <tabBarItem key="tabBarItem" title="Explore" id="fNh-A7-h6S"/>
                     <connections>
                         <outlet property="collectionView" destination="dbh-Qt-vKd" id="VSb-lj-Van"/>
                     </connections>
@@ -230,11 +253,11 @@
             </objects>
             <point key="canvasLocation" x="2940" y="918.89055472263874"/>
         </scene>
-        <!--Item-->
+        <!--Home-->
         <scene sceneID="tTX-Qz-tD1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o4Z-2E-yd3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="rva-dk-cMN"/>
+                    <tabBarItem key="tabBarItem" title="Home" id="rva-dk-cMN"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2KV-Uc-WJk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

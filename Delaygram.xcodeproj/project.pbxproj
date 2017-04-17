@@ -31,6 +31,9 @@
 		7A15D97B1EA45F65004FDD55 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A15D9791EA45F65004FDD55 /* SearchTableViewCell.swift */; };
 		7A15D97C1EA45F65004FDD55 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A15D97A1EA45F65004FDD55 /* SearchTableViewCell.xib */; };
 		7AA23D5E1EA3A0A900DA9C08 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA23D5D1EA3A0A900DA9C08 /* SearchViewController.swift */; };
+		7AC3F42F1EA4A23E0023A22F /* testCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC3F42E1EA4A23E0023A22F /* testCollectionViewCell.swift */; };
+		7AC3F4311EA4A25A0023A22F /* testSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC3F4301EA4A25A0023A22F /* testSearchViewController.swift */; };
+		7AC3F4331EA4A4170023A22F /* CustomImageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC3F4321EA4A4170023A22F /* CustomImageFlowLayout.swift */; };
 		D315A1FDFE78D09AF8162430 /* Pods_Delaygram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16542BBE5D7CD165DD8D2B63 /* Pods_Delaygram.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +65,9 @@
 		7A15D9791EA45F65004FDD55 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7A15D97A1EA45F65004FDD55 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		7AA23D5D1EA3A0A900DA9C08 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		7AC3F42E1EA4A23E0023A22F /* testCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testCollectionViewCell.swift; sourceTree = "<group>"; };
+		7AC3F4301EA4A25A0023A22F /* testSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testSearchViewController.swift; sourceTree = "<group>"; };
+		7AC3F4321EA4A4170023A22F /* CustomImageFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomImageFlowLayout.swift; sourceTree = "<group>"; };
 		DB353FD1B3DBA1CA0D489731 /* Pods-Delaygram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Delaygram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Delaygram/Pods-Delaygram.debug.xcconfig"; sourceTree = "<group>"; };
 		FBD213D75B21E2DE02EF2D5B /* Pods-Delaygram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Delaygram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Delaygram/Pods-Delaygram.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +109,7 @@
 				7AA23D5D1EA3A0A900DA9C08 /* SearchViewController.swift */,
 				1AD145481EA258D100C42B6F /* UploadViewController.swift */,
 				1A4DF35A1EA0BD54005B76EF /* ViewController.swift */,
+				7AC3F4341EA4A4B90023A22F /* testing(nick) */,
 			);
 			name = MainFolder;
 			sourceTree = "<group>";
@@ -159,6 +166,16 @@
 				1AD1454A1EA371C800C42B6F /* Extensions.swift */,
 			);
 			name = "Universal Classes";
+			sourceTree = "<group>";
+		};
+		7AC3F4341EA4A4B90023A22F /* testing(nick) */ = {
+			isa = PBXGroup;
+			children = (
+				7AC3F4321EA4A4170023A22F /* CustomImageFlowLayout.swift */,
+				7AC3F42E1EA4A23E0023A22F /* testCollectionViewCell.swift */,
+				7AC3F4301EA4A25A0023A22F /* testSearchViewController.swift */,
+			);
+			name = "testing(nick)";
 			sourceTree = "<group>";
 		};
 		D240DC45B8B09449D0AB292B /* Pods */ = {
@@ -320,7 +337,10 @@
 				1AECA3411EA1E651003236F1 /* picturePostViewCell.swift in Sources */,
 				1A4DF35B1EA0BD54005B76EF /* ViewController.swift in Sources */,
 				3D7E9A161EA0D2B600492761 /* SignupViewController.swift in Sources */,
+				7AC3F4331EA4A4170023A22F /* CustomImageFlowLayout.swift in Sources */,
 				1AECA3481EA20D4D003236F1 /* User.swift in Sources */,
+				7AC3F4311EA4A25A0023A22F /* testSearchViewController.swift in Sources */,
+				7AC3F42F1EA4A23E0023A22F /* testCollectionViewCell.swift in Sources */,
 				1AECA3441EA1FE18003236F1 /* picturePost.swift in Sources */,
 				1A4DF3591EA0BD54005B76EF /* AppDelegate.swift in Sources */,
 			);

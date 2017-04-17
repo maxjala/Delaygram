@@ -145,6 +145,21 @@ class ViewController: UIViewController {
     
     
 
+    @IBAction func tempLogoutButton(_ sender: Any) {
+        let firebaseAuth = FIRAuth.auth()
+        do{
+            try firebaseAuth?.signOut()
+        
+            if let logOutVC = storyboard?.instantiateViewController(withIdentifier: "LoginViewController"){
+            
+                present(logOutVC, animated: true, completion: nil)
+            }
+            catch let signOutError; as NSError {
+                print("Error Signing Out: %@", signOutError)
+            }
+        }
+    }
+    
 
 }
 

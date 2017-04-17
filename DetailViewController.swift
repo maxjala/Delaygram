@@ -79,12 +79,12 @@ class DetailViewController: UIViewController {
     func saveImagePath (downloadPath: String, referencePath: String) {
         
         let dbRef = FIRDatabase.database().reference()
-        let chatValue : [String : Any] = [
+        let imageValue : [String : Any] = [
             "timeStamp" : dateFormat.string(from : Date()),
             "imageUrl" : downloadPath,
             "referencePath" : referencePath]
         
-        dbRef.child("users").child(currentUserID).child("imageURL").childByAutoId().setValue(chatValue)
+        dbRef.child("users").child(currentUserID).child("imageURL").setValue(imageValue)
     }
 
     //End of DetailViewController

@@ -75,7 +75,7 @@ class SignupViewController: UIViewController {
     }
     func directToDetailViewController() {
         let viewController = storyboard?.instantiateViewController(withIdentifier:"DetailViewController") as! DetailViewController
-        self.present(viewController, animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

@@ -62,19 +62,21 @@ class ViewController: UIViewController {
         
         self.pictureFeed.append(testPost)
         
-        let testPost2 = PicturePost(anID: 1, aUserID: currentUserID, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "now")
+        let testPost2 = PicturePost(anID: 2, aUserID: currentUserID, aUserScreenName: (currentUser?.email)!, aUserProfileImageURL: testURL, anImagePostURL: testURL, aCaption: "testing", aTimeStamp: "now")
         
         self.pictureFeed.append(testPost2)
+        
+        listenToFirebase()
         
     }
     
     func listenToFirebase() {
-        ref.child("posts").child(currentUserID).child("subscribedPosts").observe(.value, with: { (snapshot) in
+        ref.child("posts").observe(.value, with: { (snapshot) in
             print("Value : " , snapshot)
         })
         
         // 2. get the snapshot
-        ref.child("posts").child(currentUserID).child("subscribedPosts").observe(.childAdded, with: { (snapshot) in
+        ref.child("posts").observe(.childAdded, with: { (snapshot) in
             print("Value : " , snapshot)
             
             // 3. convert snapshot to dictionary
@@ -99,44 +101,57 @@ class ViewController: UIViewController {
             
         })
         
-//        ref.child("chat").child(currentChat.id).child("messages").observe(.childRemoved, with: { (snapshot) in
-//            print("Value : " , snapshot)
-//            
-//            guard let deletedId = Int(snapshot.key)
-//                else {return}
-//            
-//            if let deletedIndex = self.messages.index(where: { (msg) -> Bool in
-//                return msg.id == deletedId
-//            }) {
-//                self.messages.remove(at: deletedIndex)
-//                let indexPath = IndexPath(row: deletedIndex, section: 0)
-//                self.chatTableView.deleteRows(at: [indexPath], with: .right)
-//            }
-//            
-//            // to delete :
-//            //            self.ref.child("path").removeValue()
-//            //            self.ref.child("student").child("targetId").removeValue()
-//        })
-        
-        
     }
+    
+    
+//    func addToPersonalFeed(id : Any, postInfo : NSDictionary) {
+//        let strTime = "2015-07-27 19:29:50 +0000"
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "MM-dd HH:mm"
+//        formatter.date(from: strTime) // Returns "Jul 27, 2015, 12:29 PM" PST
+//        
+//
+//            if let screenName = postInfo["screenName"] as? String,
+//            let caption = postInfo["caption"] as? String,
+//            let profilePictureURL = postInfo["profileImageURL"] as? String,
+//            let timeStamp = postInfo["timestamp"] as? String,
+//            let postID = id as? String, //remember to do postID +=1
+//            let userID = ["userID"] as? String,
+//            let imagePostURL = ["imagePostURL"] as? String,
+//                
+//            let strTime = id as? String,
+//            let formatter = DateFormatter(),
+//            formatter.dateFormat = "MM-dd HH:mm",
+//            let currentPostID = formatter {
+//
+////            let newPost = PicturePost(anID: <#T##Int#>, aUserID: <#T##String#>, aUserScreenName: <#T##String#>, aUserProfileImageURL: <#T##String#>, anImagePostURL: <#T##String#>, aCaption: <#T##String#>, aTimeStamp: <#T##String#>)
+//            
+//            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: imagePostURL, anImagePostURL: imagePostURL, aCaption: caption, aTimeStamp: timeStamp)
+//                
+//                //need to edit this later
+//
+//            
+//        }
+//        
+//        
+//    }
     
     func addToPersonalFeed(id : Any, postInfo : NSDictionary) {
         
-        if let email = postInfo["email"] as? String,
-            let screenName = postInfo["screenName"] as? String,
-            let caption = postInfo["caption"] as? String,
-            let profilePictureURL = postInfo["profileImageURL"] as? String,
-            let timeStamp = postInfo["timestamp"] as? String,
-            let postID = id as? String, //remember to do postID +=1
-            let imagePostURL = ["imagePostURL"] as? String,
-            let currentPostID = Int(postID) {
-
-//            let newPost = PicturePost(anID: <#T##Int#>, aUserID: <#T##String#>, aUserScreenName: <#T##String#>, aUserProfileImageURL: <#T##String#>, anImagePostURL: <#T##String#>, aCaption: <#T##String#>, aTimeStamp: <#T##String#>)
-
+                    if let userEmail = postInfo["userEmail"] as? String,
+                    let caption = postInfo["body"] as? String,
+                    //let profilePictureURL = postInfo["profileImageURL"] as? String,
+                    let timeStamp = postInfo["timestamp"] as? String,
+                    let postID = id as? String, //remember to do postID +=1
+                    let currentPostID = Int(postID),
+                    let userID =  postInfo["userID"] as? String,
+                    let imagePostURL = postInfo["imageURL"] as? String {
+                        
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: userEmail, aUserProfileImageURL: imagePostURL, anImagePostURL: imagePostURL, aCaption: caption, aTimeStamp: timeStamp)
+                        
+                self.pictureFeed.append(newPost)
             
         }
-        
         
     }
 

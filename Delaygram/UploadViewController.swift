@@ -150,6 +150,7 @@ class UploadViewController: UIViewController {
         let currentDate = NSDate()
         let dateFormatter:DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd HH:mm"
+        let uniqueTimeID = Int(currentDate.timeIntervalSince1970)
         let timeCreated = dateFormatter.string(from: currentDate as Date)
         
         
@@ -158,7 +159,7 @@ class UploadViewController: UIViewController {
             lastID = lastID + 1
             let post : [String : Any] = ["userID": currentUserID, "userEmail": currentUserEmail, "body": caption, "imageURL" : self.uploadImageURL, "timestamp": timeCreated]
             
-            ref.child("posts").child("\(currentUserID)-\(lastID)").updateChildValues(post)
+            ref.child("posts").child("\(uniqueTimeID)").updateChildValues(post)
             
 
         }

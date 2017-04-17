@@ -10,6 +10,7 @@ import Foundation
 
 class PicturePost {
     var imagePostID: Int = 0
+    //var imagePostID = Date()
     var userID : String = ""
     var userScreenName : String = ""
     var userProfileImageURL : String = ""

@@ -202,7 +202,7 @@ class UploadViewController: UIViewController {
     func uploadImage(_ image: UIImage) {
         
         let ref = FIRStorage.storage().reference()
-        guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
+        guard let imageData = UIImageJPEGRepresentation(image, 0.1) else {return}
         let metaData = FIRStorageMetadata()
         metaData.contentType = "image/jpeg"
         ref.child("\(currentUser?.email)-\(createTimeStamp()).jpeg").put(imageData, metadata: metaData) { (meta, error) in

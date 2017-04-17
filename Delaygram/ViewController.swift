@@ -138,16 +138,16 @@ class ViewController: UIViewController {
     
     func addToPersonalFeed(id : Any, postInfo : NSDictionary) {
         
-                    if let userEmail = postInfo["userEmail"] as? String,
-                    let caption = postInfo["body"] as? String,
-                    //let profilePictureURL = postInfo["profileImageURL"] as? String,
+                    if let userID = postInfo["userID"] as? String,
+                    let caption = postInfo["caption"] as? String,
+                    let profilePictureURL = postInfo["profileImageURL"] as? String,
                     let timeStamp = postInfo["timestamp"] as? String,
                     let postID = id as? String, //remember to do postID +=1
                     let currentPostID = Int(postID),
-                    let userID =  postInfo["userID"] as? String,
-                    let imagePostURL = postInfo["imageURL"] as? String {
+                    let postedImageURL =  postInfo["postedImageURL"] as? String,
+                    let screenName = postInfo["screenName"] as? String {
                         
-            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: userEmail, aUserProfileImageURL: imagePostURL, anImagePostURL: imagePostURL, aCaption: caption, aTimeStamp: timeStamp)
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
                         
                 self.pictureFeed.append(newPost)
             
@@ -197,10 +197,11 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         let currentPost = pictureFeed[indexPath.row]
             
             let pictureURL = currentPost.imagePostURL
+            let profilePicURL = currentPost.userProfileImageURL
             //cell.i.loadImageUsingCacheWithUrlString(urlString: messageURL)
             //cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: messageURL)
             cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)
-            cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)
+            cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: profilePicURL)
             cell.captionTextView.text = currentPost.caption
             cell.userNameLabel.text = currentPost.userScreenName
         

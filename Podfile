@@ -6,10 +6,12 @@ target 'Delaygram' do
   use_frameworks!
 
   # Pods for Delaygram
-	pod ‘Firebase/Core’
+	pod 'Firebase/Core'
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
     pod 'Firebase/Storage'
     pod 'GoogleSignIn'
-
+    pod 'FBSDKCoreKit'
+    pod 'FBSDKLoginKit'
+    pod 'FBSDKShareKit'
 end

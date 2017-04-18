@@ -12,7 +12,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import GoogleSignIn
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailSigninLabel: UITextField!
     @IBOutlet weak var passwordSigninLabel: UITextField!
@@ -28,26 +28,18 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
             registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         }
     }
+    @IBOutlet weak var googleSignInView: GIDSignInButton! {
+        didSet {
+            googleSignInView.addTarget(self, action: #selector(googleSignIn), for: .touchUpInside)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        facebookLogin()
+        googleLogin()
         
-         //MARK Facebook loggin
-        if (FBSDKAccessToken.current() == nil) { print("Not logged in") }
-        else { print("Logged in") }
-        
-        let facebookLoginButton = FBSDKLoginButton()
-        facebookLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
-        facebookLoginButton.frame = CGRect(x: 107, y: 417, width: 200, height: 42)
-        
-        facebookLoginButton.delegate = self
-        self.view.addSubview(facebookLoginButton)
-        
-        //MARK Google loggin
-        GIDSignIn.sharedInstance().uiDelegate = self
-        
-        // MARK Email loggin
         if (FIRAuth.auth()?.currentUser) != nil {
             print("User already logged in")
             // go to main page
@@ -55,6 +47,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         }
     }
 
+    // MARK - Email Login
     func loginButtonTapped () {
         guard let email = emailSigninLabel.text,
             let password = passwordSigninLabel.text
@@ -94,15 +87,89 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     }
 
     // MARK - Facebook loggin
+    func facebookLogin () {
+        if (FBSDKAccessToken.current() == nil) { print("Facebook Not logged in") }
+        else { print("Facebook Logged in") }
+        
+        let facebookLoginButton = FBSDKLoginButton()
+        facebookLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
+        facebookLoginButton.frame = CGRect(x: 107, y: 417, width: 200, height: 42)
+        
+        facebookLoginButton.delegate = self
+        self.view.addSubview(facebookLoginButton)
+    }
+    
+     // MARK - Google loggin
+    func googleLogin () {
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().delegate = self
+        
+        if (GIDSignIn.sharedInstance().currentUser == nil) { print("Google Not logged in") }
+        else { print("Google Logged in") }
+        
+    }
+    
+    func googleSignIn () {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    
+    func directToViewController () {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+        self.present(viewController, animated: true)
+    }
+    
+//End of LoginViewController
+}
+
+
+extension LoginViewController : GIDSignInDelegate {
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+        
+        if let error = error {
+            
+            print("GSingIn Error : \(error.localizedDescription)" )
+            return
+        }
+        
+        guard let authentication = user.authentication else { return }
+        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                          accessToken: authentication.accessToken)
+        
+        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+            if let err = error {
+                print("Google Loggin Error : \(err.localizedDescription)")
+                return
+            }
+            self.directToViewController()
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
+    }
+}
+
+extension LoginViewController : GIDSignInUIDelegate {
+    
+    func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
+        
+    }
+    
+    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {}
+    
+    func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {}
+}
+
+extension LoginViewController : FBSDKLoginButtonDelegate {
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error == nil {
             print("Log in complete")
-            if (FBSDKAccessToken.current() == nil) {
-                dismiss(animated: true, completion: nil)
-            }
-            else {
-            directToViewController()
-            }
+            if (FBSDKAccessToken.current() == nil) { dismiss(animated: true, completion: nil) }
+            else { directToViewController() }
         }
         else if let err = error {
             print("SignIn Error : \(err.localizedDescription)")
@@ -113,33 +180,5 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("User logged out")
     }
-    
-     // MARK - Google loggin
-    @IBAction func signInGoogleView(_ sender: GIDSignInButton) {
-        GIDSignIn.sharedInstance().signIn()
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if error == nil {
-            print("Log in complete")
-            directToViewController()
-        }
-        else if let err = error {
-            print("SignIn Error : \(err.localizedDescription)")
-            dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        print("User logged out")
-    }
-
-    
-    func directToViewController () {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
-        self.present(viewController, animated: true)
-    }
-    
-//End of LoginViewController
 }
+

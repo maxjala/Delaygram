@@ -81,9 +81,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="9Kg-2H-VFI"/>
                                 </constraints>
-                                <connections>
-                                    <action selector="signInGoogleView:" destination="so2-YK-beu" eventType="touchUpInside" id="1Yg-Ft-a9s"/>
-                                </connections>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="5Za-Xw-nu8">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
@@ -139,6 +136,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="emailSigninLabel" destination="aM7-Ii-VEQ" id="wst-fR-BK1"/>
+                        <outlet property="googleSignInView" destination="T5G-fs-Mrb" id="iYP-4E-QPQ"/>
                         <outlet property="loginButton" destination="4gd-8s-lFx" id="bh5-Qk-NMV"/>
                         <outlet property="passwordSigninLabel" destination="yWQ-di-7gV" id="MiT-uu-Y2F"/>
                         <outlet property="registerButton" destination="onm-MV-qRC" id="pYB-1g-4aI"/>

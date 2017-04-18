@@ -15,6 +15,7 @@ class testSearchViewController: UIViewController, UICollectionViewDataSource, UI
 
     var userPost: [PicturePost] = []
     var personalPosts : [PicturePost] = []
+    var searchResults: [PicturePost] = []
     var ref: FIRDatabaseReference!
     var currentUser: FIRUser? = FIRAuth.auth()?.currentUser
     var currentUserId: String = ""
@@ -22,6 +23,7 @@ class testSearchViewController: UIViewController, UICollectionViewDataSource, UI
     var uploadImageURL : String = ""
     var lastID = 0
     var collectionViewLayout: CustomImageFlowLayout!
+    
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet{
@@ -31,7 +33,6 @@ class testSearchViewController: UIViewController, UICollectionViewDataSource, UI
         }
     
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,16 +51,16 @@ class testSearchViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func addPost(id: Any , postInfo:NSDictionary){
-        if let userEmail = postInfo["userEmail"] as? String,
-            let caption = postInfo["body"] as? String,
-            //let profilePictureURL = postInfo["profileImageURL"] as? String,
+        if let userID = postInfo["userID"] as? String,
+            let caption = postInfo["caption"] as? String,
+            let profilePictureURL = postInfo["profileImageURL"] as? String,
             let timeStamp = postInfo["timestamp"] as? String,
-            let postID = id as? String, //remember to do postID +=1
+            let postID = id as? String,
             let currentPostID = Int(postID),
-            let userID =  postInfo["userID"] as? String,
-            let imagePostURL = postInfo["imageURL"] as? String {
+            let postedImageURL =  postInfo["postedImageURL"] as? String,
+            let screenName = postInfo["screenName"] as? String {
             
-            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: userEmail, aUserProfileImageURL: imagePostURL, anImagePostURL: imagePostURL, aCaption: caption, aTimeStamp: timeStamp)
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
             
             self.userPost.append(newPost)
         }
@@ -103,16 +104,19 @@ class testSearchViewController: UIViewController, UICollectionViewDataSource, UI
         })
         
     }
-
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return userPost.count
+   
+     func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1//userPost.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+      return userPost.count
+    }
+      // double Check!
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! testCollectionViewCell
         
-        let imageName = (indexPath.row % 2 == 0) ? "imageURL" : "imageURL"
+        let imageName = (indexPath.row % 2 == 0) ? "postedImageURL" : "postedImageURL" // to check
         
         let currentPost = userPost[indexPath.row]
         let userImage = currentPost.imagePostURL
@@ -126,3 +130,8 @@ class testSearchViewController: UIViewController, UICollectionViewDataSource, UI
     }
 
 }
+//private extension testSearchViewController {
+//    func photoForIndexPath(indexPath: IndexPath) -> PicturePost {
+//        return userPost[(indexPath as NSIndexPath).section].searchResults[(indexPath as IndexPath).row]
+//    }
+//}

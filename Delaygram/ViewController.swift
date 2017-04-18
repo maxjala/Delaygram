@@ -35,12 +35,13 @@ class ViewController: UIViewController {
     
 
     var pictureFeed : [PicturePost] = []
+    var filteredPictureFeed: [PicturePost] = []
     var ref: FIRDatabaseReference!
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var currentUserID : String = ""
     var lastPostID : Int = 0
     
-    var followingArray : [String] = []
+    var followingArray = [String]()
     
 
 
@@ -57,8 +58,8 @@ class ViewController: UIViewController {
             currentUserID = id
         }
         
-        listenToFirebase()
         fetchFollowingUsersAndPosts()
+        listenToFirebase()
         
     }
     
@@ -71,10 +72,17 @@ class ViewController: UIViewController {
         ref.child("posts").observe(.childAdded, with: { (snapshot) in
             print("Value : " , snapshot)
             
+            //self.fetchFollowingUsersAndPosts()
+            
             // 3. convert snapshot to dictionary
             guard let info = snapshot.value as? NSDictionary else {return}
             // 4. add users to array of following users
-            self.addToPersonalFeed(id: snapshot.key, postInfo: info)
+            let newPost = self.createPictureFeed(id: snapshot.key, postInfo: info)
+            
+            if let tempPost = newPost {
+                self.pictureFeed.append(tempPost)
+                self.addToMyFeed(tempPost)
+            }
             
             // sort
             self.pictureFeed.sort(by: { (picture1, picture2) -> Bool in
@@ -157,31 +165,31 @@ class ViewController: UIViewController {
             
             guard let checkedID = snapshot.value as? NSDictionary
                 else {return}
-            self.followingArray = checkedID.allValues as! [String]
+            self.followingArray = (checkedID.allValues as? [String])!
             
-            for each in self.followingArray {
-                
-            }
+            self.pictureFeedTableView.reloadData()
+    
+        })
+        
+        ref.child("users").child(currentUserID).child("following").observe(.childAdded, with: { (snapshot) in
+            print("Value : " , snapshot)
             
-
-            self.ref.child("posts").observeSingleEvent(of: .value,  with: { (postSS) in
-                
-                // 3. convert snapshot to dictionary
-//                guard let info = postSS.value as? NSDictionary else {return}
-//                // 4. add users to array of following users
-//                
-//                if info["userID"] ==
-                
-                
-                
+            guard let checkedID = snapshot.value as? NSDictionary
+                else {return}
+            self.followingArray = (checkedID.allValues as? [String])!
             
-            
+            self.pictureFeedTableView.reloadData()
             
         })
         
+        ref.child("users").child(currentUserID).child("following").observe(.childRemoved, with: { (snapshot) in
+            print("Value : " , snapshot)
             
+            guard let checkedID = snapshot.value as? NSDictionary
+                else {return}
+            self.followingArray = (checkedID.allValues as? [String])!
             
-            
+            self.pictureFeedTableView.reloadData()
             
         })
     }
@@ -199,7 +207,15 @@ class ViewController: UIViewController {
             
             let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
             
-            self.pictureFeed.append(newPost)
+            for each in self.followingArray {
+                if each == newPost.userID {
+                    
+                    self.pictureFeed.append(newPost)
+                    
+                    print("")
+                }
+            }
+            //self.pictureFeed.append(newPost)
             
         }
         
@@ -207,24 +223,48 @@ class ViewController: UIViewController {
     
 
     
-//    func addToPersonalFeed(id : Any, postInfo : NSDictionary) {
-//    
-//                    if let userID = postInfo["userID"] as? String,
-//                    let caption = postInfo["caption"] as? String,
-//                    let profilePictureURL = postInfo["profileImageURL"] as? String,
-//                    let timeStamp = postInfo["timestamp"] as? String,
-//                    let postID = id as? String,
-//                    let currentPostID = Int(postID),
-//                    let postedImageURL =  postInfo["postedImageURL"] as? String,
-//                    let screenName = postInfo["screenName"] as? String {
-//                        
-//            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
-//                        
-//                self.pictureFeed.append(newPost)
-//            
-//        }
+    func createPictureFeed(id : Any, postInfo : NSDictionary) -> PicturePost?{
+    
+                    if let userID = postInfo["userID"] as? String,
+                    let caption = postInfo["caption"] as? String,
+                    let profilePictureURL = postInfo["profileImageURL"] as? String,
+                    let timeStamp = postInfo["timestamp"] as? String,
+                    let postID = id as? String,
+                    let currentPostID = Int(postID),
+                    let postedImageURL =  postInfo["postedImageURL"] as? String,
+                    let screenName = postInfo["screenName"] as? String {
+                        
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
+                        
+            return newPost
+
+        }
+        return nil
+    }
+    
+
+    func addToMyFeed(_ post : PicturePost) {
+        
+        for each in self.followingArray {
+            if each == post.userID {
+                
+                self.filteredPictureFeed.append(post)
+                
+            }
+        }
+        
+        
+//        for post in self.pictureFeed {
+//            for each in self.followingArray {
+//            if each == post.userID {
+//                
+//                self.filteredPictureFeed.append(post)
 //        
-//    }
+//            }
+//        }
+        
+        self.pictureFeedTableView.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -252,7 +292,7 @@ class ViewController: UIViewController {
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pictureFeed.count
+        return filteredPictureFeed.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
@@ -265,7 +305,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: picturePostViewCell.cellIdentifier) as? picturePostViewCell
             else {return UITableViewCell()}
         
-        let currentPost = pictureFeed[indexPath.row]
+        let currentPost = filteredPictureFeed[indexPath.row]
             
             let pictureURL = currentPost.imagePostURL
             let profilePicURL = currentPost.userProfileImageURL

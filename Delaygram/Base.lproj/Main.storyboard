@@ -291,11 +291,11 @@
                                     <navigationItem title="Delaygram" id="C9C-x7-5NO">
                                         <barButtonItem key="rightBarButtonItem" title="Logout" id="qbr-th-yeE">
                                             <connections>
-<<<<<<< HEAD
+
                                                 <action selector="logoutButtonTapped:" destination="h8G-XK-a8C" id="1ug-md-qfK"/>
-=======
+
                                                 <action selector="logoutButtonTap:" destination="h8G-XK-a8C" id="BDs-GP-ipO"/>
->>>>>>> bd6d6ad3191c51b5664d599ed777c1ce68bf17c4
+
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -446,10 +446,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="9IO-Re-xQz"/>
                     <connections>
-<<<<<<< HEAD
+
                         <outlet property="bioLabel" destination="hQl-PP-LeS" id="DPl-s5-gE3"/>
-=======
->>>>>>> bd6d6ad3191c51b5664d599ed777c1ce68bf17c4
+
                         <outlet property="displayPictureUser" destination="66F-JK-Zha" id="74A-VU-AvU"/>
                         <outlet property="editButton" destination="YZq-hh-TvS" id="rAI-G4-KT7"/>
                         <outlet property="followerLabel" destination="oOS-oO-vqp" id="TDs-ZM-qXl"/>
@@ -458,15 +457,15 @@
                         <outlet property="numberOfFollowers" destination="oOS-oO-vqp" id="33J-Mq-3gN"/>
                         <outlet property="numberOfFollowing" destination="xgB-bR-eLH" id="b0n-V7-S2W"/>
                         <outlet property="numberOfPosts" destination="aTC-XQ-EGu" id="J9U-0G-r4S"/>
-<<<<<<< HEAD
-=======
+
+
                         <outlet property="postCollectionView" destination="78T-We-R9U" id="usH-Q3-jgl"/>
                         <outlet property="postLabel" destination="aTC-XQ-EGu" id="KyB-NT-xuo"/>
                         <outlet property="profileImageView" destination="66F-JK-Zha" id="MoS-dH-FDD"/>
                         <outlet property="profileNameLabel" destination="4io-Ga-XfS" id="uGW-D3-ryX"/>
                         <outlet property="profileStatusLabel" destination="hQl-PP-LeS" id="TxO-bl-Kqm"/>
                         <outlet property="statusLabel" destination="hQl-PP-LeS" id="Y80-EW-A5S"/>
->>>>>>> bd6d6ad3191c51b5664d599ed777c1ce68bf17c4
+
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMg-Rc-OiB" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -14,8 +14,10 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var shortBioTextView: UITextView! {
         didSet {
-            shortBioTextView.layer.borderColor = UIColor.black.cgColor
-            shortBioTextView.layer.borderWidth = 2.0
+            shortBioTextView.layer.borderColor = UIColor.lightGray.cgColor
+            shortBioTextView.layer.borderWidth = 0.2
+            shortBioTextView.layer.cornerRadius = 5
+            shortBioTextView.layer.masksToBounds = true
         }
     }
     @IBOutlet weak var displayPictureImageView: UIImageView!

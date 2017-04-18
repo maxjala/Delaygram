@@ -168,7 +168,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func followButtonTapped(sender:UIButton) {
-        let cell = userTableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.cellIdentifier) as? SearchTableViewCell
+        
         
         let buttonRow = sender.tag
         
@@ -188,8 +188,6 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
                         ref.child("users").child(uid).child("following/\(ke)").removeValue()
                         ref.child("users").child(self.allUsers[buttonRow].id).child("followers/\(ke)").removeValue()
                         
-//                        self.userTableView.cellForRow(at: indexPath)?.accessoryType = .none
-                        //cell?.followButton.isUserInteractionEnabled = true
                         (sender as AnyObject).setTitle("Follow", for: .normal)
                         
                         
@@ -203,9 +201,6 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
                 ref.child("users").child(uid).updateChildValues(following)
                 ref.child("users").child(self.allUsers[buttonRow].id).updateChildValues(followers)
                 
-////                self.userTableView.cellForRow(at: )?.accessoryType = .checkmark
-//                    //cell?.followButton.isUserInteractionEnabled = true
-//                    cell?.followButton.setTitle("Following", for: .normal)
                 (sender as AnyObject).setTitle("Following", for: .normal)
             }
         })
@@ -217,7 +212,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
 
     
     func checkFollowing(indexPath: IndexPath, sender: UIButton) {
-        let cell = userTableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.cellIdentifier) as? SearchTableViewCell
+
         
         let uid = FIRAuth.auth()!.currentUser!.uid
         let ref = FIRDatabase.database().reference()

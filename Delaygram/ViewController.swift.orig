@@ -50,51 +50,18 @@ class ViewController: UIViewController {
             currentUserID = id
         }
         
-        fetchFollowingUsersAndPosts()
-        listenToFirebase()
+        fetchFollowingUsers()
+        self.pictureFeedTableView.reloadData()
         
     }
     
-    func listenToFirebase() {
-
-        ref.child("posts").observe(.childAdded, with: { (snapshot) in
-            print("Value : " , snapshot)
-            
-            //self.fetchFollowingUsersAndPosts()
-            
-            // 3. convert snapshot to dictionary
-            guard let info = snapshot.value as? NSDictionary else {return}
-            // 4. add users to array of following users
-            let newPost = self.createPictureFeed(id: snapshot.key, postInfo: info)
-            
-            if let tempPost = newPost {
-                self.pictureFeed.append(tempPost)
-                self.addToMyFeed(tempPost)
-            }
-            
-            // sort
-            self.pictureFeed.sort(by: { (picture1, picture2) -> Bool in
-                return picture1.imagePostID > picture2.imagePostID
-                
-                //LATER NEED TO CHANGE TO SORT BY POST TIME
-            })
-            
-            // set last message id to last id
-            if let lastPost = self.pictureFeed.last {
-                self.lastPostID = lastPost.imagePostID
-            }
-            
-            // 5. update table view
-            self.pictureFeedTableView.reloadData()
-            
-        })
+    func fetchFollowingUsers() {
         
-    }
-    
-    
-    func fetchFollowingUsersAndPosts() {
         ref.child("users").child(currentUserID).child("following").observe(.value, with: { (snapshot) in
             print("Value : " , snapshot)
+            
+            self.filteredPictureFeed.removeAll()
+            self.pictureFeed.removeAll()
             
             guard let checkedID = snapshot.value as? NSDictionary
                 else {
@@ -103,47 +70,38 @@ class ViewController: UIViewController {
             }
             self.followingArray = (checkedID.allValues as? [String])!
             
-            self.listenToFirebase()
+            self.fetchPosts()
             
-            self.pictureFeedTableView.reloadData()
+        })
+        
+    }
     
-        })
+    func fetchPosts() {
         
-        ref.child("users").child(currentUserID).child("following").observe(.childAdded, with: { (snapshot) in
+        ref.child("posts").observe(.childAdded, with: { (snapshot) in
             print("Value : " , snapshot)
             
-            guard let checkedID = snapshot.value as? String
-                else {
-                    print("observing child added for \(self.currentUserID) following no value")
-                    return
-            }
-            self.followingArray.append(checkedID)
+            // 3. convert snapshot to dictionary
+            guard let info = snapshot.value as? NSDictionary else {return}
+            // 4. add users to array of following users
+            let newPost = self.createPicturePost(id: snapshot.key, postInfo: info)
             
-            self.listenToFirebase()
+            if let tempPost = newPost {
+                self.addToMyFeed(tempPost)
+            }
+            
+            // sort
+            self.filteredPictureFeed.sort(by: { (picture1, picture2) -> Bool in
+                return picture1.imagePostID > picture2.imagePostID
+                
+                //LATER NEED TO CHANGE TO SORT BY POST TIME
+            })
             
             self.pictureFeedTableView.reloadData()
             
+
         })
         
-        ref.child("users").child(currentUserID).child("following").observe(.childRemoved, with: { (snapshot) in
-            print("Value : " , snapshot)
-            
-            guard let checkedID = snapshot.value as? String
-                else {
-                    print("observing child added for \(self.currentUserID) following no value")
-                    return
-            }
-            
-            while self.followingArray.contains(checkedID) {
-                if let checkIDIndex = self.followingArray.index(of: checkedID) {
-                    self.followingArray.remove(at: checkIDIndex)
-                }
-            }
-            
-            self.listenToFirebase()
-            self.pictureFeedTableView.reloadData()
-            
-        })
     }
     
     
@@ -165,7 +123,6 @@ class ViewController: UIViewController {
         }
         return nil
     }
-    
 
     func addToMyFeed(_ post : PicturePost) {
         
@@ -177,11 +134,6 @@ class ViewController: UIViewController {
             }
         }
         self.pictureFeedTableView.reloadData()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
  
 
@@ -231,7 +183,6 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 300)
             
             //cell..text = currentMessage.timestamp
-            
             
             
             return cell

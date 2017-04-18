@@ -56,11 +56,7 @@ class ViewController: UIViewController {
     }
     
     func listenToFirebase() {
-        ref.child("posts").observe(.value, with: { (snapshot) in
-            print("Value : " , snapshot)
-        })
-        
-        // 2. get the snapshot
+
         ref.child("posts").observe(.childAdded, with: { (snapshot) in
             print("Value : " , snapshot)
             
@@ -101,8 +97,13 @@ class ViewController: UIViewController {
             print("Value : " , snapshot)
             
             guard let checkedID = snapshot.value as? NSDictionary
-                else {return}
+                else {
+                    print("observing child value for \(self.currentUserID) following no value")
+                    return
+            }
             self.followingArray = (checkedID.allValues as? [String])!
+            
+            self.listenToFirebase()
             
             self.pictureFeedTableView.reloadData()
     
@@ -111,9 +112,14 @@ class ViewController: UIViewController {
         ref.child("users").child(currentUserID).child("following").observe(.childAdded, with: { (snapshot) in
             print("Value : " , snapshot)
             
-            guard let checkedID = snapshot.value as? NSDictionary
-                else {return}
-            self.followingArray = (checkedID.allValues as? [String])!
+            guard let checkedID = snapshot.value as? String
+                else {
+                    print("observing child added for \(self.currentUserID) following no value")
+                    return
+            }
+            self.followingArray.append(checkedID)
+            
+            self.listenToFirebase()
             
             self.pictureFeedTableView.reloadData()
             
@@ -122,10 +128,19 @@ class ViewController: UIViewController {
         ref.child("users").child(currentUserID).child("following").observe(.childRemoved, with: { (snapshot) in
             print("Value : " , snapshot)
             
-            guard let checkedID = snapshot.value as? NSDictionary
-                else {return}
-            self.followingArray = (checkedID.allValues as? [String])!
+            guard let checkedID = snapshot.value as? String
+                else {
+                    print("observing child added for \(self.currentUserID) following no value")
+                    return
+            }
             
+            while self.followingArray.contains(checkedID) {
+                if let checkIDIndex = self.followingArray.index(of: checkedID) {
+                    self.followingArray.remove(at: checkIDIndex)
+                }
+            }
+            
+            self.listenToFirebase()
             self.pictureFeedTableView.reloadData()
             
         })

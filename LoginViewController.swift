@@ -97,10 +97,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error == nil {
             print("Log in complete")
+            if (FBSDKAccessToken.current() == nil) {
+                dismiss(animated: true, completion: nil)
+            }
+            else {
             directToViewController()
+            }
         }
         else if let err = error {
             print("SignIn Error : \(err.localizedDescription)")
+            dismiss(animated: true, completion: nil)
         }
     }
     
@@ -120,6 +126,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         }
         else if let err = error {
             print("SignIn Error : \(err.localizedDescription)")
+            dismiss(animated: true, completion: nil)
         }
     }
     

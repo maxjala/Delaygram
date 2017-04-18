@@ -116,15 +116,23 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
         
         cell.userImageView.loadImageUsingCacheWithUrlString(urlString: userImage)
         cell.userLabel.text = selectedUser
-        checkFollowing(indexPath: indexPath)
+        checkFollowing(indexPath: indexPath, sender: cell.followButton)
+        
+        cell.followButton.tag = indexPath.row
+        cell.followButton.addTarget(self, action: #selector(followButtonTapped(sender:)), for: .touchUpInside)
         
 //        cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 200)
+        
+
         
         return cell
 
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func followButtonTapped(sender:UIButton) {
+        let cell = userTableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.cellIdentifier) as? SearchTableViewCell
+        
+        let buttonRow = sender.tag
         
         let uid = FIRAuth.auth()!.currentUser!.uid
         let ref = FIRDatabase.database().reference()
@@ -136,31 +144,43 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
             
             if let following = snapshot.value as? [String : AnyObject] {
                 for (ke, value) in following {
-                    if value as! String == self.searchUser[indexPath.row].id {
+                    if value as! String == self.searchUser[buttonRow].id {
                         isFollower = true
                         
                         ref.child("users").child(uid).child("following/\(ke)").removeValue()
-                        ref.child("users").child(self.searchUser[indexPath.row].id).child("followers/\(ke)").removeValue()
+                        ref.child("users").child(self.searchUser[buttonRow].id).child("followers/\(ke)").removeValue()
                         
-                        self.userTableView.cellForRow(at: indexPath)?.accessoryType = .none
+//                        self.userTableView.cellForRow(at: indexPath)?.accessoryType = .none
+                        //cell?.followButton.isUserInteractionEnabled = true
+                        (sender as AnyObject).setTitle("Follow", for: .normal)
+                        
+                        
                     }
                 }
             }
             if !isFollower {
-                let following = ["following/\(key)" : self.searchUser[indexPath.row].id]
+                let following = ["following/\(key)" : self.searchUser[buttonRow].id]
                 let followers = ["followers/\(key)" : uid]
                 
                 ref.child("users").child(uid).updateChildValues(following)
-                ref.child("users").child(self.searchUser[indexPath.row].id).updateChildValues(followers)
+                ref.child("users").child(self.searchUser[buttonRow].id).updateChildValues(followers)
                 
-                self.userTableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+////                self.userTableView.cellForRow(at: )?.accessoryType = .checkmark
+//                    //cell?.followButton.isUserInteractionEnabled = true
+//                    cell?.followButton.setTitle("Following", for: .normal)
+                (sender as AnyObject).setTitle("Following", for: .normal)
             }
         })
         ref.removeAllObservers()
         
+        
     }
     
-    func checkFollowing(indexPath: IndexPath) {
+
+    
+    func checkFollowing(indexPath: IndexPath, sender: UIButton) {
+        let cell = userTableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.cellIdentifier) as? SearchTableViewCell
+        
         let uid = FIRAuth.auth()!.currentUser!.uid
         let ref = FIRDatabase.database().reference()
         
@@ -169,7 +189,8 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
             if let following = snapshot.value as? [String : AnyObject] {
                 for (_, value) in following {
                     if value as! String == self.searchUser[indexPath.row].id {
-                        self.userTableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+                        //self.userTableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+                        (sender as AnyObject).setTitle("Following", for: .normal)
                     }
                 }
             }

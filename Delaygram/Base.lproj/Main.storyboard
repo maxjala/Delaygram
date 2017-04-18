@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -202,7 +202,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="8QS-es-Oiq" customClass="testCollectionViewCell" customModule="Delaygram" customModuleProvider="target">
-                                        <rect key="frame" x="81" y="0.0" width="214" height="168"/>
+                                        <rect key="frame" x="80.5" y="0.0" width="214" height="168"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="214" height="168"/>
@@ -246,7 +246,7 @@
         <!--Profile-->
         <scene sceneID="wBp-vk-z7M">
             <objects>
-                <viewController id="h8G-XK-a8C" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PersonalProfileViewController" id="h8G-XK-a8C" customClass="PersonalProfileViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KUc-oL-rZl"/>
                         <viewControllerLayoutGuide type="bottom" id="KUx-9N-dBd"/>
@@ -259,7 +259,11 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Delaygram" id="C9C-x7-5NO">
-                                        <barButtonItem key="rightBarButtonItem" title="Logout" id="qbr-th-yeE"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Logout" id="qbr-th-yeE">
+                                            <connections>
+                                                <action selector="logoutButtonTapped:" destination="h8G-XK-a8C" id="sSe-68-Akw"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -396,6 +400,15 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="9IO-Re-xQz"/>
+                    <connections>
+                        <outlet property="displayPictureUser" destination="66F-JK-Zha" id="74A-VU-AvU"/>
+                        <outlet property="editButton" destination="YZq-hh-TvS" id="rAI-G4-KT7"/>
+                        <outlet property="nameLabel" destination="4io-Ga-XfS" id="RLJ-B2-WRF"/>
+                        <outlet property="numberOfFollowers" destination="oOS-oO-vqp" id="33J-Mq-3gN"/>
+                        <outlet property="numberOfFollowing" destination="xgB-bR-eLH" id="b0n-V7-S2W"/>
+                        <outlet property="numberOfPosts" destination="aTC-XQ-EGu" id="J9U-0G-r4S"/>
+                        <outlet property="statusLabel" destination="hQl-PP-LeS" id="Y80-EW-A5S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMg-Rc-OiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -30,6 +30,8 @@
 		3D7E9A161EA0D2B600492761 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E9A151EA0D2B600492761 /* SignupViewController.swift */; };
 		7A15D97B1EA45F65004FDD55 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A15D9791EA45F65004FDD55 /* SearchTableViewCell.swift */; };
 		7A15D97C1EA45F65004FDD55 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A15D97A1EA45F65004FDD55 /* SearchTableViewCell.xib */; };
+		7A76C1F91EA5CEFE0020C20F /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A76C1F81EA5CEFE0020C20F /* ExploreViewController.swift */; };
+		7A76C1FB1EA5E0440020C20F /* PersonalProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A76C1FA1EA5E0440020C20F /* PersonalProfileViewController.swift */; };
 		7AA23D5E1EA3A0A900DA9C08 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA23D5D1EA3A0A900DA9C08 /* SearchViewController.swift */; };
 		7AC3F42F1EA4A23E0023A22F /* testCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC3F42E1EA4A23E0023A22F /* testCollectionViewCell.swift */; };
 		7AC3F4311EA4A25A0023A22F /* testSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC3F4301EA4A25A0023A22F /* testSearchViewController.swift */; };
@@ -66,6 +68,8 @@
 		3D893E951EA5D34A005891A7 /* Delaygram-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Delaygram-Bridging-Header.h"; sourceTree = "<group>"; };
 		7A15D9791EA45F65004FDD55 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7A15D97A1EA45F65004FDD55 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		7A76C1F81EA5CEFE0020C20F /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		7A76C1FA1EA5E0440020C20F /* PersonalProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalProfileViewController.swift; sourceTree = "<group>"; };
 		7AA23D5D1EA3A0A900DA9C08 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7AC3F42E1EA4A23E0023A22F /* testCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testCollectionViewCell.swift; sourceTree = "<group>"; };
 		7AC3F4301EA4A25A0023A22F /* testSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testSearchViewController.swift; sourceTree = "<group>"; };
@@ -107,11 +111,13 @@
 			isa = PBXGroup;
 			children = (
 				1A4DF35C1EA0BD54005B76EF /* Main.storyboard */,
+				7A76C1FA1EA5E0440020C20F /* PersonalProfileViewController.swift */,
 				7A15D9791EA45F65004FDD55 /* SearchTableViewCell.swift */,
 				7A15D97A1EA45F65004FDD55 /* SearchTableViewCell.xib */,
 				7AA23D5D1EA3A0A900DA9C08 /* SearchViewController.swift */,
 				1AD145481EA258D100C42B6F /* UploadViewController.swift */,
 				1A4DF35A1EA0BD54005B76EF /* ViewController.swift */,
+				7A76C1F81EA5CEFE0020C20F /* ExploreViewController.swift */,
 				7AC3F4341EA4A4B90023A22F /* testing(nick) */,
 			);
 			name = "MainFolder ";
@@ -342,11 +348,13 @@
 				7AA23D5E1EA3A0A900DA9C08 /* SearchViewController.swift in Sources */,
 				3D7E9A141EA0D28300492761 /* LoginViewController.swift in Sources */,
 				1AD1454B1EA371C800C42B6F /* Extensions.swift in Sources */,
+				7A76C1F91EA5CEFE0020C20F /* ExploreViewController.swift in Sources */,
 				1AD145491EA258D100C42B6F /* UploadViewController.swift in Sources */,
 				7A15D97B1EA45F65004FDD55 /* SearchTableViewCell.swift in Sources */,
 				1AECA3411EA1E651003236F1 /* picturePostViewCell.swift in Sources */,
 				1A4DF35B1EA0BD54005B76EF /* ViewController.swift in Sources */,
 				3D7E9A161EA0D2B600492761 /* SignupViewController.swift in Sources */,
+				7A76C1FB1EA5E0440020C20F /* PersonalProfileViewController.swift in Sources */,
 				7AC3F4331EA4A4170023A22F /* CustomImageFlowLayout.swift in Sources */,
 				1AECA3481EA20D4D003236F1 /* User.swift in Sources */,
 				7AC3F4311EA4A25A0023A22F /* testSearchViewController.swift in Sources */,

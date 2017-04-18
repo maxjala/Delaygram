@@ -56,6 +56,7 @@ class ViewController: UIViewController {
         }
         
         listenToFirebase()
+        fetchFollowingUsersAndPosts()
         
     }
     
@@ -70,7 +71,7 @@ class ViewController: UIViewController {
             
             // 3. convert snapshot to dictionary
             guard let info = snapshot.value as? NSDictionary else {return}
-            // 4. add student to array of messages
+            // 4. add users to array of following users
             self.addToPersonalFeed(id: snapshot.key, postInfo: info)
             
             // sort
@@ -91,10 +92,37 @@ class ViewController: UIViewController {
         })
         
     }
+    
+//    func fetchFollowingUsersAndPosts() {
+//        ref.child("users").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+//            
+//            let users = snapshot.value as! [String : String]
+//            
+//            for each in users {
+//                
+//                    
+//                }
+//                
+//            }
+//            
+//
+//    })
+//    }
+    func fetchFollowingUsersAndPosts() {
+        ref.child("users").child(currentUserID).child("following").observe(.value, with: { (snapshot) in
+            print("Value : " , snapshot)
+            
+            
+            
+            
+            
+        })
+    }
+    
 
     
     func addToPersonalFeed(id : Any, postInfo : NSDictionary) {
-        
+    
                     if let userID = postInfo["userID"] as? String,
                     let caption = postInfo["caption"] as? String,
                     let profilePictureURL = postInfo["profileImageURL"] as? String,

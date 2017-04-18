@@ -13,7 +13,7 @@ import FBSDKLoginKit
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     var window: UIWindow?
     
@@ -29,9 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate {
         // Override point for customization after application launch.
 
         FIRApp.configure()
-        
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -44,28 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate , GIDSignInDelegate {
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return /*FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: annotation as! [UIApplicationOpenURLOptionsKey : Any]) && */GIDSignIn.sharedInstance().handle(url,
+        return /*FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: annotation as! [UIApplicationOpenURLOptionsKey : Any]) && */
+            GIDSignIn.sharedInstance().handle(url,
                                                  sourceApplication: sourceApplication,
                                                  annotation: annotation)
     }
     
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        // ...
-        if let error = error {
-            // ...
-            return
-        }
-        
-        guard let authentication = user.authentication else { return }
-        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                          accessToken: authentication.accessToken)
-        // ...
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        // Perform any operations when the user disconnects from app here.
-        // ...
-    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -100,16 +100,6 @@ class UploadViewController: UIViewController {
     
     @IBAction func postButtonTapped(_ sender: Any) {
         
-//        self.ref.child("users").child(currentUserID).observe(.value, with: { (userSS) in
-//            print("Value : " , userSS)
-//
-//            let dictionary = userSS.value as? [String: String]
-//
-//            self.profileScreenName = (dictionary?["screenName"])!
-//            self.profileImageURL = (dictionary?["imageURL"])!
-        
-        
-        
         let currentDate = NSDate()
         let dateFormatter:DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd HH:mm"
@@ -125,8 +115,6 @@ class UploadViewController: UIViewController {
             
 
         }
-            
-        //})
         
         
     }

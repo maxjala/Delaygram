@@ -136,7 +136,6 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="emailSigninLabel" destination="aM7-Ii-VEQ" id="wst-fR-BK1"/>
-                        <outlet property="googleSignInView" destination="T5G-fs-Mrb" id="iYP-4E-QPQ"/>
                         <outlet property="loginButton" destination="4gd-8s-lFx" id="bh5-Qk-NMV"/>
                         <outlet property="passwordSigninLabel" destination="yWQ-di-7gV" id="MiT-uu-Y2F"/>
                         <outlet property="registerButton" destination="onm-MV-qRC" id="pYB-1g-4aI"/>

@@ -11,11 +11,10 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
 
-class testSearchViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class testSearchViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     var userPost: [PicturePost] = []
     var personalPosts : [PicturePost] = []
-    var searchResults: [PicturePost] = []
     var ref: FIRDatabaseReference!
     var currentUser: FIRUser? = FIRAuth.auth()?.currentUser
     var currentUserId: String = ""
@@ -25,6 +24,8 @@ class testSearchViewController: UIViewController, UICollectionViewDataSource, UI
     var collectionViewLayout: CustomImageFlowLayout!
     
     
+    @IBOutlet weak var searchBar: UISearchBar! 
+     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet{
             collectionView.delegate = self
@@ -130,8 +131,4 @@ class testSearchViewController: UIViewController, UICollectionViewDataSource, UI
     }
 
 }
-//private extension testSearchViewController {
-//    func photoForIndexPath(indexPath: IndexPath) -> PicturePost {
-//        return userPost[(indexPath as NSIndexPath).section].searchResults[(indexPath as IndexPath).row]
-//    }
-//}
+

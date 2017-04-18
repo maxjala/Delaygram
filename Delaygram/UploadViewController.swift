@@ -71,6 +71,18 @@ class UploadViewController: UIViewController {
             currentUserID = id
             currentUserEmail = email
         }
+        
+        
+        self.ref.child("users").child(currentUserID).observe(.value, with: { (userSS) in
+            print("Value : " , userSS)
+            
+            let dictionary = userSS.value as? [String: Any]
+            
+            self.profileScreenName = (dictionary?["screenName"])! as! String
+            self.profileImageURL = (dictionary?["imageURL"])! as! String
+            
+        })
+        
     }
     
     func removePlaceholderText() {
@@ -88,13 +100,13 @@ class UploadViewController: UIViewController {
     
     @IBAction func postButtonTapped(_ sender: Any) {
         
-        self.ref.child("users").child(currentUserID).observe(.value, with: { (userSS) in
-            print("Value : " , userSS)
-
-            let dictionary = userSS.value as? [String: String]
-
-            self.profileScreenName = (dictionary?["screenName"])!
-            self.profileImageURL = (dictionary?["imageURL"])!
+//        self.ref.child("users").child(currentUserID).observe(.value, with: { (userSS) in
+//            print("Value : " , userSS)
+//
+//            let dictionary = userSS.value as? [String: String]
+//
+//            self.profileScreenName = (dictionary?["screenName"])!
+//            self.profileImageURL = (dictionary?["imageURL"])!
         
         
         
@@ -114,7 +126,7 @@ class UploadViewController: UIViewController {
 
         }
             
-        })
+        //})
         
         
     }

@@ -11,7 +11,6 @@ import Firebase
 
 class PersonalProfileViewController: UIViewController {
 
-<<<<<<< HEAD
     @IBOutlet weak var displayPictureUser: UIImageView!
     
     @IBOutlet weak var numberOfPosts: UILabel!
@@ -22,7 +21,7 @@ class PersonalProfileViewController: UIViewController {
     
     @IBOutlet weak var editButton: UIButton!{
         didSet {
-            editButton
+            editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         }
     }
     
@@ -36,9 +35,6 @@ class PersonalProfileViewController: UIViewController {
     var currentUserID : String = ""
     var profileImageURL : String = ""
     var users : [User] = []
-=======
-    
->>>>>>> c149801f08ec0399b2961e413ee4fbda79b6a295
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +48,7 @@ class PersonalProfileViewController: UIViewController {
         listenToFirebase()
         }
 
-<<<<<<< HEAD
+
 //    func readData () {
 //        let userID = FIRAuth.auth()?.currentUser?.uid
 //        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -89,6 +85,10 @@ class PersonalProfileViewController: UIViewController {
         }
     }
     
+    func editButtonTapped () {
+        
+    }
+    
     @IBAction func logoutButtonTapped(_ sender: Any) {
         let firebaseAuth = FIRAuth.auth()
         
@@ -105,10 +105,6 @@ class PersonalProfileViewController: UIViewController {
     }
     
 //End of PersonalProfileViewController
-=======
-
-
->>>>>>> c149801f08ec0399b2961e413ee4fbda79b6a295
 }
 
 

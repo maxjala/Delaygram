@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     var currentUserID : String = ""
     var lastPostID : Int = 0
     
-    var followingArray : [String]
+    var followingArray : [String] = []
     
 
 

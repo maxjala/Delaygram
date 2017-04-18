@@ -11,7 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController,UISearchBarDelegate {
 
     @IBOutlet weak var userTableView: UITableView! {
         didSet{
@@ -19,15 +19,17 @@ class SearchViewController: UIViewController {
             userTableView.dataSource = self
             
             userTableView.register(SearchTableViewCell.cellNib, forCellReuseIdentifier: SearchTableViewCell.cellIdentifier)
-        
         }
-    
     }
     
-    
-    @IBOutlet weak var userSearchBar: UISearchBar!
-    
-    var searchUser: [User] = []
+    @IBOutlet weak var userSearchBar: UISearchBar!{
+        didSet{
+            userSearchBar.delegate = self
+        }
+    }
+    var searchActive: Bool = false
+    var allUsers: [User] = []
+    var filteredUsers: [User] = []
     var ref: FIRDatabaseReference!
     var currentUser: FIRUser? = FIRAuth.auth()?.currentUser
     var currentUserId: String = ""
@@ -46,16 +48,34 @@ class SearchViewController: UIViewController {
         }
     }
     
+    //MARK search Bar
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    
     func addUser(id: Any , userInfo:NSDictionary){
-        if let userName = userInfo["screenName"] as? String,
-        let userImage = userInfo["imageURL"] as? String,
+        if
+            let userName = userInfo["screenName"] as? String,
+            let userImage = userInfo["imageURL"] as? String,
             let userId = id as? String,
             let userEmail = userInfo["email"] as? String,
-            let userDescription = userInfo["desc"] as? String{
-            
-        let newUser = User(anId: userId, anEmail: userEmail, aScreenName: userName, aDesc: userDescription, anImageURL: userImage)
-            
-            self.searchUser.append(newUser)
+            let userDescription = userInfo["desc"] as? String {
+
+            let newUser = User(anId: userId, anEmail: userEmail, aScreenName: userName, aDesc: userDescription, anImageURL: userImage)
+            self.allUsers.append(newUser)
         }
     }
 
@@ -74,17 +94,14 @@ class SearchViewController: UIViewController {
             self.addUser(id: snapshot.key, userInfo: info)
             
             // sort
-            self.searchUser.sort(by: { (user1, user2) -> Bool in
+            self.allUsers.sort(by: { (user1, user2) -> Bool in
                 return user1.screenName  < user2.screenName
                 
                 //LATER NEED TO CHANGE TO SORT BY POST TIME
             })
             
-//            // set last message id to last id
-//            if let lastUser = self.searchUser.last {
-//                self.lastUserId = lastUser.id
-//                
-//            }
+            self.filteredUsers = self.allUsers
+            
             
             // 5. update table view
             self.userTableView.reloadData()
@@ -92,12 +109,36 @@ class SearchViewController: UIViewController {
         })
 
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        
+        if searchText.characters.count == 0 {
+            
+            filteredUsers = allUsers;
+            self.userTableView.reloadData()
+            return
+        }
+        
+        
+        
+        filteredUsers = allUsers.filter({ (user) -> Bool in
+            let nameString: NSString = user.screenName as NSString
+            let range = nameString.range(of: searchText, options: .caseInsensitive)
+            return range.location != NSNotFound
+        })
+        
+   
+        
+        self.userTableView.reloadData()
+}
+    
 }
 
 extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchUser.count
+        return filteredUsers.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -109,7 +150,8 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.cellIdentifier) as? SearchTableViewCell
             else { return UITableViewCell() }
         
-        let currentUser = searchUser[indexPath.row]
+        
+        let currentUser = filteredUsers[indexPath.row]
         
         let userImage = currentUser.imageURL
         let selectedUser = currentUser.screenName
@@ -120,10 +162,6 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
         
         cell.followButton.tag = indexPath.row
         cell.followButton.addTarget(self, action: #selector(followButtonTapped(sender:)), for: .touchUpInside)
-        
-//        cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 200)
-        
-
         
         return cell
 
@@ -144,11 +182,11 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
             
             if let following = snapshot.value as? [String : AnyObject] {
                 for (ke, value) in following {
-                    if value as! String == self.searchUser[buttonRow].id {
+                    if value as! String == self.allUsers[buttonRow].id {
                         isFollower = true
                         
                         ref.child("users").child(uid).child("following/\(ke)").removeValue()
-                        ref.child("users").child(self.searchUser[buttonRow].id).child("followers/\(ke)").removeValue()
+                        ref.child("users").child(self.allUsers[buttonRow].id).child("followers/\(ke)").removeValue()
                         
                         (sender as AnyObject).setTitle("Follow", for: .normal)
                         
@@ -157,11 +195,11 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
                 }
             }
             if !isFollower {
-                let following = ["following/\(key)" : self.searchUser[buttonRow].id]
+                let following = ["following/\(key)" : self.allUsers[buttonRow].id]
                 let followers = ["followers/\(key)" : uid]
                 
                 ref.child("users").child(uid).updateChildValues(following)
-                ref.child("users").child(self.searchUser[buttonRow].id).updateChildValues(followers)
+                ref.child("users").child(self.allUsers[buttonRow].id).updateChildValues(followers)
                 
                 (sender as AnyObject).setTitle("Following", for: .normal)
             }
@@ -183,7 +221,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
             
             if let following = snapshot.value as? [String : AnyObject] {
                 for (_, value) in following {
-                    if value as! String == self.searchUser[indexPath.row].id {
+                    if value as! String == self.allUsers[indexPath.row].id {
                         //self.userTableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
                         (sender as AnyObject).setTitle("Following", for: .normal)
                     }

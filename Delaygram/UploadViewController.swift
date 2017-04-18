@@ -49,7 +49,7 @@ class UploadViewController: UIViewController {
     var uploadImageURL : String = ""
     var newPost : PicturePost?
     var personalPosts : [PicturePost] = []
-    var lastID = 0
+    //var lastID = 0
     
 
     override func viewDidLoad() {

@@ -11,7 +11,12 @@ import Firebase
 
 class PersonalProfileViewController: UIViewController {
 
-    @IBOutlet weak var displayPictureUser: UIImageView!
+    @IBOutlet weak var displayPictureUser: UIImageView! {
+        didSet {
+            displayPictureUser.layer.cornerRadius = displayPictureUser.frame.width/2
+            displayPictureUser.layer.masksToBounds = true
+        }
+    }
     
     @IBOutlet weak var numberOfPosts: UILabel!
     
@@ -27,14 +32,17 @@ class PersonalProfileViewController: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var bioLabel: UILabel!
     
     
     var ref: FIRDatabaseReference!
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var currentUserID : String = ""
     var profileImageURL : String = ""
-    var users : [User] = []
+    var profileScreenName : String = ""
+    var profileDesc : String = ""
+    var profileFollowers : String = ""
+    var profileFolowing : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,43 +55,39 @@ class PersonalProfileViewController: UIViewController {
         
         listenToFirebase()
         }
-
-
-//    func readData () {
-//        let userID = FIRAuth.auth()?.currentUser?.uid
-//        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-//            // Get user value
-//            let value = snapshot.value as? NSDictionary
-//            let username = value?["username"] as? Any ?? ""
-//            let user = User.init(username: username)
-//            
-//            // ...
-//        }) { (error) in
-//            print(error.localizedDescription)
-//        }
-//    }
     
     func listenToFirebase () {
-        ref.child("student").observe(.childAdded, with: { (snapshot) in print("Added :" , snapshot)
+        ref.child("users").child(currentUserID).observe(.value, with: { (snapshot) in
+            print("Value : " , snapshot)
             
-            guard let info = snapshot.value as? NSDictionary
-                else {return}
+            var dict = snapshot.value as? [String: String]
             
-            self.addUserToArray(id: snapshot.key, userInfo: info)
+            self.profileScreenName = (dict?["screenName"])!
+            self.profileImageURL = (dict?["imageURL"])!
+            self.profileDesc = (dict?["desc"])!
+//            self.profileFollowers = (dictionary?["followers"])!
+//            self.profileFolowing = (dictionary?["following"])!
+            
+            
+            print("")
+            
+            self.setUpProfile()
         })
     }
     
-    func addUserToArray (id:Any, userInfo : NSDictionary) {
+    func setUpProfile () {
+        nameLabel.text = profileScreenName
+        bioLabel.text = profileDesc
+//        numberOfFollowers.text = profileFollowers.count
+//        numberOfFollowing.text = profileFolowing.count
         
-        if let email = userInfo["email"] as? String,
-            let screeenName = userInfo["screenName"] as? String,
-            let desc = userInfo["desc"] as? String,
-            let imageURL = userInfo["imageURL"] as? String {
-            
-            let aUser = User(anId: currentUserID, anEmail: email, aScreenName: screeenName, aDesc: desc, anImageURL: imageURL)
-            self.users.append(aUser)
-        }
+        let imageURL = profileImageURL
+        displayPictureUser.loadImageUsingCacheWithUrlString(urlString: imageURL)
+        
+        
+        print("")
     }
+
     
     func editButtonTapped () {
         
@@ -104,10 +108,81 @@ class PersonalProfileViewController: UIViewController {
         }
     }
     
+//    @IBAction func editPictureButton(_ sender: Any) {
+//        let imagePicker = UIImagePickerController()
+//        imagePicker.delegate = self
+//        present(imagePicker, animated: true, completion: nil)
+//        
+//        
+//    }
+//    
+//    
+//    
+//    func dismissImagePicker() {
+//        dismiss(animated: true, completion: nil)
+//    }
+//    
+//    func uploadImage(_ image: UIImage) {
+//        
+//        let ref = FIRStorage.storage().reference()
+//        guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
+//        let metaData = FIRStorageMetadata()
+//        metaData.contentType = "image/jpeg"
+//        ref.child("\(currentUser?.email)-\(createTimeStamp()).jpeg").put(imageData, metadata: metaData) { (meta, error) in
+//            
+//            if let downloadPath = meta?.downloadURL()?.absoluteString {
+//                //save to firebase database
+//                self.saveImagePath(downloadPath)
+//                
+//                print("")
+//            }
+//            
+//        }
+//        
+//        
+//    }
+//    
+//    func createTimeStamp() -> String {
+//        
+//        let currentDate = NSDate()
+//        let dateFormatter:DateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "MM-dd HH:mm"
+//        let timeCreated = dateFormatter.string(from: currentDate as Date)
+//        
+//        return timeCreated
+//        
+//    }
+//    
+//    func saveImagePath(_ path: String) {
+//        
+//        let profileValue : [String: Any] = ["imageURL": path]
+//        
+//        ref.child("users").child(currentUserID).updateChildValues(profileValue)
+//    }
 //End of PersonalProfileViewController
 }
 
-
-
+//extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+//    
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+//        
+//        defer {
+//            dismissImagePicker()
+//        }
+//        
+//        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+//            return
+//        }
+//        
+//        //display / store
+//        uploadImage(image)
+//        
+//    }
+//    
+//    func uniqueFileForUser(_ name: String) -> String {
+//        let currentDate = Date()
+//        return "\(name)_\(currentDate.timeIntervalSince1970).jpeg"
+//    }
+//}
 
 

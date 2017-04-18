@@ -80,6 +80,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 if(snapshot == nil) {
                     self.databaseRef.child("users").child(user!.uid).child("imageURL").setValue(defaultImageURL)
                     self.databaseRef.child("users").child(user!.uid).child("email").setValue(user!.email)
+                    self.databaseRef.child("users").child(user!.uid).child("desc").setValue("Add description")
+                    self.databaseRef.child("users").child(user!.uid).child("screenName").setValue("Anonymous")
                 }
                 
                 let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

@@ -28,11 +28,8 @@ class LoginViewController: UIViewController {
             registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         }
     }
-    @IBOutlet weak var googleSignInView: GIDSignInButton! {
-        didSet {
-            googleSignInView.addTarget(self, action: #selector(googleSignIn), for: .touchUpInside)
-        }
-    }
+    
+    var databaseRef : FIRDatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +90,7 @@ class LoginViewController: UIViewController {
         
         let facebookLoginButton = FBSDKLoginButton()
         facebookLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
+        facebookLoginButton.center = self.view.center
         facebookLoginButton.frame = CGRect(x: 107, y: 417, width: 200, height: 42)
         
         facebookLoginButton.delegate = self
@@ -109,11 +107,6 @@ class LoginViewController: UIViewController {
         
     }
     
-    func googleSignIn () {
-        GIDSignIn.sharedInstance().signIn()
-    }
-    
-    
     func directToViewController () {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let viewController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
@@ -121,36 +114,6 @@ class LoginViewController: UIViewController {
     }
     
 //End of LoginViewController
-}
-
-
-extension LoginViewController : GIDSignInDelegate {
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        
-        if let error = error {
-            
-            print("GSingIn Error : \(error.localizedDescription)" )
-            return
-        }
-        
-        guard let authentication = user.authentication else { return }
-        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                          accessToken: authentication.accessToken)
-        
-        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-            if let err = error {
-                print("Google Loggin Error : \(err.localizedDescription)")
-                return
-            }
-            self.directToViewController()
-        }
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        // Perform any operations when the user disconnects from app here.
-        // ...
-    }
 }
 
 extension LoginViewController : GIDSignInUIDelegate {
@@ -164,12 +127,86 @@ extension LoginViewController : GIDSignInUIDelegate {
     func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {}
 }
 
+extension LoginViewController : GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+        
+        if let error = error {
+            
+            print("GSingIn Error : \(error.localizedDescription)" )
+            return
+        }
+        print("user signed in to Google")
+        
+        guard let authentication = user.authentication else { return }
+        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                          accessToken: authentication.accessToken)
+        
+        let defaultImageURL = "https://firebasestorage.googleapis.com/v0/b/chatapp2-8fc6d.appspot.com/o/icon1.png?alt=media&token=a0c137ff-3053-442b-a6fb-3ef06f818d6a"
+        
+        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+            if let err = error {
+                print("Google Loggin Error : \(err.localizedDescription)")
+                return
+            }
+            
+            print("user signed in to Firebase")
+            self.databaseRef = FIRDatabase.database().reference()
+            self.databaseRef.child("users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                let snapshot = snapshot.value as? NSDictionary
+                
+                if(snapshot == nil) {
+                    self.databaseRef.child("users").child(user!.uid).child("imageURL").setValue(defaultImageURL)
+                    self.databaseRef.child("users").child(user!.uid).child("email").setValue(user!.email)
+                }
+                
+                self.directToViewController()
+            })
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
+}
+
 extension LoginViewController : FBSDKLoginButtonDelegate {
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error == nil {
-            print("Log in complete")
             if (FBSDKAccessToken.current() == nil) { dismiss(animated: true, completion: nil) }
-            else { directToViewController() }
+            else {
+                
+                print("Log in complete")
+                
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                let defaultImageURL = "https://firebasestorage.googleapis.com/v0/b/chatapp2-8fc6d.appspot.com/o/icon1.png?alt=media&token=a0c137ff-3053-442b-a6fb-3ef06f818d6a"
+                
+                FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                    // ...
+                    if let err = error {
+                        print("Facebook Loggin Error : \(err.localizedDescription)")
+                        return
+                    }
+                    
+                    print("user signed in to Firebase")
+                    self.databaseRef = FIRDatabase.database().reference()
+                    self.databaseRef.child("users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                        let snapshot = snapshot.value as? NSDictionary
+                        
+                        if(snapshot == nil) {
+                            self.databaseRef.child("users").child(user!.uid).child("imageURL").setValue(defaultImageURL)
+                            self.databaseRef.child("users").child(user!.uid).child("email").setValue(user!.email)
+                        }
+                        
+                        self.directToViewController()
+                    })
+                }
+            }
         }
         else if let err = error {
             print("SignIn Error : \(err.localizedDescription)")
@@ -181,4 +218,3 @@ extension LoginViewController : FBSDKLoginButtonDelegate {
         print("User logged out")
     }
 }
-

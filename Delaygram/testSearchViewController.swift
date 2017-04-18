@@ -23,8 +23,6 @@ class testSearchViewController: UIViewController, UICollectionViewDataSource, UI
     var lastID = 0
     var collectionViewLayout: CustomImageFlowLayout!
     
-    
-    @IBOutlet weak var searchBar: UISearchBar! 
      
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet{

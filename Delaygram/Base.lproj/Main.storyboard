@@ -261,7 +261,11 @@
                                     <navigationItem title="Delaygram" id="C9C-x7-5NO">
                                         <barButtonItem key="rightBarButtonItem" title="Logout" id="qbr-th-yeE">
                                             <connections>
+<<<<<<< HEAD
                                                 <action selector="logoutButtonTapped:" destination="h8G-XK-a8C" id="sSe-68-Akw"/>
+=======
+                                                <action selector="logoutButtonTap:" destination="h8G-XK-a8C" id="BDs-GP-ipO"/>
+>>>>>>> c149801f08ec0399b2961e413ee4fbda79b6a295
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -271,19 +275,30 @@
                                 <rect key="frame" x="0.0" y="256" width="375" height="362"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3M9-Ub-C26">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="245" height="175"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="b1m-cF-gmR">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="65" y="0.0" width="245" height="175"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="245" height="175"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AIb-EH-3hH">
+                                                    <rect key="frame" x="0.0" y="0.0" width="245" height="175"/>
+                                                </imageView>
+                                            </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="AIb-EH-3hH" firstAttribute="top" secondItem="b1m-cF-gmR" secondAttribute="top" id="0SW-fk-ofE"/>
+                                            <constraint firstAttribute="trailing" secondItem="AIb-EH-3hH" secondAttribute="trailing" id="MUB-5a-3OO"/>
+                                            <constraint firstAttribute="bottom" secondItem="AIb-EH-3hH" secondAttribute="bottom" id="Ytu-Ul-b1p"/>
+                                            <constraint firstItem="AIb-EH-3hH" firstAttribute="leading" secondItem="b1m-cF-gmR" secondAttribute="leading" id="vAq-gH-s2b"/>
+                                        </constraints>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -331,6 +346,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZq-hh-TvS">
                                 <rect key="frame" x="150" y="160" width="209" height="30"/>
                                 <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="editButtonTap:" destination="h8G-XK-a8C" eventType="touchUpInside" id="06D-Pb-Iul"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4io-Ga-XfS">
                                 <rect key="frame" x="16" y="204" width="43" height="19.5"/>
@@ -401,6 +419,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="9IO-Re-xQz"/>
                     <connections>
+<<<<<<< HEAD
                         <outlet property="displayPictureUser" destination="66F-JK-Zha" id="74A-VU-AvU"/>
                         <outlet property="editButton" destination="YZq-hh-TvS" id="rAI-G4-KT7"/>
                         <outlet property="nameLabel" destination="4io-Ga-XfS" id="RLJ-B2-WRF"/>
@@ -408,6 +427,15 @@
                         <outlet property="numberOfFollowing" destination="xgB-bR-eLH" id="b0n-V7-S2W"/>
                         <outlet property="numberOfPosts" destination="aTC-XQ-EGu" id="J9U-0G-r4S"/>
                         <outlet property="statusLabel" destination="hQl-PP-LeS" id="Y80-EW-A5S"/>
+=======
+                        <outlet property="followerLabel" destination="oOS-oO-vqp" id="TDs-ZM-qXl"/>
+                        <outlet property="followingLabel" destination="xgB-bR-eLH" id="zTg-uS-COv"/>
+                        <outlet property="postCollectionView" destination="78T-We-R9U" id="usH-Q3-jgl"/>
+                        <outlet property="postLabel" destination="aTC-XQ-EGu" id="KyB-NT-xuo"/>
+                        <outlet property="profileImageView" destination="66F-JK-Zha" id="MoS-dH-FDD"/>
+                        <outlet property="profileNameLabel" destination="4io-Ga-XfS" id="uGW-D3-ryX"/>
+                        <outlet property="profileStatusLabel" destination="hQl-PP-LeS" id="TxO-bl-Kqm"/>
+>>>>>>> c149801f08ec0399b2961e413ee4fbda79b6a295
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMg-Rc-OiB" userLabel="First Responder" sceneMemberID="firstResponder"/>

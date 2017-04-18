@@ -18,6 +18,12 @@ class SearchTableViewCell: UITableViewCell {
     }
     @IBOutlet weak var userLabel: UILabel!
     
+    @IBOutlet weak var followButton: UIButton!
+    
+    
+    
+    
+    
     static let cellIdentifier = "SearchTableViewCell"
     static let cellNib = UINib(nibName: SearchTableViewCell.cellIdentifier, bundle: Bundle.main)
     

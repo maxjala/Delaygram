@@ -199,6 +199,8 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         let pictureURL = currentPost.imagePostURL
         let profilePicURL = currentPost.userProfileImageURL
         
+        cell.delegate = self
+        cell.picturePost = currentPost        
         
         
         cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)

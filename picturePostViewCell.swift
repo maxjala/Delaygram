@@ -69,9 +69,8 @@ class picturePostViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-<<<<<<< HEAD
-    @IBAction func likeButton(_ sender: Any) {
-=======
+
+
     @IBAction func likeButton(_ sender: UIButton) {
         if let likeButtonImg = UIImage(named: "heart-empty") {
             sender.setImage(likeButtonImg, for: .normal)
@@ -80,7 +79,7 @@ class picturePostViewCell: UITableViewCell {
             let likeButtonImg = UIImage(named: "heart-full")
                 sender.setImage(likeButtonImg, for: .normal)
         }
->>>>>>> nickBranch
+
         
         
     }
@@ -101,9 +100,12 @@ class picturePostViewCell: UITableViewCell {
             }
         }
     }
-    
-    
-    
-    
-    
+
+
 }
+    
+    
+    
+    
+    
+

@@ -268,6 +268,9 @@
                             <constraint firstItem="YQR-Ea-9Py" firstAttribute="top" secondItem="UsL-M5-Tiy" secondAttribute="bottom" id="e34-kQ-YZd"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="peoplePostTableView" destination="UsL-M5-Tiy" id="zvq-O2-OtS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kQD-Ha-7yc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -291,11 +294,7 @@
                                     <navigationItem title="Delaygram" id="C9C-x7-5NO">
                                         <barButtonItem key="rightBarButtonItem" title="Logout" id="qbr-th-yeE">
                                             <connections>
-
-                                                <action selector="logoutButtonTapped:" destination="h8G-XK-a8C" id="1ug-md-qfK"/>
-
                                                 <action selector="logoutButtonTap:" destination="h8G-XK-a8C" id="BDs-GP-ipO"/>
-
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -446,9 +445,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="9IO-Re-xQz"/>
                     <connections>
-
                         <outlet property="bioLabel" destination="hQl-PP-LeS" id="DPl-s5-gE3"/>
-
                         <outlet property="displayPictureUser" destination="66F-JK-Zha" id="74A-VU-AvU"/>
                         <outlet property="editButton" destination="YZq-hh-TvS" id="rAI-G4-KT7"/>
                         <outlet property="followerLabel" destination="oOS-oO-vqp" id="TDs-ZM-qXl"/>
@@ -457,15 +454,12 @@
                         <outlet property="numberOfFollowers" destination="oOS-oO-vqp" id="33J-Mq-3gN"/>
                         <outlet property="numberOfFollowing" destination="xgB-bR-eLH" id="b0n-V7-S2W"/>
                         <outlet property="numberOfPosts" destination="aTC-XQ-EGu" id="J9U-0G-r4S"/>
-
-
                         <outlet property="postCollectionView" destination="78T-We-R9U" id="usH-Q3-jgl"/>
                         <outlet property="postLabel" destination="aTC-XQ-EGu" id="KyB-NT-xuo"/>
                         <outlet property="profileImageView" destination="66F-JK-Zha" id="MoS-dH-FDD"/>
                         <outlet property="profileNameLabel" destination="4io-Ga-XfS" id="uGW-D3-ryX"/>
                         <outlet property="profileStatusLabel" destination="hQl-PP-LeS" id="TxO-bl-Kqm"/>
                         <outlet property="statusLabel" destination="hQl-PP-LeS" id="Y80-EW-A5S"/>
-
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMg-Rc-OiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -478,7 +472,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o4Z-2E-yd3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" id="rva-dk-cMN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2KV-Uc-WJk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2KV-Uc-WJk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

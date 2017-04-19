@@ -124,6 +124,12 @@ class testSearchViewController: UIViewController, UICollectionViewDataSource, UI
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let controller = storyboard?.instantiateViewController(withIdentifier: "ExploreViewController") as? ExploreViewController
+            navigationController?.pushViewController(controller!, animated: true)
+    }
+    
     override var prefersStatusBarHidden : Bool {
         return true
     }

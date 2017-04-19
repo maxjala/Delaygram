@@ -36,7 +36,10 @@ class picturePostViewCell: UITableViewCell {
         
     //self.frame = CGRect(x: 0, y: 0, width: 100, height: 10)
    // self.frame = CGRect(
+        
+        
     }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

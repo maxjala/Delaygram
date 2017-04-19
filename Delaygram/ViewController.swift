@@ -171,22 +171,31 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             else {return UITableViewCell()}
         
         let currentPost = filteredPictureFeed[indexPath.row]
+        //let currentPostUserID = currentPost.userID
             
             let pictureURL = currentPost.imagePostURL
             let profilePicURL = currentPost.userProfileImageURL
+
+
 
             cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)
             cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: profilePicURL)
             cell.captionTextView.text = currentPost.caption
             cell.userNameLabel.text = currentPost.userScreenName
+                    
+            
         
             cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 300)
             
             //cell..text = currentMessage.timestamp
+
             
             
             return cell
         }
+    
+
+    
     }
 
 

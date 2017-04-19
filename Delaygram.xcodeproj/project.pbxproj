@@ -22,6 +22,7 @@
 		1AECA3421EA1E651003236F1 /* picturePostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AECA3401EA1E651003236F1 /* picturePostViewCell.xib */; };
 		1AECA3441EA1FE18003236F1 /* picturePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AECA3431EA1FE18003236F1 /* picturePost.swift */; };
 		1AECA3481EA20D4D003236F1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AECA3471EA20D4D003236F1 /* User.swift */; };
+		3D1A47BC1EA7432400749FF3 /* PersonalPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A47BB1EA7432400749FF3 /* PersonalPostCollectionViewCell.swift */; };
 		3D2DA31B1EA33D5F00F77298 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2DA3171EA33D5F00F77298 /* Bolts.framework */; };
 		3D2DA31C1EA33D6000F77298 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2DA3181EA33D5F00F77298 /* FBSDKCoreKit.framework */; };
 		3D2DA31D1EA33D6000F77298 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2DA3191EA33D5F00F77298 /* FBSDKLoginKit.framework */; };
@@ -60,6 +61,7 @@
 		1AECA3401EA1E651003236F1 /* picturePostViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = picturePostViewCell.xib; path = ../picturePostViewCell.xib; sourceTree = "<group>"; };
 		1AECA3431EA1FE18003236F1 /* picturePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = picturePost.swift; sourceTree = "<group>"; };
 		1AECA3471EA20D4D003236F1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3D1A47BB1EA7432400749FF3 /* PersonalPostCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		3D2DA3171EA33D5F00F77298 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../Programs/FacebookSDKs-iOS-4.21.0/Bolts.framework"; sourceTree = "<group>"; };
 		3D2DA3181EA33D5F00F77298 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../Programs/FacebookSDKs-iOS-4.21.0/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		3D2DA3191EA33D5F00F77298 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../Programs/FacebookSDKs-iOS-4.21.0/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				1ACE77D61EA7058A00C4FDE8 /* GeneralProfileViewController.swift */,
 				3D893E9A1EA62127005891A7 /* EditProfileViewController.swift */,
 				7A76C1FA1EA5E0440020C20F /* PersonalProfileViewController.swift */,
+				3D1A47BB1EA7432400749FF3 /* PersonalPostCollectionViewCell.swift */,
 				7A15D9791EA45F65004FDD55 /* SearchTableViewCell.swift */,
 				7A15D97A1EA45F65004FDD55 /* SearchTableViewCell.xib */,
 				7AA23D5D1EA3A0A900DA9C08 /* SearchViewController.swift */,
@@ -354,6 +357,7 @@
 				7AA23D5E1EA3A0A900DA9C08 /* SearchViewController.swift in Sources */,
 				3D7E9A141EA0D28300492761 /* LoginViewController.swift in Sources */,
 				1AD1454B1EA371C800C42B6F /* Extensions.swift in Sources */,
+				3D1A47BC1EA7432400749FF3 /* PersonalPostCollectionViewCell.swift in Sources */,
 				7A76C1F91EA5CEFE0020C20F /* ExploreViewController.swift in Sources */,
 				1AD145491EA258D100C42B6F /* UploadViewController.swift in Sources */,
 				3D893E9B1EA62127005891A7 /* EditProfileViewController.swift in Sources */,

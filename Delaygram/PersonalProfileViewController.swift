@@ -30,7 +30,13 @@ class PersonalProfileViewController: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var bioLabel: UILabel!
-    
+
+    @IBOutlet weak var postsCollectionView: UICollectionView! {
+        didSet {
+            postsCollectionView.delegate = self
+            postsCollectionView.dataSource = self
+        }
+    }
     
     var ref: FIRDatabaseReference!
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
@@ -44,6 +50,11 @@ class PersonalProfileViewController: UIViewController {
     var profileFollowing : [String]? = []
     var profilePosts : [String]? = []
     
+    var collectionViewLayout: CustomImageFlowLayout!
+    var userPost: [PicturePost] = []
+    var personalPosts : [PicturePost] = []
+    var lastID = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,12 +63,16 @@ class PersonalProfileViewController: UIViewController {
             print(id)
             currentUserID = id
         }
+        //collectionView setting
+        collectionViewLayout = CustomImageFlowLayout()
+        postsCollectionView.collectionViewLayout = collectionViewLayout
+        postsCollectionView.backgroundColor = .white
         
-        listenToFirebase()
-        countingThings()
+        setupProfile()
+        setupCollectionView()
         }
     
-    func listenToFirebase () {
+    func setupProfile () {
         ref.child("users").child(currentUserID).observe(.value, with: { (snapshot) in
             print("Value : " , snapshot)
             
@@ -67,24 +82,13 @@ class PersonalProfileViewController: UIViewController {
             self.profileImageURL = dict?["imageURL"] as? String
             self.profileDesc = dict?["desc"] as? String
             
-            print("")
-            self.setUpProfile()
+            self.nameLabel.text = self.profileScreenName
+            self.bioLabel.text = self.profileDesc
+            
+            let imageURL = self.profileImageURL
+            self.displayPictureUser.loadImageUsingCacheWithUrlString(urlString: imageURL!)
             })
-        }
-    
-    func setUpProfile () {
         
-        nameLabel.text = profileScreenName
-        bioLabel.text = profileDesc
-        
-        let imageURL = profileImageURL
-        displayPictureUser.loadImageUsingCacheWithUrlString(urlString: imageURL!)
-        
-        
-        print("")
-    }
-    
-    func countingThings () {
         ref.child("users").child(currentUserID).child("followers").observe(.value, with: { (snapshot) in
             if (snapshot.value == nil) { return }
             else {
@@ -113,13 +117,58 @@ class PersonalProfileViewController: UIViewController {
             if (snapshot.value == nil) { return }
             else {
                 
-                let noOfPost = snapshot.value as? NSDictionary
-                guard let post = noOfPost?.allValues as? [String]
-                    else {return}
-                self.profilePosts = post
-                self.numberOfPosts.text = String (describing: post.count)
+                self.numberOfPosts.text = String("\(snapshot.childrenCount)")
             }
         })
+    }
+    
+    func setupCollectionView () {
+        ref.child("users").child(currentUserID).child("posts").observe(.value, with: { (snapshot) in
+            print("Value : " , snapshot)
+        })
+        
+        //get the snapshot
+        ref.child("users").child(currentUserID).child("posts").observe(.childAdded, with: { (snapshot) in
+            print("Value : " , snapshot)
+            
+            //convert snapshot to dictionary
+            guard let info = snapshot.value as? NSDictionary else {return}
+            
+            //add student to array of messages
+            self.addPost(id: snapshot.key, postInfo: info)
+            
+            //sort
+            self.userPost.sort(by: { (post1, post2) -> Bool in
+            return post1.imagePostID < post2.imagePostID
+                
+            //LATER NEED TO CHANGE TO SORT BY POST TIME
+            })
+            
+            //set last message id to last id
+            if let lastPost = self.personalPosts.last {
+            self.lastID = lastPost.imagePostID
+            }
+            
+            //update collection view
+            self.postsCollectionView.reloadData()
+            
+        })
+    }
+    
+    func addPost(id: Any , postInfo:NSDictionary){
+        if let userID = postInfo["userID"] as? String,
+            let caption = postInfo["caption"] as? String,
+            let profilePictureURL = postInfo["profileImageURL"] as? String,
+            let timeStamp = postInfo["timestamp"] as? String,
+            let postID = id as? String,
+            let currentPostID = Int(postID),
+            let postedImageURL =  postInfo["postedImageURL"] as? String,
+            let screenName = postInfo["screenName"] as? String {
+            
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
+            
+            self.userPost.append(newPost)
+        }
     }
     
     func editButtonTapped () {
@@ -143,5 +192,32 @@ class PersonalProfileViewController: UIViewController {
     }
     
 //End of PersonalProfileViewController
+}
+
+extension PersonalProfileViewController : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return userPost.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! PersonalPostCollectionViewCell
+        
+        let imageName = (indexPath.row % 2 == 0) ? "postedImageURL" : "postedImageURL" // kand hui said we don't need this
+        
+        let currentPost = userPost[indexPath.row]
+        let userImage = currentPost.imagePostURL
+        cell.imageView.image = UIImage(named: imageName)    //kang hui said we don't need this
+        cell.imageView.loadImageUsingCacheWithUrlString(urlString: userImage)
+        return cell
+    }
+        
+    override var prefersStatusBarHidden : Bool {
+        return true
+    }
 }
 

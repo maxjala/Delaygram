@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A093A751EA75BDC008A43EB /* CommentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A093A731EA75BDC008A43EB /* CommentViewCell.swift */; };
+		1A093A761EA75BDC008A43EB /* CommentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A093A741EA75BDC008A43EB /* CommentViewCell.xib */; };
+		1A093A781EA7646E008A43EB /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A093A771EA7646E008A43EB /* Comment.swift */; };
 		1A3E910B1EA0CC0A00769DCC /* LoginStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A3E910A1EA0CC0A00769DCC /* LoginStoryBoard.storyboard */; };
 		1A3E910D1EA0CC2300769DCC /* ProfileStoryBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A3E910C1EA0CC2300769DCC /* ProfileStoryBoard.storyboard */; };
 		1A4DF3591EA0BD54005B76EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4DF3581EA0BD54005B76EF /* AppDelegate.swift */; };
@@ -45,6 +48,9 @@
 
 /* Begin PBXFileReference section */
 		16542BBE5D7CD165DD8D2B63 /* Pods_Delaygram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Delaygram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A093A731EA75BDC008A43EB /* CommentViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewCell.swift; sourceTree = "<group>"; };
+		1A093A741EA75BDC008A43EB /* CommentViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewCell.xib; sourceTree = "<group>"; };
+		1A093A771EA7646E008A43EB /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		1A3E910A1EA0CC0A00769DCC /* LoginStoryBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LoginStoryBoard.storyboard; path = Delaygram/LoginStoryBoard.storyboard; sourceTree = "<group>"; };
 		1A3E910C1EA0CC2300769DCC /* ProfileStoryBoard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileStoryBoard.storyboard; sourceTree = "<group>"; };
 		1A4DF3551EA0BD54005B76EF /* Delaygram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delaygram.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +192,9 @@
 				1AECA33F1EA1E651003236F1 /* picturePostViewCell.swift */,
 				1AECA3401EA1E651003236F1 /* picturePostViewCell.xib */,
 				1AD1454A1EA371C800C42B6F /* Extensions.swift */,
+				1A093A731EA75BDC008A43EB /* CommentViewCell.swift */,
+				1A093A741EA75BDC008A43EB /* CommentViewCell.xib */,
+				1A093A771EA7646E008A43EB /* Comment.swift */,
 			);
 			name = "Universal Classes";
 			sourceTree = "<group>";
@@ -295,6 +304,7 @@
 				1A4DF36B1EA0C027005B76EF /* GoogleService-Info.plist in Resources */,
 				1A4DF3601EA0BD54005B76EF /* Assets.xcassets in Resources */,
 				1A3E910B1EA0CC0A00769DCC /* LoginStoryBoard.storyboard in Resources */,
+				1A093A761EA75BDC008A43EB /* CommentViewCell.xib in Resources */,
 				1A4DF35E1EA0BD54005B76EF /* Main.storyboard in Resources */,
 				1A3E910D1EA0CC2300769DCC /* ProfileStoryBoard.storyboard in Resources */,
 				1AECA3421EA1E651003236F1 /* picturePostViewCell.xib in Resources */,
@@ -357,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D2DA3201EA4611A00F77298 /* DetailViewController.swift in Sources */,
+				1A093A781EA7646E008A43EB /* Comment.swift in Sources */,
 				7AA23D5E1EA3A0A900DA9C08 /* SearchViewController.swift in Sources */,
 				3D7E9A141EA0D28300492761 /* LoginViewController.swift in Sources */,
 				1AD1454B1EA371C800C42B6F /* Extensions.swift in Sources */,
@@ -376,6 +387,7 @@
 				7AC3F4311EA4A25A0023A22F /* testSearchViewController.swift in Sources */,
 				7AC3F42F1EA4A23E0023A22F /* testCollectionViewCell.swift in Sources */,
 				1AECA3441EA1FE18003236F1 /* picturePost.swift in Sources */,
+				1A093A751EA75BDC008A43EB /* CommentViewCell.swift in Sources */,
 				1A4DF3591EA0BD54005B76EF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

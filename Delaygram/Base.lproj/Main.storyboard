@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -68,39 +68,40 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="615"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vbw-Ou-Buz">
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKp-vH-Xgz">
                                 <rect key="frame" x="0.0" y="615" width="375" height="52"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add a comment..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7B1-qZ-oge">
                                         <rect key="frame" x="0.0" y="0.0" width="307" height="52"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="307" id="2mZ-F1-d1p"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEa-do-q5q">
                                         <rect key="frame" x="307" y="0.0" width="68" height="52"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="68" id="jcw-lY-UfA"/>
-                                        </constraints>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="sendButtonTapped:" destination="nM7-SM-duc" eventType="touchUpInside" id="gR6-F2-c9Z"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="vbw-Ou-Buz" firstAttribute="top" secondItem="uZx-rd-Kdz" secondAttribute="bottom" id="6Fk-aj-LNE"/>
-                            <constraint firstItem="vbw-Ou-Buz" firstAttribute="bottom" secondItem="XJe-hE-Rko" secondAttribute="top" id="FgK-IB-2A8"/>
-                            <constraint firstItem="vbw-Ou-Buz" firstAttribute="top" secondItem="dVP-np-Thm" secondAttribute="top" constant="615" id="IE4-B8-quY"/>
-                            <constraint firstItem="uZx-rd-Kdz" firstAttribute="leading" secondItem="dVP-np-Thm" secondAttribute="leading" id="WsK-HJ-MO7"/>
-                            <constraint firstAttribute="trailing" secondItem="uZx-rd-Kdz" secondAttribute="trailing" id="dkA-nq-OZ4"/>
-                            <constraint firstItem="vbw-Ou-Buz" firstAttribute="leading" secondItem="uZx-rd-Kdz" secondAttribute="leading" id="gTp-fx-uYL"/>
-                            <constraint firstItem="uZx-rd-Kdz" firstAttribute="top" secondItem="dVP-np-Thm" secondAttribute="top" id="xWk-ZT-biD"/>
+                            <constraint firstItem="xKp-vH-Xgz" firstAttribute="top" secondItem="uZx-rd-Kdz" secondAttribute="bottom" id="3lk-jm-z8v"/>
+                            <constraint firstAttribute="trailing" secondItem="uZx-rd-Kdz" secondAttribute="trailing" id="57V-i7-7SZ"/>
+                            <constraint firstItem="XJe-hE-Rko" firstAttribute="top" secondItem="xKp-vH-Xgz" secondAttribute="bottom" id="6wK-d3-ypm"/>
+                            <constraint firstItem="uZx-rd-Kdz" firstAttribute="top" secondItem="dVP-np-Thm" secondAttribute="top" id="7zw-DM-hRJ"/>
+                            <constraint firstItem="xKp-vH-Xgz" firstAttribute="leading" secondItem="dVP-np-Thm" secondAttribute="leading" id="DA7-sX-zl5"/>
+                            <constraint firstItem="uZx-rd-Kdz" firstAttribute="leading" secondItem="dVP-np-Thm" secondAttribute="leading" id="fgL-mL-R2f"/>
+                            <constraint firstAttribute="trailing" secondItem="xKp-vH-Xgz" secondAttribute="trailing" id="ogr-xa-wdO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="commentsTableView" destination="uZx-rd-Kdz" id="Hwz-ox-idV"/>
+                        <outlet property="inputTextView" destination="7B1-qZ-oge" id="sK7-fn-hHS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EIV-55-SQm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -256,7 +257,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="8QS-es-Oiq" customClass="testCollectionViewCell" customModule="Delaygram" customModuleProvider="target">
-                                        <rect key="frame" x="80.5" y="0.0" width="214" height="168"/>
+                                        <rect key="frame" x="81" y="0.0" width="214" height="168"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="214" height="168"/>
@@ -743,7 +744,7 @@
                                 </state>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mYS-fL-6xu">
-                                <rect key="frame" x="112.5" y="109" width="150" height="150"/>
+                                <rect key="frame" x="113" y="109" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="4Qk-gF-iRs"/>
                                     <constraint firstAttribute="height" constant="150" id="MUV-IB-gEV"/>
@@ -867,7 +868,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o4Z-2E-yd3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" id="rva-dk-cMN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2KV-Uc-WJk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2KV-Uc-WJk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -907,7 +908,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="n0J-u8-eP2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bCf-1q-plk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="bCf-1q-plk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -926,7 +927,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7gt-GG-lYs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Explore" id="fNh-A7-h6S"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LCX-16-WSm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LCX-16-WSm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -945,7 +946,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9GS-5h-uQM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" id="d47-l5-G0c"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="h40-rc-cce">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="h40-rc-cce">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

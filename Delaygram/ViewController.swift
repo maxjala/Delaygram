@@ -182,7 +182,9 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: profilePicURL)
             cell.captionTextView.text = currentPost.caption
             cell.userNameLabel.text = currentPost.userScreenName
-                    
+        
+            cell.delegate = self
+            cell.picturePost = currentPost
             
         
             cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 300)
@@ -197,6 +199,17 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 
     
     }
+
+extension ViewController : PicturePostDelegate {
+    
+    func goToComments(_ post: PicturePost) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        guard let controller = storyboard .instantiateViewController(withIdentifier: "CommentsViewController") as?
+            CommentsViewController else { return }
+        controller.selectedPost = post
+        navigationController?.pushViewController(controller, animated: true)
+    }
+}
 
 
 

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PicturePostDelegate {
-    func goToComments(_: PicturePost)
+    func goToComments(_ post: PicturePost)
 }
 
 
@@ -41,6 +41,8 @@ class picturePostViewCell: UITableViewCell {
     
     @IBOutlet weak var viewCommentsButton: UIButton!
 
+    var picturePost : PicturePost?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -66,9 +68,20 @@ class picturePostViewCell: UITableViewCell {
     }
     
     @IBAction func CommentButton(_ sender: Any) {
+        if delegate != nil {
+            if let _picturePost = picturePost {
+                delegate?.goToComments(_picturePost)
+            }
+        }
+        
     }
     
     @IBAction func viewCommentsButton(_ sender: Any) {
+        if delegate != nil {
+            if let _picturePost = picturePost {
+                delegate?.goToComments(_picturePost)
+            }
+        }
     }
     
     

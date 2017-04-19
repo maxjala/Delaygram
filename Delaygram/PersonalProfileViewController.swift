@@ -202,7 +202,7 @@ class PersonalProfileViewController: UIViewController {
                 //LATER NEED TO CHANGE TO SORT BY POST TIME
             })
             
-            self.postsCollectionView.reloadData()
+            //self.postsCollectionView.reloadData()
             
             
         })
@@ -232,9 +232,10 @@ class PersonalProfileViewController: UIViewController {
             let postID = id as? String,
             let currentPostID = Int(postID),
             let postedImageURL =  postInfo["postedImageURL"] as? String,
-            let screenName = postInfo["screenName"] as? String {
+            let screenName = postInfo["screenName"] as? String,
+            let numberOflikes = postInfo["numberOfLikes"] as? Int {
             
-            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp, aNumberOfLikes: numberOflikes)
             
             return newPost
             
@@ -252,9 +253,10 @@ class PersonalProfileViewController: UIViewController {
             let postID = id as? String,
             let currentPostID = Int(postID),
             let postedImageURL =  postInfo["postedImageURL"] as? String,
-            let screenName = postInfo["screenName"] as? String {
+            let screenName = postInfo["screenName"] as? String,
+            let numberOflikes = postInfo["numberOfLikes"] as? Int {
             
-            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp, aNumberOfLikes: numberOflikes)
             
             self.userPost.append(newPost)
         }
@@ -306,7 +308,7 @@ extension PersonalProfileViewController : UICollectionViewDataSource, UICollecti
         
         let currentPost = onlyMyPosts[indexPath.row]
         let userImage = currentPost.imagePostURL
-        cell.imageView.image = UIImage(named: imageName)    //kang hui said we don't need this
+        //cell.imageView.image = UIImage(named: imageName)    //kang hui said we don't need this
         cell.imageView.loadImageUsingCacheWithUrlString(urlString: userImage)
         
         

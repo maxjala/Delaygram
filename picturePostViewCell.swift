@@ -16,6 +16,7 @@ protocol PicturePostDelegate {
 }
 
 
+
 class picturePostViewCell: UITableViewCell {
     
     var delegate : PicturePostDelegate? = nil
@@ -41,6 +42,7 @@ class picturePostViewCell: UITableViewCell {
     
     @IBOutlet weak var captionTextView: UITextView!
     
+    @IBOutlet weak var likeButton: UIButton!
     
     @IBOutlet weak var commentButton: UIButton!
     
@@ -52,35 +54,12 @@ class picturePostViewCell: UITableViewCell {
         super.awakeFromNib()
         
         ref = FIRDatabase.database().reference()
-        // Initialization code
-        
-    //self.frame = CGRect(x: 0, y: 0, width: 100, height: 10)
-   // self.frame = CGRect(
-        
-        //delegate?.goToComments()
-        
         
     }
     
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
-
-
-    @IBAction func likeButton(_ sender: UIButton) {
-        if let likeButtonImg = UIImage(named: "heart-empty") {
-            sender.setImage(likeButtonImg, for: .normal)
-        } else {
-        
-            let likeButtonImg = UIImage(named: "heart-full")
-                sender.setImage(likeButtonImg, for: .normal)
-        }
-
-        
         
     }
     

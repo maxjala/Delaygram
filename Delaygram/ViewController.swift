@@ -22,11 +22,6 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var uploadTabButton: UITabBarItem! {
-        didSet{
-            //uploadTabButton.addTar
-        }
-    }
     
     @IBOutlet weak var profileTabButton: UITabBarItem!
     
@@ -62,21 +57,21 @@ class ViewController: UIViewController {
         
     }
    
-    //for likes
-    func likeButtonTapped(sender:UIButton){
-        
-        let button = sender.tag
-        let postUid = FIRAuth.auth()!.currentUser!.uid
-        let ref = FIRDatabase.database().reference()
-        let key = ref.child("posts").childByAutoId().key
-        
-        var isLiked = false
-        
-    
-        ref.child("posts").child(postUid).child("like")
-    
-        
-    }
+//    //for likes
+//    func likeButtonTapped(sender:UIButton){
+//        
+//        let button = sender.tag
+//        let postUid = FIRAuth.auth()!.currentUser!.uid
+//        let ref = FIRDatabase.database().reference()
+//        let key = ref.child("posts").childByAutoId().key
+//        
+//        var isLiked = false
+//        
+//    
+//        ref.child("posts").child(postUid).child("like")
+//    
+//        
+//    }
     func fetchFollowingUsers() {
         
         ref.child("users").child(currentUserID).child("following").observe(.value, with: { (snapshot) in
@@ -125,7 +120,6 @@ class ViewController: UIViewController {
         })
         
     }
-  
     
     
     func createPictureFeed(id : Any, postInfo : NSDictionary) -> PicturePost?{
@@ -137,9 +131,10 @@ class ViewController: UIViewController {
             let postID = id as? String,
             let currentPostID = Int(postID),
             let postedImageURL =  postInfo["postedImageURL"] as? String,
-            let screenName = postInfo["screenName"] as? String {
+            let screenName = postInfo["screenName"] as? String,
+            let numberOflikes = postInfo["numberOfLikes"] as? Int {
             
-            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp, aNumberOfLikes: numberOflikes)
             
             return newPost
             
@@ -185,7 +180,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 550.0;//Choose your custom row height
+        return 550//Choose your custom row height
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -194,7 +189,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             else {return UITableViewCell()}
         
         let currentPost = filteredPictureFeed[indexPath.row]
-        //let currentPostUserID = currentPost.userID
+        let currentPostUserID = currentPost.userID
         
         let pictureURL = currentPost.imagePostURL
         let profilePicURL = currentPost.userProfileImageURL
@@ -207,21 +202,147 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: profilePicURL)
         cell.captionTextView.text = currentPost.caption
         cell.userNameLabel.text = currentPost.userScreenName
+        //cell.numberOfLikesLabel.text = observeForLikes(_post: currentPost)
+        observeForLikes(_post: currentPost, _label: cell.numberOfLikesLabel)
         
+        //cell.numberOfLikesLabel.text = "\(currentPost.numberOfLikes) likes"
         
+        checkifLiked(indexPath: indexPath, sender: cell.likeButton)
         
-        cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 300)
+        cell.likeButton.tag = indexPath.row
+        cell.likeButton.addTarget(self, action: #selector(likedButtonTapped(sender:)), for: .touchUpInside)
         
-        //cell..text = currentMessage.timestamp
+        //increaseLikeCount(currentPost.imagePostID)
+
+        
         
         
         
         return cell
     }
     
+    func observeForLikes(_post: PicturePost, _label: UILabel) {
+        
+        let postID = "\(_post.imagePostID)"
+        
+        ref.child("posts").child(postID).child("likes").observe(.value, with: { (snapshot) in
+            print("Value : " , snapshot)
+            
+            var numberOfLikes : [String] = []
+            var noOfLikesString = ""
+            
+            guard let checkedLikes = snapshot.value as? NSDictionary
+                else {return}
+            
+            numberOfLikes = (checkedLikes.allValues as? [String])!
+            
+            if numberOfLikes.count == 1 {
+                noOfLikesString = "1 like"
+            } else if numberOfLikes.count > 1 {
+                noOfLikesString = "\(numberOfLikes) likes"
+            }
+            _label.text = noOfLikesString
+        })
+    }
+    
+    func likedButtonTapped(sender:UIButton) {
+        
+        let buttonRow = sender.tag
+        let ref = FIRDatabase.database().reference()
+        let key = ref.child("users").childByAutoId().key
+        let chosenPostID = "\(self.filteredPictureFeed[buttonRow].imagePostID)"
+        
+        
+        var hasLiked = false
+        
+        ref.child("posts").child("\(chosenPostID)").child("likes").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            
+            if let likers = snapshot.value as? [String : AnyObject] {
+                for (ke, value) in likers {
+                    if value as! String == self.currentUserID {
+                        hasLiked = true
+
+                        ref.child("posts").child("\(chosenPostID)").child("likes/\(ke)").removeValue()
+                        self.decreaseLikeCount(Int(chosenPostID)!)
+                        
+                        let likeButtonImg = UIImage(named: "heart-empty")
+                        (sender as AnyObject).setImage(likeButtonImg, for: .normal)
+    
+                    }
+                }
+            }
+            if !hasLiked {
+                let liked = ["likes/\(key)" : self.currentUserID]
+                
+                ref.child("posts").child("\(chosenPostID)").updateChildValues(liked)
+                self.increaseLikeCount(Int(chosenPostID)!)
+                
+                let likeButtonImg = UIImage(named: "heart-full")
+                (sender as AnyObject).setImage(likeButtonImg, for: .normal)
+            }
+        })
+        ref.removeAllObservers()
+        
+    }
+    
+    
+    func checkifLiked(indexPath: IndexPath, sender: UIButton) {
+        
+        let buttonRow = sender.tag
+        let ref = FIRDatabase.database().reference()
+        let chosenPostID = self.filteredPictureFeed[buttonRow].imagePostID
+        
+        ref.child("posts").child("\(chosenPostID)").child("likes").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            
+            if let likesOfPost = snapshot.value as? [String : AnyObject] {
+                for (_, value) in likesOfPost {
+                    if value as! String == self.currentUserID {
+                        //self.userTableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+                        
+                        let likeButtonImg = UIImage(named: "heart-full")
+                        (sender as AnyObject).setImage(likeButtonImg, for: .normal)
+                    }
+                }
+            }
+        })
+        ref.removeAllObservers()
+        
+    }
+    
+    func increaseLikeCount(_ postID: Int) {
+        ref.child("posts").child("\(postID)").child("numberOfLikes").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            guard let noOfLikes = snapshot.value as? Int else {
+                print("print noOfLikes not found. wrong path/observation used")
+                return }
+
+            let newLikesCount = noOfLikes + 1
+            
+            self.ref.child("posts").child("\(postID)").child("numberOfLikes").setValue(newLikesCount)
+            
+        })
+    }
+    
+    func decreaseLikeCount(_ postID: Int) {
+        ref.child("posts").child("\(postID)").child("numberOfLikes").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            guard let noOfLikes = snapshot.value as? Int else {
+                print("print noOfLikes not found. wrong path/observation used")
+                return }
+
+            let newLikesCount = noOfLikes - 1
+            
+            self.ref.child("posts").child("\(postID)").child("numberOfLikes").setValue(newLikesCount)
+            
+        })
+    }
+    
     
     
 }
+
+
+
 
 extension ViewController : PicturePostDelegate {
     
@@ -232,6 +353,9 @@ extension ViewController : PicturePostDelegate {
         controller.selectedPost = post
         navigationController?.pushViewController(controller, animated: true)
     }
+    
+    
+
 }
 
 

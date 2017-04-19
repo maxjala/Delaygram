@@ -76,9 +76,6 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUw-R3-ews">
                         <rect key="frame" x="8" y="390" width="23" height="20"/>
                         <state key="normal" image="heart-empty"/>
-                        <connections>
-                            <action selector="likeButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="EmL-xd-moO"/>
-                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -112,6 +109,7 @@
             <connections>
                 <outlet property="captionTextView" destination="Lur-ZL-uih" id="X40-H1-sKp"/>
                 <outlet property="commentButton" destination="D6e-PV-rVc" id="sl7-6T-qp8"/>
+                <outlet property="likeButton" destination="hUw-R3-ews" id="e0j-FE-nW1"/>
                 <outlet property="numberOfLikesLabel" destination="dIE-HW-6xw" id="7Ep-nO-pyx"/>
                 <outlet property="picturePostImageView" destination="Ibf-o2-o3e" id="eCV-r6-uti"/>
                 <outlet property="profilePicImageView" destination="h3e-7G-aGu" id="R24-Nm-Is0"/>

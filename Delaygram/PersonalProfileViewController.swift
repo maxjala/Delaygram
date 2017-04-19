@@ -9,6 +9,11 @@
 import UIKit
 import Firebase
 
+enum ProfileType {
+    case myProfile
+    case otherProfile
+}
+
 class PersonalProfileViewController: UIViewController {
 
     @IBOutlet weak var displayPictureUser: UIImageView! {
@@ -22,12 +27,7 @@ class PersonalProfileViewController: UIViewController {
     @IBOutlet weak var numberOfFollowers: UILabel!
     @IBOutlet weak var numberOfFollowing: UILabel!
     
-    @IBOutlet weak var editButton: UIButton!{
-        didSet {
-            editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
-        }
-    }
-    
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var bioLabel: UILabel!
 
@@ -41,6 +41,9 @@ class PersonalProfileViewController: UIViewController {
     var ref: FIRDatabaseReference!
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var currentUserID : String = ""
+    
+    var profileType : ProfileType = .myProfile
+    var selectedProfile : User?
     
     var profileImageURL : String? = ""
     var profileScreenName : String? = ""
@@ -59,10 +62,8 @@ class PersonalProfileViewController: UIViewController {
         super.viewDidLoad()
 
         ref = FIRDatabase.database().reference()
-        if let id = currentUser?.uid {
-            print(id)
-            currentUserID = id
-        }
+        configuringProfileType(profileType)
+        
         //collectionView setting
         collectionViewLayout = CustomImageFlowLayout()
         postsCollectionView.collectionViewLayout = collectionViewLayout
@@ -72,7 +73,40 @@ class PersonalProfileViewController: UIViewController {
         setupCollectionView()
         }
     
+    func configuringProfileType (_ type : ProfileType) {
+        switch type {
+        case .myProfile :
+            
+            configureMyProfile()
+        case .otherProfile:
+            
+            configureOtherProfile()
+        }
+    }
+    
+    func configureMyProfile () {
+        
+        let barButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutButtonTapped))
+        navigationItem.rightBarButtonItem = barButtonItem
+        editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
+        
+        if let id = currentUser?.uid {
+            print(id)
+            currentUserID = id
+        }
+    }
+    
+    func configureOtherProfile () {
+        
+        editButton.setTitle("Follow", for: .normal)
+        editButton.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
+        
+        
+    }
+    
     func setupProfile () {
+        
+        
         ref.child("users").child(currentUserID).observe(.value, with: { (snapshot) in
             print("Value : " , snapshot)
             
@@ -176,7 +210,11 @@ class PersonalProfileViewController: UIViewController {
         present(controller!, animated: true, completion: nil)
     }
     
-    @IBAction func logoutButtonTapped(_ sender: Any) {
+    func followButtonTapped () {
+        
+    }
+    
+    func logoutButtonTapped() {
         let firebaseAuth = FIRAuth.auth()
         
         do {

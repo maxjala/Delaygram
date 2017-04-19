@@ -11,7 +11,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
 
-class testSearchViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ExploreCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     var userPost: [PicturePost] = []
     var personalPosts : [PicturePost] = []
@@ -133,6 +133,7 @@ class testSearchViewController: UIViewController, UICollectionViewDataSource, UI
     override var prefersStatusBarHidden : Bool {
         return true
     }
+
 
 }
 

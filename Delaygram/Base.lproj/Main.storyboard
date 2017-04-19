@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+>>>>>>> nickBranch
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -233,10 +237,10 @@
             </objects>
             <point key="canvasLocation" x="2964" y="1596.2518740629687"/>
         </scene>
-        <!--Test Search View Controller-->
+        <!--Explore Collection View Controller-->
         <scene sceneID="VSE-f3-eU8">
             <objects>
-                <viewController storyboardIdentifier="testSearchViewController" id="cX8-iZ-Guj" customClass="testSearchViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExploreCollectionViewController" id="cX8-iZ-Guj" customClass="ExploreCollectionViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="X7r-c9-7cR"/>
                         <viewControllerLayoutGuide type="bottom" id="eXL-xZ-W4y"/>
@@ -926,7 +930,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7gt-GG-lYs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Explore" id="fNh-A7-h6S"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LCX-16-WSm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LCX-16-WSm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

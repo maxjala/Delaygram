@@ -268,6 +268,9 @@
                             <constraint firstItem="YQR-Ea-9Py" firstAttribute="top" secondItem="UsL-M5-Tiy" secondAttribute="bottom" id="e34-kQ-YZd"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="peoplePostTableView" destination="UsL-M5-Tiy" id="zvq-O2-OtS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kQD-Ha-7yc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -804,7 +807,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o4Z-2E-yd3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" id="rva-dk-cMN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2KV-Uc-WJk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2KV-Uc-WJk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol PicturePostDelegate {
+    func goToComments(_: PicturePost)
+}
+
+
 class picturePostViewCell: UITableViewCell {
+    
+    var delegate : PicturePostDelegate? = nil
     
     static let cellIdentifier = "picturePostViewCell"
     static let cellNib = UINib(nibName: picturePostViewCell.cellIdentifier, bundle: Bundle.main)
@@ -29,6 +36,10 @@ class picturePostViewCell: UITableViewCell {
     
     @IBOutlet weak var captionTextView: UITextView!
     
+    
+    @IBOutlet weak var commentButton: UIButton!
+    
+    @IBOutlet weak var viewCommentsButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +47,8 @@ class picturePostViewCell: UITableViewCell {
         
     //self.frame = CGRect(x: 0, y: 0, width: 100, height: 10)
    // self.frame = CGRect(
+        
+        //delegate?.goToComments()
         
         
     }
@@ -48,6 +61,8 @@ class picturePostViewCell: UITableViewCell {
     }
     
     @IBAction func likeButton(_ sender: Any) {
+        
+        
     }
     
     @IBAction func CommentButton(_ sender: Any) {
@@ -55,6 +70,8 @@ class picturePostViewCell: UITableViewCell {
     
     @IBAction func viewCommentsButton(_ sender: Any) {
     }
+    
+    
     
     
     

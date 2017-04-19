@@ -15,6 +15,7 @@
 		1A4DF3601EA0BD54005B76EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A4DF35F1EA0BD54005B76EF /* Assets.xcassets */; };
 		1A4DF3631EA0BD54005B76EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4DF3611EA0BD54005B76EF /* LaunchScreen.storyboard */; };
 		1A4DF36B1EA0C027005B76EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1A4DF36A1EA0C027005B76EF /* GoogleService-Info.plist */; };
+		1AAD6C1A1EA741E20092A798 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAD6C191EA741E20092A798 /* CommentsViewController.swift */; };
 		1ACE77D71EA7058A00C4FDE8 /* GeneralProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACE77D61EA7058A00C4FDE8 /* GeneralProfileViewController.swift */; };
 		1AD145491EA258D100C42B6F /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD145481EA258D100C42B6F /* UploadViewController.swift */; };
 		1AD1454B1EA371C800C42B6F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD1454A1EA371C800C42B6F /* Extensions.swift */; };
@@ -54,6 +55,7 @@
 		1A4DF3621EA0BD54005B76EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A4DF3641EA0BD54005B76EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A4DF36A1EA0C027005B76EF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1AAD6C191EA741E20092A798 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		1ACE77D61EA7058A00C4FDE8 /* GeneralProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralProfileViewController.swift; sourceTree = "<group>"; };
 		1AD145481EA258D100C42B6F /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		1AD1454A1EA371C800C42B6F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				1A4DF35C1EA0BD54005B76EF /* Main.storyboard */,
+				1AAD6C191EA741E20092A798 /* CommentsViewController.swift */,
 				1ACE77D61EA7058A00C4FDE8 /* GeneralProfileViewController.swift */,
 				3D893E9A1EA62127005891A7 /* EditProfileViewController.swift */,
 				7A76C1FA1EA5E0440020C20F /* PersonalProfileViewController.swift */,
@@ -362,6 +365,7 @@
 				1AD145491EA258D100C42B6F /* UploadViewController.swift in Sources */,
 				3D893E9B1EA62127005891A7 /* EditProfileViewController.swift in Sources */,
 				7A15D97B1EA45F65004FDD55 /* SearchTableViewCell.swift in Sources */,
+				1AAD6C1A1EA741E20092A798 /* CommentsViewController.swift in Sources */,
 				1AECA3411EA1E651003236F1 /* picturePostViewCell.swift in Sources */,
 				1A4DF35B1EA0BD54005B76EF /* ViewController.swift in Sources */,
 				3D7E9A161EA0D2B600492761 /* SignupViewController.swift in Sources */,

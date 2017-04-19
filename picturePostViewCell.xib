@@ -111,10 +111,12 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="captionTextView" destination="Lur-ZL-uih" id="X40-H1-sKp"/>
+                <outlet property="commentButton" destination="D6e-PV-rVc" id="sl7-6T-qp8"/>
                 <outlet property="numberOfLikesLabel" destination="dIE-HW-6xw" id="7Ep-nO-pyx"/>
                 <outlet property="picturePostImageView" destination="Ibf-o2-o3e" id="eCV-r6-uti"/>
                 <outlet property="profilePicImageView" destination="h3e-7G-aGu" id="R24-Nm-Is0"/>
                 <outlet property="userNameLabel" destination="tef-kO-RzL" id="hHW-7n-Gf3"/>
+                <outlet property="viewCommentsButton" destination="OnM-Sf-nfd" id="NXR-y7-Slb"/>
             </connections>
             <point key="canvasLocation" x="20" y="308"/>
         </tableViewCell>

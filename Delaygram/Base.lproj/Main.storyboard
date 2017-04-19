@@ -52,6 +52,60 @@
             </objects>
             <point key="canvasLocation" x="2898" y="137"/>
         </scene>
+        <!--Comments View Controller-->
+        <scene sceneID="wvN-QD-iVm">
+            <objects>
+                <viewController storyboardIdentifier="CommentsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nM7-SM-duc" customClass="CommentsViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZLT-lr-ahy"/>
+                        <viewControllerLayoutGuide type="bottom" id="XJe-hE-Rko"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dVP-np-Thm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uZx-rd-Kdz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="615"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vbw-Ou-Buz">
+                                <rect key="frame" x="0.0" y="615" width="375" height="52"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add a comment..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7B1-qZ-oge">
+                                        <rect key="frame" x="0.0" y="0.0" width="307" height="52"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="307" id="2mZ-F1-d1p"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEa-do-q5q">
+                                        <rect key="frame" x="307" y="0.0" width="68" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="68" id="jcw-lY-UfA"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vbw-Ou-Buz" firstAttribute="top" secondItem="uZx-rd-Kdz" secondAttribute="bottom" id="6Fk-aj-LNE"/>
+                            <constraint firstItem="vbw-Ou-Buz" firstAttribute="bottom" secondItem="XJe-hE-Rko" secondAttribute="top" id="FgK-IB-2A8"/>
+                            <constraint firstItem="vbw-Ou-Buz" firstAttribute="top" secondItem="dVP-np-Thm" secondAttribute="top" constant="615" id="IE4-B8-quY"/>
+                            <constraint firstItem="uZx-rd-Kdz" firstAttribute="leading" secondItem="dVP-np-Thm" secondAttribute="leading" id="WsK-HJ-MO7"/>
+                            <constraint firstAttribute="trailing" secondItem="uZx-rd-Kdz" secondAttribute="trailing" id="dkA-nq-OZ4"/>
+                            <constraint firstItem="vbw-Ou-Buz" firstAttribute="leading" secondItem="uZx-rd-Kdz" secondAttribute="leading" id="gTp-fx-uYL"/>
+                            <constraint firstItem="uZx-rd-Kdz" firstAttribute="top" secondItem="dVP-np-Thm" secondAttribute="top" id="xWk-ZT-biD"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EIV-55-SQm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3964" y="142.57871064467767"/>
+        </scene>
         <!--Upload-->
         <scene sceneID="NyF-cR-9tS">
             <objects>
@@ -134,7 +188,7 @@
             </objects>
             <point key="canvasLocation" x="1076" y="912.5937031484259"/>
         </scene>
-        <!--Search-->
+        <!--Search View Controller-->
         <scene sceneID="dnl-XB-oM0">
             <objects>
                 <viewController storyboardIdentifier="SearchViewController" id="hRE-rc-TeQ" customClass="SearchViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
@@ -147,14 +201,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="e9u-AL-uDB">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="UIU-8k-oYP"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iS7-3G-Q82">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -169,7 +223,7 @@
                             <constraint firstAttribute="trailing" secondItem="e9u-AL-uDB" secondAttribute="trailing" id="rX8-u7-BKu"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" id="d47-l5-G0c"/>
+                    <navigationItem key="navigationItem" id="rjl-Id-CH3"/>
                     <connections>
                         <outlet property="userSearchBar" destination="e9u-AL-uDB" id="Qku-7F-5Da"/>
                         <outlet property="userTableView" destination="iS7-3G-Q82" id="bG7-g8-Ge7"/>
@@ -177,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="igK-ea-vSO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2095.1999999999998" y="918.89055472263874"/>
+            <point key="canvasLocation" x="2964" y="1596.2518740629687"/>
         </scene>
         <!--Test Search View Controller-->
         <scene sceneID="VSE-f3-eU8">
@@ -275,7 +329,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kQD-Ha-7yc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3879.1999999999998" y="1597.1514242878561"/>
+            <point key="canvasLocation" x="4818.3999999999996" y="1597.1514242878561"/>
         </scene>
         <!--Profile-->
         <scene sceneID="wBp-vk-z7M">
@@ -651,13 +705,14 @@
                             <constraint firstItem="gNh-Xu-UL6" firstAttribute="top" secondItem="4gn-Fy-swJ" secondAttribute="top" constant="232" id="z7y-Kc-cbh"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ShZ-PU-tnd"/>
                     <connections>
                         <outlet property="profileImageView" destination="n7W-nG-WFz" id="Jwt-Sr-PDz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sSc-Sb-mQ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5240.8000000000002" y="871.21439280359823"/>
+            <point key="canvasLocation" x="3903.1999999999998" y="2318.5907046476764"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="BIN-tz-zFk">
@@ -804,7 +859,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1b-RG-c34" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4583.1999999999998" y="1596.2518740629687"/>
+            <point key="canvasLocation" x="5522.3999999999996" y="1596.2518740629687"/>
         </scene>
         <!--Home-->
         <scene sceneID="tTX-Qz-tD1">
@@ -838,9 +893,9 @@
                     <connections>
                         <segue destination="o4Z-2E-yd3" kind="relationship" relationship="viewControllers" id="KL7-u4-pTE"/>
                         <segue destination="mZF-yc-Egh" kind="relationship" relationship="viewControllers" id="rdi-sI-ZMV"/>
-                        <segue destination="hRE-rc-TeQ" kind="relationship" relationship="viewControllers" id="9U3-M2-tLb"/>
                         <segue destination="7gt-GG-lYs" kind="relationship" relationship="viewControllers" id="k4v-Q9-QFK"/>
                         <segue destination="h8G-XK-a8C" kind="relationship" relationship="viewControllers" id="Ogo-L5-dWI"/>
+                        <segue destination="9GS-5h-uQM" kind="relationship" relationship="viewControllers" id="Oqm-y0-Xpx"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yt9-pE-hKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -863,7 +918,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lyo-E8-5XV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2940" y="1597.1514242878561"/>
+            <point key="canvasLocation" x="3879.1999999999998" y="1597.1514242878561"/>
         </scene>
         <!--Explore-->
         <scene sceneID="nUw-75-DBU">
@@ -871,7 +926,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7gt-GG-lYs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Explore" id="fNh-A7-h6S"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LCX-16-WSm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LCX-16-WSm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -883,6 +938,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yVs-oy-Xz4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2940" y="918.89055472263874"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="VHv-CC-7v0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9GS-5h-uQM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" id="d47-l5-G0c"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="h40-rc-cce">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hRE-rc-TeQ" kind="relationship" relationship="rootViewController" id="Cin-1G-ucA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yz1-FJ-wDe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2024.8" y="1595.352323838081"/>
         </scene>
     </scenes>
     <resources>

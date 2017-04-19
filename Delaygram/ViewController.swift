@@ -84,7 +84,7 @@ class ViewController: UIViewController {
             // 3. convert snapshot to dictionary
             guard let info = snapshot.value as? NSDictionary else {return}
             // 4. add users to array of following users
-            let newPost = self.createPicturePost(id: snapshot.key, postInfo: info)
+            let newPost = self.createPictureFeed(id: snapshot.key, postInfo: info)
             
             if let tempPost = newPost {
                 self.addToMyFeed(tempPost)
@@ -171,22 +171,31 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             else {return UITableViewCell()}
         
         let currentPost = filteredPictureFeed[indexPath.row]
+        //let currentPostUserID = currentPost.userID
             
             let pictureURL = currentPost.imagePostURL
             let profilePicURL = currentPost.userProfileImageURL
+
+
 
             cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)
             cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: profilePicURL)
             cell.captionTextView.text = currentPost.caption
             cell.userNameLabel.text = currentPost.userScreenName
+                    
+            
         
             cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 300)
             
             //cell..text = currentMessage.timestamp
+
             
             
             return cell
         }
+    
+
+    
     }
 
 

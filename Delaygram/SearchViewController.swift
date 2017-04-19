@@ -162,6 +162,7 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
         
         cell.followButton.tag = indexPath.row
         cell.followButton.addTarget(self, action: #selector(followButtonTapped(sender:)), for: .touchUpInside)
+
         
         return cell
 

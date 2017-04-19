@@ -234,10 +234,10 @@
             </objects>
             <point key="canvasLocation" x="2964" y="1596.2518740629687"/>
         </scene>
-        <!--Test Search View Controller-->
+        <!--Explore Collection View Controller-->
         <scene sceneID="VSE-f3-eU8">
             <objects>
-                <viewController storyboardIdentifier="testSearchViewController" id="cX8-iZ-Guj" customClass="testSearchViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExploreCollectionViewController" id="cX8-iZ-Guj" customClass="ExploreCollectionViewController" customModule="Delaygram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="X7r-c9-7cR"/>
                         <viewControllerLayoutGuide type="bottom" id="eXL-xZ-W4y"/>

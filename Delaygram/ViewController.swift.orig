@@ -15,12 +15,12 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var pictureFeedTableView: UITableView! {
         didSet{
-                pictureFeedTableView.delegate = self
-                pictureFeedTableView.dataSource = self
-    
-                pictureFeedTableView.register(picturePostViewCell.cellNib, forCellReuseIdentifier: picturePostViewCell.cellIdentifier)
+            pictureFeedTableView.delegate = self
+            pictureFeedTableView.dataSource = self
+            
+            pictureFeedTableView.register(picturePostViewCell.cellNib, forCellReuseIdentifier: picturePostViewCell.cellIdentifier)
+        }
     }
-}
     
     @IBOutlet weak var uploadTabButton: UITabBarItem! {
         didSet{
@@ -29,7 +29,9 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var profileTabButton: UITabBarItem!
-
+    
+    private var _likes: Int!
+    
     var pictureFeed : [PicturePost] = []
     var filteredPictureFeed: [PicturePost] = []
     var ref: FIRDatabaseReference!
@@ -37,7 +39,12 @@ class ViewController: UIViewController {
     var currentUserID : String = ""
     var lastPostID : Int = 0
     var followingArray = [String]()
-
+    
+    
+    var likes: Int{
+        return _likes
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +61,22 @@ class ViewController: UIViewController {
         self.pictureFeedTableView.reloadData()
         
     }
+   
+    //for likes
+    func likeButtonTapped(sender:UIButton){
+        
+        let button = sender.tag
+        let postUid = FIRAuth.auth()!.currentUser!.uid
+        let ref = FIRDatabase.database().reference()
+        let key = ref.child("posts").childByAutoId().key
+        
+        var isLiked = false
+        
     
+        ref.child("posts").child(postUid).child("like")
+    
+        
+    }
     func fetchFollowingUsers() {
         
         ref.child("users").child(currentUserID).child("following").observe(.value, with: { (snapshot) in
@@ -84,7 +106,7 @@ class ViewController: UIViewController {
             // 3. convert snapshot to dictionary
             guard let info = snapshot.value as? NSDictionary else {return}
             // 4. add users to array of following users
-            let newPost = self.createPicturePost(id: snapshot.key, postInfo: info)
+            let newPost = self.createPictureFeed(id: snapshot.key, postInfo: info)
             
             if let tempPost = newPost {
                 self.addToMyFeed(tempPost)
@@ -99,31 +121,32 @@ class ViewController: UIViewController {
             
             self.pictureFeedTableView.reloadData()
             
-
+            
         })
         
     }
+  
     
     
     func createPictureFeed(id : Any, postInfo : NSDictionary) -> PicturePost?{
-    
-                    if let userID = postInfo["userID"] as? String,
-                    let caption = postInfo["caption"] as? String,
-                    let profilePictureURL = postInfo["profileImageURL"] as? String,
-                    let timeStamp = postInfo["timestamp"] as? String,
-                    let postID = id as? String,
-                    let currentPostID = Int(postID),
-                    let postedImageURL =  postInfo["postedImageURL"] as? String,
-                    let screenName = postInfo["screenName"] as? String {
-                        
+        
+        if let userID = postInfo["userID"] as? String,
+            let caption = postInfo["caption"] as? String,
+            let profilePictureURL = postInfo["profileImageURL"] as? String,
+            let timeStamp = postInfo["timestamp"] as? String,
+            let postID = id as? String,
+            let currentPostID = Int(postID),
+            let postedImageURL =  postInfo["postedImageURL"] as? String,
+            let screenName = postInfo["screenName"] as? String {
+            
             let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
-                        
+            
             return newPost
-
+            
         }
         return nil
     }
-
+    
     func addToMyFeed(_ post : PicturePost) {
         
         for each in self.followingArray {
@@ -135,8 +158,8 @@ class ViewController: UIViewController {
         }
         self.pictureFeedTableView.reloadData()
     }
- 
-
+    
+    
     @IBAction func tempLogoutButton(_ sender: Any) {
         let firebaseAuth = FIRAuth.auth()
         
@@ -145,14 +168,14 @@ class ViewController: UIViewController {
             let storyboard = UIStoryboard(name: "LoginStoryBoard", bundle: Bundle.main)
             //logged out and go to the log in page
             let logInVC = storyboard.instantiateViewController(withIdentifier: "AuthNavigationController")
-                present(logInVC, animated: true, completion: nil)
+            present(logInVC, animated: true, completion: nil)
             
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
     }
     
-
+    
 }
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
@@ -171,23 +194,43 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             else {return UITableViewCell()}
         
         let currentPost = filteredPictureFeed[indexPath.row]
-            
-            let pictureURL = currentPost.imagePostURL
-            let profilePicURL = currentPost.userProfileImageURL
-
-            cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)
-            cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: profilePicURL)
-            cell.captionTextView.text = currentPost.caption
-            cell.userNameLabel.text = currentPost.userScreenName
+        //let currentPostUserID = currentPost.userID
         
-            cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 300)
-            
-            //cell..text = currentMessage.timestamp
-            
-            
-            return cell
-        }
+        let pictureURL = currentPost.imagePostURL
+        let profilePicURL = currentPost.userProfileImageURL
+        
+        
+        
+        cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)
+        cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: profilePicURL)
+        cell.captionTextView.text = currentPost.caption
+        cell.userNameLabel.text = currentPost.userScreenName
+        
+        
+        
+        cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 300)
+        
+        //cell..text = currentMessage.timestamp
+        
+        
+        
+        return cell
     }
+    
+    
+    
+}
+
+extension ViewController : PicturePostDelegate {
+    
+    func goToComments(_ post: PicturePost) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        guard let controller = storyboard .instantiateViewController(withIdentifier: "CommentsViewController") as?
+            CommentsViewController else { return }
+        controller.selectedPost = post
+        navigationController?.pushViewController(controller, animated: true)
+    }
+}
 
 
 

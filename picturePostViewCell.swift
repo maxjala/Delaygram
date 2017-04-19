@@ -56,14 +56,6 @@ class picturePostViewCell: UITableViewCell {
     }
     
     @IBAction func likeButton(_ sender: UIButton) {
-        if let likeButtonImg = UIImage(named: "heart-empty") {
-            sender.setImage(likeButtonImg, for: .normal)
-        } else {
-        
-            let likeButtonImg = UIImage(named: "heart-full")
-                sender.setImage(likeButtonImg, for: .normal)
-        }
-        
         
     }
     

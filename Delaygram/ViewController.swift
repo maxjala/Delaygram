@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         
     }
    
-    
+    //for likes
     func likeButtonTapped(sender:UIButton){
         
         let button = sender.tag

@@ -54,7 +54,7 @@ class PersonalProfileViewController: UIViewController {
         }
         
         listenToFirebase()
-        setUpProfile()
+        countingThings()
         }
     
     func listenToFirebase () {
@@ -67,49 +67,59 @@ class PersonalProfileViewController: UIViewController {
             self.profileImageURL = dict?["imageURL"] as? String
             self.profileDesc = dict?["desc"] as? String
             
-            })
-            
-            ref.child("users").child(currentUserID).child("followers").observe(.value, with: { (snapshot) in
-                let value = snapshot.value as? String
-                if (value == nil) { return }
-                else {
-                    self.profileFollowers?.append(value!)
-                }
-            })
-            
-            ref.child("users").child(currentUserID).child("following").observe(.value, with: { (snapshot) in
-                let value = snapshot.value as? String
-                if (value == nil) { return }
-                else {
-                    self.profileFollowing?.append(value!)
-                }
-            })
-            
-            ref.child("users").child(currentUserID).child("posts").observe(.value, with: { (snapshot) in
-                let value = snapshot.value as? String
-                if (value == nil) { return }
-                else {
-                    self.profilePosts?.append(value!)
-                }
-            })
-            
             print("")
-    }
+            self.setUpProfile()
+            })
+        }
     
     func setUpProfile () {
         
         nameLabel.text = profileScreenName
         bioLabel.text = profileDesc
         
-        //numberOfPosts.text as? Int = profilePosts?.count
-//        numberOfFollowers.text = profileFollowers?.count
-//        numberOfFollowing.text = profileFollowing?.count
-        
         let imageURL = profileImageURL
         displayPictureUser.loadImageUsingCacheWithUrlString(urlString: imageURL!)
         
         
         print("")
+    }
+    
+    func countingThings () {
+        ref.child("users").child(currentUserID).child("followers").observe(.value, with: { (snapshot) in
+            if (snapshot.value == nil) { return }
+            else {
+                
+                let noOfFollowers = snapshot.value as? NSDictionary
+                guard let followers = noOfFollowers?.allValues as? [String]
+                    else { return }
+                self.profileFollowers = followers
+                self.numberOfFollowers.text = String (describing: followers.count)
+            }
+        })
+        
+        ref.child("users").child(currentUserID).child("following").observe(.value, with: { (snapshot) in
+            if (snapshot.value == nil) { return }
+            else {
+                
+                let noOfFollowing = snapshot.value as? NSDictionary
+                guard let following = noOfFollowing?.allValues as? [String]
+                    else {return}
+                self.profileFollowing = following
+                self.numberOfFollowing.text = String (describing: following.count)
+            }
+        })
+        
+        ref.child("users").child(currentUserID).child("posts").observe(.value, with: { (snapshot) in
+            if (snapshot.value == nil) { return }
+            else {
+                
+                let noOfPost = snapshot.value as? NSDictionary
+                guard let post = noOfPost?.allValues as? [String]
+                    else {return}
+                self.profilePosts = post
+                self.numberOfPosts.text = String (describing: post.count)
+            }
+        })
     }
     
     func editButtonTapped () {

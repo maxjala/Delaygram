@@ -84,7 +84,7 @@ class ViewController: UIViewController {
             // 3. convert snapshot to dictionary
             guard let info = snapshot.value as? NSDictionary else {return}
             // 4. add users to array of following users
-            let newPost = self.createPicturePost(id: snapshot.key, postInfo: info)
+            let newPost = self.createPictureFeed(id: snapshot.key, postInfo: info)
             
             if let tempPost = newPost {
                 self.addToMyFeed(tempPost)

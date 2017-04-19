@@ -926,7 +926,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7gt-GG-lYs" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Explore" id="fNh-A7-h6S"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LCX-16-WSm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LCX-16-WSm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -945,7 +945,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9GS-5h-uQM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" id="d47-l5-G0c"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="h40-rc-cce">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="h40-rc-cce">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

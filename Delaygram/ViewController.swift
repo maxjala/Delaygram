@@ -50,21 +50,36 @@ class ViewController: UIViewController {
             currentUserID = id
         }
         
-        fetchFollowingUsersAndPosts()
-        listenToFirebase()
+        fetchFollowingUsers()
+        self.pictureFeedTableView.reloadData()
         
     }
     
-    func listenToFirebase() {
-        ref.child("posts").observe(.value, with: { (snapshot) in
-            print("Value : " , snapshot)
-        })
+    func fetchFollowingUsers() {
         
-        // 2. get the snapshot
-        ref.child("posts").observe(.childAdded, with: { (snapshot) in
+        ref.child("users").child(currentUserID).child("following").observe(.value, with: { (snapshot) in
             print("Value : " , snapshot)
             
-            //self.fetchFollowingUsersAndPosts()
+            self.filteredPictureFeed.removeAll()
+            self.pictureFeed.removeAll()
+            
+            guard let checkedID = snapshot.value as? NSDictionary
+                else {
+                    print("observing child value for \(self.currentUserID) following no value")
+                    return
+            }
+            self.followingArray = (checkedID.allValues as? [String])!
+            
+            self.fetchPosts()
+            
+        })
+        
+    }
+    
+    func fetchPosts() {
+        
+        ref.child("posts").observe(.childAdded, with: { (snapshot) in
+            print("Value : " , snapshot)
             
             // 3. convert snapshot to dictionary
             guard let info = snapshot.value as? NSDictionary else {return}
@@ -72,63 +87,21 @@ class ViewController: UIViewController {
             let newPost = self.createPictureFeed(id: snapshot.key, postInfo: info)
             
             if let tempPost = newPost {
-                self.pictureFeed.append(tempPost)
                 self.addToMyFeed(tempPost)
             }
             
             // sort
-            self.pictureFeed.sort(by: { (picture1, picture2) -> Bool in
+            self.filteredPictureFeed.sort(by: { (picture1, picture2) -> Bool in
                 return picture1.imagePostID > picture2.imagePostID
                 
                 //LATER NEED TO CHANGE TO SORT BY POST TIME
             })
             
-            // set last message id to last id
-            if let lastPost = self.pictureFeed.last {
-                self.lastPostID = lastPost.imagePostID
-            }
-            
-            // 5. update table view
             self.pictureFeedTableView.reloadData()
             
+
         })
         
-    }
-    
-    
-    func fetchFollowingUsersAndPosts() {
-        ref.child("users").child(currentUserID).child("following").observe(.value, with: { (snapshot) in
-            print("Value : " , snapshot)
-            
-            guard let checkedID = snapshot.value as? NSDictionary
-                else {return}
-            self.followingArray = (checkedID.allValues as? [String])!
-            
-            self.pictureFeedTableView.reloadData()
-    
-        })
-        
-        ref.child("users").child(currentUserID).child("following").observe(.childAdded, with: { (snapshot) in
-            print("Value : " , snapshot)
-            
-            guard let checkedID = snapshot.value as? NSDictionary
-                else {return}
-            self.followingArray = (checkedID.allValues as? [String])!
-            
-            self.pictureFeedTableView.reloadData()
-            
-        })
-        
-        ref.child("users").child(currentUserID).child("following").observe(.childRemoved, with: { (snapshot) in
-            print("Value : " , snapshot)
-            
-            guard let checkedID = snapshot.value as? NSDictionary
-                else {return}
-            self.followingArray = (checkedID.allValues as? [String])!
-            
-            self.pictureFeedTableView.reloadData()
-            
-        })
     }
     
     
@@ -150,7 +123,6 @@ class ViewController: UIViewController {
         }
         return nil
     }
-    
 
     func addToMyFeed(_ post : PicturePost) {
         
@@ -162,11 +134,6 @@ class ViewController: UIViewController {
             }
         }
         self.pictureFeedTableView.reloadData()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
  
 
@@ -216,7 +183,6 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 300)
             
             //cell..text = currentMessage.timestamp
-            
             
             
             return cell

@@ -19,9 +19,7 @@ class PersonalProfileViewController: UIViewController {
     }
     
     @IBOutlet weak var numberOfPosts: UILabel!
-    
     @IBOutlet weak var numberOfFollowers: UILabel!
-    
     @IBOutlet weak var numberOfFollowing: UILabel!
     
     @IBOutlet weak var editButton: UIButton!{
@@ -31,18 +29,20 @@ class PersonalProfileViewController: UIViewController {
     }
     
     @IBOutlet weak var nameLabel: UILabel!
-    
     @IBOutlet weak var bioLabel: UILabel!
     
     
     var ref: FIRDatabaseReference!
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var currentUserID : String = ""
-    var profileImageURL : String = ""
-    var profileScreenName : String = ""
-    var profileDesc : String = ""
-    var profileFollowers : String = ""
-    var profileFolowing : String = ""
+    
+    var profileImageURL : String? = ""
+    var profileScreenName : String? = ""
+    var profileDesc : String? = ""
+    
+    var profileFollowers : [String]? = []
+    var profileFollowing : [String]? = []
+    var profilePosts : [String]? = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,43 +54,67 @@ class PersonalProfileViewController: UIViewController {
         }
         
         listenToFirebase()
+        setUpProfile()
         }
     
     func listenToFirebase () {
         ref.child("users").child(currentUserID).observe(.value, with: { (snapshot) in
             print("Value : " , snapshot)
             
-            var dict = snapshot.value as? [String: String]
+            var dict = snapshot.value as? [String : Any]
             
-            self.profileScreenName = (dict?["screenName"])!
-            self.profileImageURL = (dict?["imageURL"])!
-            self.profileDesc = (dict?["desc"])!
-//            self.profileFollowers = (dictionary?["followers"])!
-//            self.profileFolowing = (dictionary?["following"])!
+            self.profileScreenName = dict?["screenName"] as? String
+            self.profileImageURL = dict?["imageURL"] as? String
+            self.profileDesc = dict?["desc"] as? String
             
+            })
+            
+            ref.child("users").child(currentUserID).child("followers").observe(.value, with: { (snapshot) in
+                let value = snapshot.value as? String
+                if (value == nil) { return }
+                else {
+                    self.profileFollowers?.append(value!)
+                }
+            })
+            
+            ref.child("users").child(currentUserID).child("following").observe(.value, with: { (snapshot) in
+                let value = snapshot.value as? String
+                if (value == nil) { return }
+                else {
+                    self.profileFollowing?.append(value!)
+                }
+            })
+            
+            ref.child("users").child(currentUserID).child("posts").observe(.value, with: { (snapshot) in
+                let value = snapshot.value as? String
+                if (value == nil) { return }
+                else {
+                    self.profilePosts?.append(value!)
+                }
+            })
             
             print("")
-            
-            self.setUpProfile()
-        })
     }
     
     func setUpProfile () {
+        
         nameLabel.text = profileScreenName
         bioLabel.text = profileDesc
-//        numberOfFollowers.text = profileFollowers.count
-//        numberOfFollowing.text = profileFolowing.count
+        
+        //numberOfPosts.text as? Int = profilePosts?.count
+//        numberOfFollowers.text = profileFollowers?.count
+//        numberOfFollowing.text = profileFollowing?.count
         
         let imageURL = profileImageURL
-        displayPictureUser.loadImageUsingCacheWithUrlString(urlString: imageURL)
+        displayPictureUser.loadImageUsingCacheWithUrlString(urlString: imageURL!)
         
         
         print("")
     }
-
     
     func editButtonTapped () {
-        
+        let controller = storyboard?.instantiateViewController(withIdentifier: "EditProfileViewController") as? EditProfileViewController
+        present(controller!, animated: true, completion: nil)
     }
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
@@ -108,81 +132,6 @@ class PersonalProfileViewController: UIViewController {
         }
     }
     
-//    @IBAction func editPictureButton(_ sender: Any) {
-//        let imagePicker = UIImagePickerController()
-//        imagePicker.delegate = self
-//        present(imagePicker, animated: true, completion: nil)
-//        
-//        
-//    }
-//    
-//    
-//    
-//    func dismissImagePicker() {
-//        dismiss(animated: true, completion: nil)
-//    }
-//    
-//    func uploadImage(_ image: UIImage) {
-//        
-//        let ref = FIRStorage.storage().reference()
-//        guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
-//        let metaData = FIRStorageMetadata()
-//        metaData.contentType = "image/jpeg"
-//        ref.child("\(currentUser?.email)-\(createTimeStamp()).jpeg").put(imageData, metadata: metaData) { (meta, error) in
-//            
-//            if let downloadPath = meta?.downloadURL()?.absoluteString {
-//                //save to firebase database
-//                self.saveImagePath(downloadPath)
-//                
-//                print("")
-//            }
-//            
-//        }
-//        
-//        
-//    }
-//    
-//    func createTimeStamp() -> String {
-//        
-//        let currentDate = NSDate()
-//        let dateFormatter:DateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "MM-dd HH:mm"
-//        let timeCreated = dateFormatter.string(from: currentDate as Date)
-//        
-//        return timeCreated
-//        
-//    }
-//    
-//    func saveImagePath(_ path: String) {
-//        
-//        let profileValue : [String: Any] = ["imageURL": path]
-//        
-//        ref.child("users").child(currentUserID).updateChildValues(profileValue)
-//    }
 //End of PersonalProfileViewController
 }
-
-//extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//    
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//        
-//        defer {
-//            dismissImagePicker()
-//        }
-//        
-//        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
-//            return
-//        }
-//        
-//        //display / store
-//        uploadImage(image)
-//        
-//    }
-//    
-//    func uniqueFileForUser(_ name: String) -> String {
-//        let currentDate = Date()
-//        return "\(name)_\(currentDate.timeIntervalSince1970).jpeg"
-//    }
-//}
-
 

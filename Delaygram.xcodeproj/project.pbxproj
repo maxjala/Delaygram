@@ -28,6 +28,7 @@
 		3D2DA3201EA4611A00F77298 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2DA31F1EA4611A00F77298 /* DetailViewController.swift */; };
 		3D7E9A141EA0D28300492761 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E9A131EA0D28300492761 /* LoginViewController.swift */; };
 		3D7E9A161EA0D2B600492761 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E9A151EA0D2B600492761 /* SignupViewController.swift */; };
+		3D893E9B1EA62127005891A7 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D893E9A1EA62127005891A7 /* EditProfileViewController.swift */; };
 		7A15D97B1EA45F65004FDD55 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A15D9791EA45F65004FDD55 /* SearchTableViewCell.swift */; };
 		7A15D97C1EA45F65004FDD55 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A15D97A1EA45F65004FDD55 /* SearchTableViewCell.xib */; };
 		7A76C1F91EA5CEFE0020C20F /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A76C1F81EA5CEFE0020C20F /* ExploreViewController.swift */; };
@@ -68,6 +69,7 @@
 		3D7E9A151EA0D2B600492761 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		3D893E941EA5D2A6005891A7 /* Delaygram.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Delaygram.entitlements; sourceTree = "<group>"; };
 		3D893E951EA5D34A005891A7 /* Delaygram-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Delaygram-Bridging-Header.h"; sourceTree = "<group>"; };
+		3D893E9A1EA62127005891A7 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		7A15D9791EA45F65004FDD55 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7A15D97A1EA45F65004FDD55 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		7A76C1F81EA5CEFE0020C20F /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				1A4DF35C1EA0BD54005B76EF /* Main.storyboard */,
+				3D893E9A1EA62127005891A7 /* EditProfileViewController.swift */,
 				7A76C1FA1EA5E0440020C20F /* PersonalProfileViewController.swift */,
 				7A15D9791EA45F65004FDD55 /* SearchTableViewCell.swift */,
 				7A15D97A1EA45F65004FDD55 /* SearchTableViewCell.xib */,
@@ -358,6 +361,7 @@
 				7A76C1F91EA5CEFE0020C20F /* ExploreViewController.swift in Sources */,
 				7A76C2021EA60D610020C20F /* PeoplePostViewCell.swift in Sources */,
 				1AD145491EA258D100C42B6F /* UploadViewController.swift in Sources */,
+				3D893E9B1EA62127005891A7 /* EditProfileViewController.swift in Sources */,
 				7A15D97B1EA45F65004FDD55 /* SearchTableViewCell.swift in Sources */,
 				1AECA3411EA1E651003236F1 /* picturePostViewCell.swift in Sources */,
 				1A4DF35B1EA0BD54005B76EF /* ViewController.swift in Sources */,

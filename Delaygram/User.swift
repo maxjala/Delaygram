@@ -12,8 +12,6 @@ class User {
     var id: String
     var email : String
     var screenName : String
-//    var followers : Array<String>
-//    var following : Array<String>
     var desc : String
     var imageURL : String
     
@@ -21,18 +19,14 @@ class User {
         id = ""
         email = ""
         screenName = ""
-//        followers = []
-//        following = []
         desc = ""
         imageURL = ""
     }
     
-    init(anId : String, anEmail : String, aScreenName : String,/* followersArray : Array<String>, followingArray : Array<String>,*/ aDesc : String, anImageURL : String) {
+    init(anId : String, anEmail : String, aScreenName : String, aDesc : String, anImageURL : String) {
         id = anId
         email = anEmail
         screenName = aScreenName
-//        followers = followersArray
-//        following = followingArray
         desc = aDesc
         imageURL = anImageURL
     }

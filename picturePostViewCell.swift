@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
+import FirebaseStorage
 
 class picturePostViewCell: UITableViewCell {
     
     static let cellIdentifier = "picturePostViewCell"
     static let cellNib = UINib(nibName: picturePostViewCell.cellIdentifier, bundle: Bundle.main)
+    
+    var ref: FIRDatabaseReference!
     
     
     @IBOutlet weak var profilePicImageView: UIImageView! {
@@ -29,9 +34,12 @@ class picturePostViewCell: UITableViewCell {
     
     @IBOutlet weak var captionTextView: UITextView!
     
+    @IBOutlet weak var likeButtonImg: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        ref = FIRDatabase.database().reference()
         // Initialization code
         
     //self.frame = CGRect(x: 0, y: 0, width: 100, height: 10)
@@ -47,7 +55,16 @@ class picturePostViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func likeButton(_ sender: Any) {
+    @IBAction func likeButton(_ sender: UIButton) {
+        if let likeButtonImg = UIImage(named: "heart-empty") {
+            sender.setImage(likeButtonImg, for: .normal)
+        } else {
+        
+            let likeButtonImg = UIImage(named: "heart-full")
+                sender.setImage(likeButtonImg, for: .normal)
+        }
+        
+        
     }
     
     @IBAction func CommentButton(_ sender: Any) {

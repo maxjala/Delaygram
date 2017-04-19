@@ -34,8 +34,6 @@
 		7A15D97C1EA45F65004FDD55 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A15D97A1EA45F65004FDD55 /* SearchTableViewCell.xib */; };
 		7A76C1F91EA5CEFE0020C20F /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A76C1F81EA5CEFE0020C20F /* ExploreViewController.swift */; };
 		7A76C1FB1EA5E0440020C20F /* PersonalProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A76C1FA1EA5E0440020C20F /* PersonalProfileViewController.swift */; };
-		7A76C2021EA60D610020C20F /* PeoplePostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A76C2001EA60D610020C20F /* PeoplePostViewCell.swift */; };
-		7A76C2031EA60D610020C20F /* PeoplePostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A76C2011EA60D610020C20F /* PeoplePostViewCell.xib */; };
 		7AA23D5E1EA3A0A900DA9C08 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA23D5D1EA3A0A900DA9C08 /* SearchViewController.swift */; };
 		7AC3F42F1EA4A23E0023A22F /* testCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC3F42E1EA4A23E0023A22F /* testCollectionViewCell.swift */; };
 		7AC3F4311EA4A25A0023A22F /* testSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC3F4301EA4A25A0023A22F /* testSearchViewController.swift */; };
@@ -76,8 +74,6 @@
 		7A15D97A1EA45F65004FDD55 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		7A76C1F81EA5CEFE0020C20F /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		7A76C1FA1EA5E0440020C20F /* PersonalProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalProfileViewController.swift; sourceTree = "<group>"; };
-		7A76C2001EA60D610020C20F /* PeoplePostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeoplePostViewCell.swift; sourceTree = "<group>"; };
-		7A76C2011EA60D610020C20F /* PeoplePostViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeoplePostViewCell.xib; sourceTree = "<group>"; };
 		7AA23D5D1EA3A0A900DA9C08 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7AC3F42E1EA4A23E0023A22F /* testCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testCollectionViewCell.swift; sourceTree = "<group>"; };
 		7AC3F4301EA4A25A0023A22F /* testSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testSearchViewController.swift; sourceTree = "<group>"; };
@@ -184,8 +180,6 @@
 				1AECA33F1EA1E651003236F1 /* picturePostViewCell.swift */,
 				1AECA3401EA1E651003236F1 /* picturePostViewCell.xib */,
 				1AD1454A1EA371C800C42B6F /* Extensions.swift */,
-				7A76C2001EA60D610020C20F /* PeoplePostViewCell.swift */,
-				7A76C2011EA60D610020C20F /* PeoplePostViewCell.xib */,
 			);
 			name = "Universal Classes";
 			sourceTree = "<group>";
@@ -296,7 +290,6 @@
 				1A4DF3601EA0BD54005B76EF /* Assets.xcassets in Resources */,
 				1A3E910B1EA0CC0A00769DCC /* LoginStoryBoard.storyboard in Resources */,
 				1A4DF35E1EA0BD54005B76EF /* Main.storyboard in Resources */,
-				7A76C2031EA60D610020C20F /* PeoplePostViewCell.xib in Resources */,
 				1A3E910D1EA0CC2300769DCC /* ProfileStoryBoard.storyboard in Resources */,
 				1AECA3421EA1E651003236F1 /* picturePostViewCell.xib in Resources */,
 			);
@@ -362,7 +355,6 @@
 				3D7E9A141EA0D28300492761 /* LoginViewController.swift in Sources */,
 				1AD1454B1EA371C800C42B6F /* Extensions.swift in Sources */,
 				7A76C1F91EA5CEFE0020C20F /* ExploreViewController.swift in Sources */,
-				7A76C2021EA60D610020C20F /* PeoplePostViewCell.swift in Sources */,
 				1AD145491EA258D100C42B6F /* UploadViewController.swift in Sources */,
 				3D893E9B1EA62127005891A7 /* EditProfileViewController.swift in Sources */,
 				7A15D97B1EA45F65004FDD55 /* SearchTableViewCell.swift in Sources */,

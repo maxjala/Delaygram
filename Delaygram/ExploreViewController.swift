@@ -13,6 +13,13 @@ import FirebaseStorage
 
 class ExploreViewController: UIViewController {
     
+    var peopleFeed: [PicturePost] = []
+    var ref: FIRDatabaseReference!
+    var currentPerson: FIRUser? = FIRAuth.auth()?.currentUser
+    var currentPersonID: String = ""
+    var lastPostID: Int = 0
+    
+    
     
     
     @IBOutlet weak var peoplePostTableView: UITableView!{
@@ -20,9 +27,69 @@ class ExploreViewController: UIViewController {
             peoplePostTableView.delegate = self
             peoplePostTableView.dataSource = self
             
-            peoplePostTableView.register(PeoplePostViewCell.cellNib, forCellReuseIdentifier: PeoplePostViewCell.cellIdentifier)
+            peoplePostTableView.register(picturePostViewCell.cellNib, forCellReuseIdentifier: picturePostViewCell.cellIdentifier)
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        ref = FIRDatabase.database().reference()
+        
+        if let id = currentPerson?.uid {
+        print(id)
+        currentPersonID = id
+        }
+        listenToFirebase()
+        self.peoplePostTableView.reloadData()
+    }
+    
+    func listenToFirebase(){
+        ref.child("posts").observe(.value, with: {(snapshot) in
+            print("Value: " , snapshot)
+        
+        })
+        
+        ref.child("posts").observe(.childAdded, with:{ (snapshot) in
+        
+            print("Value: ", snapshot)
+            
+            guard let info = snapshot.value as? NSDictionary else {return}
+            
+            self.addToPeopleFeed(id:snapshot.key, postInfo:info)
+            
+            self.peopleFeed.sort(by:{(picture1, picture2) -> Bool in
+                return picture1.imagePostID > picture2.imagePostID
+            })
+            
+            if let lastPost = self.peopleFeed.last {
+                self.lastPostID = lastPost.imagePostID
+            }
+            
+            self.peoplePostTableView.reloadData()
+            
+        })
+    }
+    
+    func addToPeopleFeed(id: Any, postInfo: NSDictionary) {
+        if let peopleId = postInfo["userID"] as? String,
+            let caption = postInfo["caption"] as? String,
+            let peopleProfilePicture = postInfo["profileImageURL"] as? String,
+            let timeStamp = postInfo["timestamp"] as? String,
+            let postID = id as? String,
+            let currentPostId = Int(postID),
+            let postedImageURL = postInfo["postedImageURL"] as? String,
+            let screenName = postInfo["screenName"] as? String {
+            
+            let newPeopleFeed = PicturePost(anID: currentPostId, aUserID: peopleId, aUserScreenName: screenName, aUserProfileImageURL: peopleProfilePicture, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
+            
+            self.peopleFeed.append(newPeopleFeed)
+        
+        
+        }
+    }
+    
+    
     
     
 }
@@ -30,7 +97,7 @@ class ExploreViewController: UIViewController {
 extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return peopleFeed.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -38,12 +105,22 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PeoplePostViewCell.cellIdentifier) as? PeoplePostViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: picturePostViewCell.cellIdentifier) as? picturePostViewCell
             else { return UITableViewCell() }
         
+        let currentPost = peopleFeed[indexPath.row]
+        
+            let pictureURL = currentPost.imagePostURL
+            let peopleProfilePic = currentPost.userProfileImageURL
         
         
+        cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)
+        cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: peopleProfilePic)
         
+        cell.captionTextView.text = currentPost.caption
+        cell.userNameLabel.text = currentPost.userScreenName
+        
+       // cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 300)
         
         
         

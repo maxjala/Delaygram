@@ -58,6 +58,9 @@ class PersonalProfileViewController: UIViewController {
     var personalPosts : [PicturePost] = []
     var lastID = 0
     
+    var postReferences = [String]()
+    var onlyMyPosts : [PicturePost] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -70,7 +73,9 @@ class PersonalProfileViewController: UIViewController {
         postsCollectionView.backgroundColor = .white
         
         setupProfile()
-        setupCollectionView()
+        //setupCollectionView()
+        
+        fetchPersonalPostIDs()
         }
     
     func configuringProfileType (_ type : ProfileType) {
@@ -189,6 +194,91 @@ class PersonalProfileViewController: UIViewController {
         })
     }
     
+    func fetchPersonalPostIDs() {
+        
+        ref.child("users").child(currentUserID).child("posts").observe(.value, with: { (snapshot) in
+            print("Value : " , snapshot)
+            
+            self.onlyMyPosts.removeAll()
+            
+            guard let checkedID = snapshot.value as? NSDictionary
+                else {
+                    print("observing child value for \(self.currentUserID) following no value")
+                    return
+            }
+            self.postReferences = (checkedID.allKeys as? [String])!
+            
+            self.fetchPosts()
+            
+        })
+        
+    }
+    
+    
+    func fetchPosts() {
+        
+        ref.child("posts").observe(.childAdded, with: { (snapshot) in
+            print("Value : " , snapshot)
+            
+            // 3. convert snapshot to dictionary
+            guard let info = snapshot.value as? NSDictionary else {return}
+            // 4. add users to array of following users
+            let newPost = self.createPictureFeed(id: snapshot.key, postInfo: info)
+            
+            if let tempPost = newPost {
+                self.addToMyFeed(tempPost)
+            }
+            
+            // sort
+            self.onlyMyPosts.sort(by: { (picture1, picture2) -> Bool in
+                return picture1.imagePostID > picture2.imagePostID
+                
+                //LATER NEED TO CHANGE TO SORT BY POST TIME
+            })
+            
+            //self.postsCollectionView.reloadData()
+            
+            
+        })
+        
+    }
+    
+    func addToMyFeed(_ post : PicturePost) {
+        
+        for each in self.postReferences {
+            if Int(each) == post.imagePostID {
+                
+                self.onlyMyPosts.append(post)
+                
+            }
+        }
+        self.postsCollectionView.reloadData()
+    }
+    
+    
+    
+    func createPictureFeed(id : Any, postInfo : NSDictionary) -> PicturePost?{
+        
+        if let userID = postInfo["userID"] as? String,
+            let caption = postInfo["caption"] as? String,
+            let profilePictureURL = postInfo["profileImageURL"] as? String,
+            let timeStamp = postInfo["timestamp"] as? String,
+            let postID = id as? String,
+            let currentPostID = Int(postID),
+            let postedImageURL =  postInfo["postedImageURL"] as? String,
+            let screenName = postInfo["screenName"] as? String,
+            let numberOflikes = postInfo["numberOfLikes"] as? Int {
+            
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp, aNumberOfLikes: numberOflikes)
+            
+            return newPost
+            
+        }
+        return nil
+    }
+    
+    
+    
     func addPost(id: Any , postInfo:NSDictionary){
         if let userID = postInfo["userID"] as? String,
             let caption = postInfo["caption"] as? String,
@@ -197,9 +287,10 @@ class PersonalProfileViewController: UIViewController {
             let postID = id as? String,
             let currentPostID = Int(postID),
             let postedImageURL =  postInfo["postedImageURL"] as? String,
-            let screenName = postInfo["screenName"] as? String {
+            let screenName = postInfo["screenName"] as? String,
+            let numberOflikes = postInfo["numberOfLikes"] as? Int {
             
-            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp, aNumberOfLikes: numberOflikes)
             
             self.userPost.append(newPost)
         }
@@ -239,7 +330,8 @@ extension PersonalProfileViewController : UICollectionViewDataSource, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return userPost.count
+        //return userPost.count
+        return onlyMyPosts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -247,10 +339,17 @@ extension PersonalProfileViewController : UICollectionViewDataSource, UICollecti
         
         let imageName = (indexPath.row % 2 == 0) ? "postedImageURL" : "postedImageURL" // kand hui said we don't need this
         
-        let currentPost = userPost[indexPath.row]
+//        let currentPost = userPost[indexPath.row]
+//        let userImage = currentPost.imagePostURL
+//        cell.imageView.image = UIImage(named: imageName)    //kang hui said we don't need this
+//        cell.imageView.loadImageUsingCacheWithUrlString(urlString: userImage)
+        
+        let currentPost = onlyMyPosts[indexPath.row]
         let userImage = currentPost.imagePostURL
-        cell.imageView.image = UIImage(named: imageName)    //kang hui said we don't need this
+        //cell.imageView.image = UIImage(named: imageName)    //kang hui said we don't need this
         cell.imageView.loadImageUsingCacheWithUrlString(urlString: userImage)
+        
+        
         return cell
     }
         

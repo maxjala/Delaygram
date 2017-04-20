@@ -79,9 +79,10 @@ class ExploreViewController: UIViewController {
             let postID = id as? String,
             let currentPostId = Int(postID),
             let postedImageURL = postInfo["postedImageURL"] as? String,
-            let screenName = postInfo["screenName"] as? String {
+            let screenName = postInfo["screenName"] as? String,
+            let numberOflikes = postInfo["numberOfLikes"] as? Int {
             
-            let newPeopleFeed = PicturePost(anID: currentPostId, aUserID: peopleId, aUserScreenName: screenName, aUserProfileImageURL: peopleProfilePicture, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
+            let newPeopleFeed = PicturePost(anID: currentPostId, aUserID: peopleId, aUserScreenName: screenName, aUserProfileImageURL: peopleProfilePicture, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp, aNumberOfLikes: numberOflikes)
             
             self.peopleFeed.append(newPeopleFeed)
         

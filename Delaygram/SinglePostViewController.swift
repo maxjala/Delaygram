@@ -18,6 +18,9 @@ class SinglePostViewController: UIViewController {
             singlePostTableView.delegate = self
             singlePostTableView.dataSource = self
             
+            singlePostTableView.estimatedRowHeight = 550
+            singlePostTableView.rowHeight = UITableViewAutomaticDimension
+            
             singlePostTableView.register(picturePostViewCell.cellNib, forCellReuseIdentifier: picturePostViewCell.cellIdentifier)
         }
     }
@@ -56,11 +59,11 @@ extension SinglePostViewController : UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return aPost.count
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
-        return 550//Choose your custom row height
-    }
+//    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+//    {
+//        return 550//Choose your custom row height
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

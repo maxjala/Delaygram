@@ -1,48 +1,35 @@
 //
-//  PersonalProfileViewController.swift
+//  ProfileScrollViewController.swift
 //  Delaygram
 //
-//  Created by nicholaslee on 18/04/2017.
+//  Created by Max Jala on 20/04/2017.
 //  Copyright © 2017 TeamDiamonds. All rights reserved.
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
-enum ProfileType {
+
+enum DisplayType {
     case myProfile
     case otherProfile
 }
 
-class PersonalProfileViewController: UIViewController {
-
-    @IBOutlet weak var displayPictureUser: UIImageView! {
-        didSet {
-            displayPictureUser.layer.cornerRadius = displayPictureUser.frame.width/2
-            displayPictureUser.layer.masksToBounds = true
+class ProfileScrollViewController: UIViewController {
+    
+    @IBOutlet weak var profileCollectionView: UICollectionView! {
+        didSet{
+            profileCollectionView.delegate = self
+            profileCollectionView.dataSource = self
         }
     }
-    
-    @IBOutlet weak var numberOfPosts: UILabel!
-    @IBOutlet weak var numberOfFollowers: UILabel!
-    @IBOutlet weak var numberOfFollowing: UILabel!
-    
-    @IBOutlet weak var editButton: UIButton!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var bioLabel: UILabel!
 
-    @IBOutlet weak var postsCollectionView: UICollectionView! {
-        didSet {
-            postsCollectionView.delegate = self
-            postsCollectionView.dataSource = self
-        }
-    }
-    
     var ref: FIRDatabaseReference!
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var currentUserID : String = ""
     
-    var profileType : ProfileType = .myProfile
+    var profileType : DisplayType = .myProfile
     var selectedProfile : User?
     
     var profileImageURL : String? = ""
@@ -63,20 +50,18 @@ class PersonalProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         ref = FIRDatabase.database().reference()
-        configuringProfileType(profileType)
+        //configuringProfileType(profileType)
         
         //collectionView setting
-        collectionViewLayout = CustomImageFlowLayout()
-        postsCollectionView.collectionViewLayout = collectionViewLayout
-        postsCollectionView.backgroundColor = .white
+
         
-        setupProfile()
+        //setupProfile()
         //setupCollectionView()
         
         fetchPersonalPostIDs()
-        }
+    }
     
     func configuringProfileType (_ type : ProfileType) {
         switch type {
@@ -93,7 +78,7 @@ class PersonalProfileViewController: UIViewController {
         
         let barButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutButtonTapped))
         navigationItem.rightBarButtonItem = barButtonItem
-        editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
+        //editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         
         if let id = currentUser?.uid {
             print(id)
@@ -103,9 +88,9 @@ class PersonalProfileViewController: UIViewController {
     
     func configureOtherProfile () {
         
-        editButton.setTitle("Follow", for: .normal)
-        checkFollowing(sender: editButton)
-        editButton.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
+//        editButton.setTitle("Follow", for: .normal)
+//        checkFollowing(sender: editButton)
+//        editButton.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
     }
     
     func setupProfile () {
@@ -119,13 +104,8 @@ class PersonalProfileViewController: UIViewController {
             self.profileScreenName = dict?["screenName"] as? String
             self.profileImageURL = dict?["imageURL"] as? String
             self.profileDesc = dict?["desc"] as? String
-            
-            self.nameLabel.text = self.profileScreenName
-            self.bioLabel.text = self.profileDesc
-            
-            let imageURL = self.profileImageURL
-            self.displayPictureUser.loadImageUsingCacheWithUrlString(urlString: imageURL!)
-            })
+
+        })
         
         ref.child("users").child(currentUserID).child("followers").observe(.value, with: { (snapshot) in
             if (snapshot.value == nil) { return }
@@ -135,7 +115,7 @@ class PersonalProfileViewController: UIViewController {
                 guard let followers = noOfFollowers?.allValues as? [String]
                     else { return }
                 self.profileFollowers = followers
-                self.numberOfFollowers.text = String (describing: followers.count)
+
             }
         })
         
@@ -147,7 +127,7 @@ class PersonalProfileViewController: UIViewController {
                 guard let following = noOfFollowing?.allValues as? [String]
                     else {return}
                 self.profileFollowing = following
-                self.numberOfFollowing.text = String (describing: following.count)
+                //self.numberOfFollowing.text = String (describing: following.count)
             }
         })
         
@@ -155,10 +135,11 @@ class PersonalProfileViewController: UIViewController {
             if (snapshot.value == nil) { return }
             else {
                 
-                self.numberOfPosts.text = String("\(snapshot.childrenCount)")
+                //self.numberOfPosts.text = String("\(snapshot.childrenCount)")
             }
         })
     }
+    
     
     func fetchPersonalPostIDs() {
         
@@ -218,7 +199,7 @@ class PersonalProfileViewController: UIViewController {
                 
             }
         }
-        self.postsCollectionView.reloadData()
+        self.profileCollectionView.reloadData()
     }
     
     
@@ -335,10 +316,10 @@ class PersonalProfileViewController: UIViewController {
         }
     }
     
-//End of PersonalProfileViewController
+    //End of PersonalProfileViewController
 }
 
-extension PersonalProfileViewController : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ProfileScrollViewController : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -354,12 +335,12 @@ extension PersonalProfileViewController : UICollectionViewDataSource, UICollecti
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! PersonalPostCollectionViewCell
         
-//        let imageName = (indexPath.row % 2 == 0) ? "postedImageURL" : "postedImageURL" // kand hui said we don't need this
+        //        let imageName = (indexPath.row % 2 == 0) ? "postedImageURL" : "postedImageURL" // kand hui said we don't need this
         
-//        let currentPost = userPost[indexPath.row]
-//        let userImage = currentPost.imagePostURL
-//        cell.imageView.image = UIImage(named: imageName)    //kang hui said we don't need this
-//        cell.imageView.loadImageUsingCacheWithUrlString(urlString: userImage)
+        //        let currentPost = userPost[indexPath.row]
+        //        let userImage = currentPost.imagePostURL
+        //        cell.imageView.image = UIImage(named: imageName)    //kang hui said we don't need this
+        //        cell.imageView.loadImageUsingCacheWithUrlString(urlString: userImage)
         
         let currentPost = onlyMyPosts[indexPath.row]
         let userImage = currentPost.imagePostURL
@@ -384,6 +365,3 @@ extension PersonalProfileViewController : UICollectionViewDataSource, UICollecti
         return true
     }
 }
-
-
-

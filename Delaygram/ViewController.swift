@@ -18,6 +18,9 @@ class ViewController: UIViewController {
             pictureFeedTableView.delegate = self
             pictureFeedTableView.dataSource = self
             
+            pictureFeedTableView.estimatedRowHeight = 550
+            pictureFeedTableView.rowHeight = UITableViewAutomaticDimension
+            
             pictureFeedTableView.register(picturePostViewCell.cellNib, forCellReuseIdentifier: picturePostViewCell.cellIdentifier)
         }
     }
@@ -25,9 +28,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var profileTabButton: UITabBarItem!
     
-    private var _likes: Int!
-    
-    var pictureFeed : [PicturePost] = []
     var filteredPictureFeed: [PicturePost] = []
     var ref: FIRDatabaseReference!
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
@@ -58,7 +58,6 @@ class ViewController: UIViewController {
             print("Value : " , snapshot)
             
             self.filteredPictureFeed.removeAll()
-            self.pictureFeed.removeAll()
             
             guard let checkedID = snapshot.value as? NSDictionary
                 else {
@@ -66,6 +65,7 @@ class ViewController: UIViewController {
                     return
             }
             self.followingArray = (checkedID.allValues as? [String])!
+            self.followingArray.append(self.currentUserID)
             
             self.fetchPosts()
             
@@ -157,10 +157,12 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         return filteredPictureFeed.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
-        return 550//Choose your custom row height
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+//    {
+//        //return 550//Choose your custom row height
+//        
+//        return UITableViewAutomaticDimension
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -168,8 +170,6 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             else {return UITableViewCell()}
         
         let currentPost = filteredPictureFeed[indexPath.row]
-        let currentPostUserID = currentPost.userID
-        
         let pictureURL = currentPost.imagePostURL
         let profilePicURL = currentPost.userProfileImageURL
         
@@ -181,7 +181,6 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: profilePicURL)
         cell.captionTextView.text = currentPost.caption
         cell.userNameLabel.text = currentPost.userScreenName
-        //cell.numberOfLikesLabel.text = observeForLike(_post: currentPost)
         checkifLiked(indexPath: indexPath, sender: cell.likeButton)
         observeForLikes(_post: currentPost, _label: cell.numberOfLikesLabel)
         

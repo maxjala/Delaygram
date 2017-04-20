@@ -56,6 +56,8 @@ class ViewController: UIViewController {
         self.pictureFeedTableView.reloadData()
         
     }
+    
+    
    
 //    //for likes
 //    func likeButtonTapped(sender:UIButton){

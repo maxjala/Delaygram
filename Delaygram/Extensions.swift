@@ -12,7 +12,6 @@ import UIKit
 
 extension UIImageView {
     
-    
     func loadImageUsingCacheWithUrlString(urlString: String) {
         
         self.image = nil
@@ -31,6 +30,7 @@ extension UIImageView {
             // Dowload hit an error so let's return out
             if error != nil {
                 print(error!)
+               
                 return
             }
             DispatchQueue.main.async(execute: {
@@ -38,6 +38,7 @@ extension UIImageView {
                 if let downloadedImage = UIImage(data: data!) {
                     imageCache.setObject(downloadedImage, forKey: urlString as NSString)
                     self.image = downloadedImage
+                
                 }
             })
         }).resume()

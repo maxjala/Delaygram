@@ -51,8 +51,9 @@ class UploadViewController: UIViewController {
     var personalPosts : [PicturePost] = []
     //var lastID = 0
     
-    let progressIndicatorView = CircularLoaderView(frame: CGRect.zero)
-    
+    //for loading indicator - nick
+    var activityIndicator = UIActivityIndicatorView()
+    let effectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +63,7 @@ class UploadViewController: UIViewController {
         // Do any additional setup after loading the view.
 
     }
-    
+  
     func setCurrentUser() {
         ref = FIRDatabase.database().reference()
         // Do any additional setup after loading the view, typically from a nib.
@@ -97,8 +98,6 @@ class UploadViewController: UIViewController {
             return
         }
     }
-    
-
     
     @IBAction func postButtonTapped(_ sender: Any) {
         

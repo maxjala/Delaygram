@@ -21,6 +21,9 @@
 		1AAD6C1A1EA741E20092A798 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAD6C191EA741E20092A798 /* CommentsViewController.swift */; };
 		1AD145491EA258D100C42B6F /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD145481EA258D100C42B6F /* UploadViewController.swift */; };
 		1AD1454B1EA371C800C42B6F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD1454A1EA371C800C42B6F /* Extensions.swift */; };
+		1AD201951EA8A2F500A0C1A1 /* ProfileScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD201941EA8A2F500A0C1A1 /* ProfileScrollViewController.swift */; };
+		1AD201971EA8A91B00A0C1A1 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD201961EA8A91B00A0C1A1 /* ProfileCell.swift */; };
+		1AD201991EA8A94100A0C1A1 /* PictureTileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD201981EA8A94100A0C1A1 /* PictureTileCell.swift */; };
 		1ADD04101EA86FF900A47D3B /* SinglePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADD040F1EA86FF900A47D3B /* SinglePostViewController.swift */; };
 		1AECA3411EA1E651003236F1 /* picturePostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AECA33F1EA1E651003236F1 /* picturePostViewCell.swift */; };
 		1AECA3421EA1E651003236F1 /* picturePostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AECA3401EA1E651003236F1 /* picturePostViewCell.xib */; };
@@ -65,6 +68,9 @@
 		1AAD6C191EA741E20092A798 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		1AD145481EA258D100C42B6F /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		1AD1454A1EA371C800C42B6F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1AD201941EA8A2F500A0C1A1 /* ProfileScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileScrollViewController.swift; sourceTree = "<group>"; };
+		1AD201961EA8A91B00A0C1A1 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		1AD201981EA8A94100A0C1A1 /* PictureTileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureTileCell.swift; sourceTree = "<group>"; };
 		1ADD040F1EA86FF900A47D3B /* SinglePostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePostViewController.swift; sourceTree = "<group>"; };
 		1AECA33F1EA1E651003236F1 /* picturePostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = picturePostViewCell.swift; path = ../picturePostViewCell.swift; sourceTree = "<group>"; };
 		1AECA3401EA1E651003236F1 /* picturePostViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = picturePostViewCell.xib; path = ../picturePostViewCell.xib; sourceTree = "<group>"; };
@@ -127,6 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				1A4DF35C1EA0BD54005B76EF /* Main.storyboard */,
+				1AD201961EA8A91B00A0C1A1 /* ProfileCell.swift */,
+				1AD201981EA8A94100A0C1A1 /* PictureTileCell.swift */,
+				1AD201941EA8A2F500A0C1A1 /* ProfileScrollViewController.swift */,
 				1ADD040F1EA86FF900A47D3B /* SinglePostViewController.swift */,
 				1AAD6C191EA741E20092A798 /* CommentsViewController.swift */,
 				3D893E9A1EA62127005891A7 /* EditProfileViewController.swift */,
@@ -382,14 +391,17 @@
 				3D893E9B1EA62127005891A7 /* EditProfileViewController.swift in Sources */,
 				7A15D97B1EA45F65004FDD55 /* SearchTableViewCell.swift in Sources */,
 				1AAD6C1A1EA741E20092A798 /* CommentsViewController.swift in Sources */,
+				1AD201971EA8A91B00A0C1A1 /* ProfileCell.swift in Sources */,
 				1AECA3411EA1E651003236F1 /* picturePostViewCell.swift in Sources */,
 				1A4DF35B1EA0BD54005B76EF /* ViewController.swift in Sources */,
 				3D7E9A161EA0D2B600492761 /* SignupViewController.swift in Sources */,
+				1AD201951EA8A2F500A0C1A1 /* ProfileScrollViewController.swift in Sources */,
 				7A76C1FB1EA5E0440020C20F /* PersonalProfileViewController.swift in Sources */,
 				7AC3F4331EA4A4170023A22F /* CustomImageFlowLayout.swift in Sources */,
 				1AECA3481EA20D4D003236F1 /* User.swift in Sources */,
 				7AC3F4311EA4A25A0023A22F /* ExploreCollectionViewController.swift in Sources */,
 				7AC3F42F1EA4A23E0023A22F /* testCollectionViewCell.swift in Sources */,
+				1AD201991EA8A94100A0C1A1 /* PictureTileCell.swift in Sources */,
 				1AECA3441EA1FE18003236F1 /* picturePost.swift in Sources */,
 				1A093A751EA75BDC008A43EB /* CommentViewCell.swift in Sources */,
 				1A4DF3591EA0BD54005B76EF /* AppDelegate.swift in Sources */,

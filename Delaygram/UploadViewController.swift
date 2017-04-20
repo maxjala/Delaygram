@@ -120,7 +120,21 @@ class UploadViewController: UIViewController {
 
         }
         
+        goBackToHome2()
         
+    }
+    
+    func goBackToHome() {
+        captionTextView.text = "Write a caption..."
+        captionTextView.isUserInteractionEnabled = false
+        uploadImageView.loadImageUsingCacheWithUrlString(urlString: "")
+        self.tabBarController?.selectedIndex = 0
+    }
+    
+    func goBackToHome2() {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+        self.present(viewController, animated: true)
     }
 
 
@@ -128,7 +142,6 @@ class UploadViewController: UIViewController {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
-        
     }
     
     

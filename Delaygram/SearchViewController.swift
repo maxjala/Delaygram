@@ -75,7 +75,11 @@ class SearchViewController: UIViewController,UISearchBarDelegate {
             let userDescription = userInfo["desc"] as? String {
 
             let newUser = User(anId: userId, anEmail: userEmail, aScreenName: userName, aDesc: userDescription, anImageURL: userImage)
+            
+            if newUser.id != currentUserId {
             self.allUsers.append(newUser)
+            }
+            
         }
     }
 

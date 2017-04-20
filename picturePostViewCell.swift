@@ -11,7 +11,15 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
 
+protocol PicturePostDelegate {
+    func goToComments(_ post: PicturePost)
+}
+
+
+
 class picturePostViewCell: UITableViewCell {
+    
+    var delegate : PicturePostDelegate? = nil
     
     static let cellIdentifier = "picturePostViewCell"
     static let cellNib = UINib(nibName: picturePostViewCell.cellIdentifier, bundle: Bundle.main)
@@ -34,37 +42,54 @@ class picturePostViewCell: UITableViewCell {
     
     @IBOutlet weak var captionTextView: UITextView!
     
-    @IBOutlet weak var likeButtonImg: UIButton!
+    @IBOutlet weak var likeButton: UIButton! {
+        didSet{
+            let likeButtonImg = UIImage(named: "heart-empty")
+            likeButton.setImage(likeButtonImg, for: .normal)
+        }
+    }
+    
+    @IBOutlet weak var commentButton: UIButton!
+    
+    @IBOutlet weak var viewCommentsButton: UIButton!
 
+    var picturePost : PicturePost?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         ref = FIRDatabase.database().reference()
-        // Initialization code
-        
-    //self.frame = CGRect(x: 0, y: 0, width: 100, height: 10)
-   // self.frame = CGRect(
-        
         
     }
     
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
-    @IBAction func likeButton(_ sender: UIButton) {
         
     }
     
     @IBAction func CommentButton(_ sender: Any) {
+        if delegate != nil {
+            if let _picturePost = picturePost {
+                delegate?.goToComments(_picturePost)
+            }
+        }
+        
     }
     
     @IBAction func viewCommentsButton(_ sender: Any) {
+        if delegate != nil {
+            if let _picturePost = picturePost {
+                delegate?.goToComments(_picturePost)
+            }
+        }
     }
-    
-    
-    
+
+
 }
+    
+    
+    
+    
+    
+

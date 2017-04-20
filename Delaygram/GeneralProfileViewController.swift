@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class GeneralProfileViewController: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView!
     
-    var selectedPersonID : String = ""
+    var selectedProfile : User?
+    var ref: FIRDatabaseReference!
+    var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
+    var currentUserID : String = ""
+    
+    
     
     
     
@@ -22,8 +29,19 @@ class GeneralProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = FIRDatabase.database().reference()
+        setCurrentUser()
+        
+        
 
         // Do any additional setup after loading the view.
+    }
+    
+    func setCurrentUser() {
+        if let id = currentUser?.uid {
+            print(id)
+            currentUserID = id
+        }
     }
 
     override func didReceiveMemoryWarning() {

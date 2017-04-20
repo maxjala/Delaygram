@@ -168,6 +168,20 @@ extension SearchViewController : UITableViewDelegate , UITableViewDataSource {
 
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let controller = storyboard?.instantiateViewController(withIdentifier: "PersonalProfileViewController") as? PersonalProfileViewController {
+        
+            let selectedPerson = filteredUsers[indexPath.row]
+
+            controller.selectedProfile = selectedPerson
+            controller.profileType = .otherProfile
+            controller.currentUserID = selectedPerson.id
+            navigationController?.pushViewController(controller, animated: true)
+        }
+        
+    }
+
+    
     func followButtonTapped(sender:UIButton) {
         
         

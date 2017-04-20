@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 }
                 
                 let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let initialViewController : ViewController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+                let initialViewController : UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
                 self.window = UIWindow(frame: UIScreen.main.bounds)
                 self.window?.rootViewController = initialViewController
                 self.window?.makeKeyAndVisible()

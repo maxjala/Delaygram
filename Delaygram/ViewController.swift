@@ -191,7 +191,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         cell.likeButton.addTarget(self, action: #selector(likedButtonTapped(sender:)), for: .touchUpInside)
         
         //increaseLikeCount(currentPost.imagePostID)
-
+        cell.activityIndicator.startAnimating()
         
         
         

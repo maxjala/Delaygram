@@ -192,7 +192,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         
         //increaseLikeCount(currentPost.imagePostID)
 
-        
+        cell.activityIndicator.startAnimating()
         
         
         

@@ -17,12 +17,12 @@ protocol PicturePostDelegate {
 
 
 
-class picturePostViewCell: UITableViewCell {
+class PicturePostViewCell: UITableViewCell {
     
     var delegate : PicturePostDelegate? = nil
     
     static let cellIdentifier = "picturePostViewCell"
-    static let cellNib = UINib(nibName: picturePostViewCell.cellIdentifier, bundle: Bundle.main)
+    static let cellNib = UINib(nibName: PicturePostViewCell.cellIdentifier, bundle: Bundle.main)
     
     var ref: FIRDatabaseReference!
     
@@ -53,12 +53,25 @@ class picturePostViewCell: UITableViewCell {
     
     @IBOutlet weak var viewCommentsButton: UIButton!
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
+        didSet {
+            activityIndicator.activityIndicatorViewStyle = .gray
+            activityIndicator.hidesWhenStopped = true
+        }
+    }
+    
     var picturePost : PicturePost?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         ref = FIRDatabase.database().reference()
+        
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        activityIndicator.stopAnimating()
         
     }
     
@@ -84,6 +97,8 @@ class picturePostViewCell: UITableViewCell {
             }
         }
     }
+    
+ 
 
 
 }

@@ -27,7 +27,7 @@ class ExploreViewController: UIViewController {
             peoplePostTableView.delegate = self
             peoplePostTableView.dataSource = self
             
-            peoplePostTableView.register(picturePostViewCell.cellNib, forCellReuseIdentifier: picturePostViewCell.cellIdentifier)
+            peoplePostTableView.register(PicturePostViewCell.cellNib, forCellReuseIdentifier: PicturePostViewCell.cellIdentifier)
         }
     }
     
@@ -105,7 +105,7 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: picturePostViewCell.cellIdentifier) as? picturePostViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PicturePostViewCell.cellIdentifier) as? PicturePostViewCell
             else { return UITableViewCell() }
         
         let currentPost = peopleFeed[indexPath.row]
@@ -119,6 +119,7 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.captionTextView.text = currentPost.caption
         cell.userNameLabel.text = currentPost.userScreenName
+        cell.activityIndicator.startAnimating()
         
        // cell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 300)
         

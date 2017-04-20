@@ -57,8 +57,7 @@ class ExploreCollectionViewController: UIViewController, UICollectionViewDataSou
             let postID = id as? String,
             let currentPostID = Int(postID),
             let postedImageURL =  postInfo["postedImageURL"] as? String,
-            let screenName = postInfo["screenName"] as? String,
-            let likes = postInfo["numberOfLikes"] as? String {
+            let screenName = postInfo["screenName"] as? String {
             
             let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
             

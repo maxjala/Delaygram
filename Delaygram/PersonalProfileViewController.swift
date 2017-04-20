@@ -161,39 +161,6 @@ class PersonalProfileViewController: UIViewController {
         })
     }
     
-    func setupCollectionView () {
-        ref.child("users").child(currentUserID).child("posts").observe(.value, with: { (snapshot) in
-            print("Value : " , snapshot)
-        })
-        
-        //get the snapshot
-        ref.child("users").child(currentUserID).child("posts").observe(.childAdded, with: { (snapshot) in
-            print("Value : " , snapshot)
-            
-            //convert snapshot to dictionary
-            guard let info = snapshot.value as? NSDictionary else {return}
-            
-            //add student to array of messages
-            self.addPost(id: snapshot.key, postInfo: info)
-            
-            //sort
-            self.userPost.sort(by: { (post1, post2) -> Bool in
-            return post1.imagePostID < post2.imagePostID
-                
-            //LATER NEED TO CHANGE TO SORT BY POST TIME
-            })
-            
-            //set last message id to last id
-            if let lastPost = self.personalPosts.last {
-            self.lastID = lastPost.imagePostID
-            }
-            
-            //update collection view
-            self.postsCollectionView.reloadData()
-            
-        })
-    }
-    
     func fetchPersonalPostIDs() {
         
         ref.child("users").child(currentUserID).child("posts").observe(.value, with: { (snapshot) in

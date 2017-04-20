@@ -266,10 +266,9 @@ class PersonalProfileViewController: UIViewController {
             let postID = id as? String,
             let currentPostID = Int(postID),
             let postedImageURL =  postInfo["postedImageURL"] as? String,
-            let screenName = postInfo["screenName"] as? String,
-            let numberOflikes = postInfo["numberOfLikes"] as? Int {
+            let screenName = postInfo["screenName"] as? String {
             
-            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp, aNumberOfLikes: numberOflikes)
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
             
             return newPost
             
@@ -287,10 +286,9 @@ class PersonalProfileViewController: UIViewController {
             let postID = id as? String,
             let currentPostID = Int(postID),
             let postedImageURL =  postInfo["postedImageURL"] as? String,
-            let screenName = postInfo["screenName"] as? String,
-            let numberOflikes = postInfo["numberOfLikes"] as? Int {
+            let screenName = postInfo["screenName"] as? String {
             
-            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp, aNumberOfLikes: numberOflikes)
+            let newPost = PicturePost(anID: currentPostID, aUserID: userID, aUserScreenName: screenName, aUserProfileImageURL: profilePictureURL, anImagePostURL: postedImageURL, aCaption: caption, aTimeStamp: timeStamp)
             
             self.userPost.append(newPost)
         }

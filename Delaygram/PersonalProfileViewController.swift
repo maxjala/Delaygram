@@ -367,9 +367,22 @@ extension PersonalProfileViewController : UICollectionViewDataSource, UICollecti
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let currentPost = onlyMyPosts[indexPath.row]
+        
+        let controller = storyboard?.instantiateViewController(withIdentifier: "SinglePostViewController") as? SinglePostViewController
+        
+        controller?.selectedPost = currentPost
+        
+        navigationController?.pushViewController(controller!, animated: true)
+    }
+    
     override var prefersStatusBarHidden : Bool {
         return true
     }
 }
+
+
 

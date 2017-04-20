@@ -36,11 +36,6 @@ class ViewController: UIViewController {
     var followingArray = [String]()
     
     
-    var likes: Int{
-        return _likes
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,23 +52,6 @@ class ViewController: UIViewController {
         
     }
     
-    
-   
-//    //for likes
-//    func likeButtonTapped(sender:UIButton){
-//        
-//        let button = sender.tag
-//        let postUid = FIRAuth.auth()!.currentUser!.uid
-//        let ref = FIRDatabase.database().reference()
-//        let key = ref.child("posts").childByAutoId().key
-//        
-//        var isLiked = false
-//        
-//    
-//        ref.child("posts").child(postUid).child("like")
-//    
-//        
-//    }
     func fetchFollowingUsers() {
         
         ref.child("users").child(currentUserID).child("following").observe(.value, with: { (snapshot) in

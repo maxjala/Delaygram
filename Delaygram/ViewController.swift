@@ -18,7 +18,7 @@ class ViewController: UIViewController {
             pictureFeedTableView.delegate = self
             pictureFeedTableView.dataSource = self
             
-            pictureFeedTableView.register(PicturePostViewCell.cellNib, forCellReuseIdentifier: PicturePostViewCell.cellIdentifier)
+            pictureFeedTableView.register(picturePostViewCell.cellNib, forCellReuseIdentifier: picturePostViewCell.cellIdentifier)
         }
     }
     
@@ -35,18 +35,9 @@ class ViewController: UIViewController {
     var lastPostID : Int = 0
     var followingArray = [String]()
     
-  
-    
-    var likes: Int{
-        return _likes
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-
         
         ref = FIRDatabase.database().reference()
         // Do any additional setup after loading the view, typically from a nib.
@@ -61,23 +52,6 @@ class ViewController: UIViewController {
         
     }
     
-    
-    
-    //    //for likes
-    //    func likeButtonTapped(sender:UIButton){
-    //
-    //        let button = sender.tag
-    //        let postUid = FIRAuth.auth()!.currentUser!.uid
-    //        let ref = FIRDatabase.database().reference()
-    //        let key = ref.child("posts").childByAutoId().key
-    //
-    //        var isLiked = false
-    //
-    //
-    //        ref.child("posts").child(postUid).child("like")
-    //
-    //
-    //    }
     func fetchFollowingUsers() {
         
         ref.child("users").child(currentUserID).child("following").observe(.value, with: { (snapshot) in
@@ -190,10 +164,8 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PicturePostViewCell.cellIdentifier) as? PicturePostViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: picturePostViewCell.cellIdentifier) as? picturePostViewCell
             else {return UITableViewCell()}
-        
         
         let currentPost = filteredPictureFeed[indexPath.row]
         let currentPostUserID = currentPost.userID
@@ -201,9 +173,9 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         let pictureURL = currentPost.imagePostURL
         let profilePicURL = currentPost.userProfileImageURL
         
-        
         cell.delegate = self
-        cell.picturePost = currentPost
+        cell.picturePost = currentPost        
+        
         
         cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)
         cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: profilePicURL)
@@ -217,9 +189,9 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         
         cell.likeButton.tag = indexPath.row
         cell.likeButton.addTarget(self, action: #selector(likedButtonTapped(sender:)), for: .touchUpInside)
-        cell.activityIndicator.startAnimating()
-        //increaseLikeCount(currentPost.imagePostID)
         
+        //increaseLikeCount(currentPost.imagePostID)
+
         
         
         
@@ -251,34 +223,34 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         })
     }
     
-    //    func observeForLike(_post: PicturePost) -> String {
-    //
-    //        let postID = "\(_post.imagePostID)"
-    //        var numberOfLikes : Int = 0
-    //        var noOfLikesString = "0 likes"
-    //
-    //        ref.child("posts").child(postID).child("likes").observe(.value, with: { (snapshot) in
-    //            print("Value : " , snapshot)
-    //
-    //            guard let checkedLikes = snapshot.value as? NSDictionary
-    //                else {return}
-    //
-    //            numberOfLikes = checkedLikes.allValues.count
-    //
-    //            if numberOfLikes == 1 {
-    //                noOfLikesString = "1 like"
-    //            } else if numberOfLikes > 1 {
-    //                noOfLikesString = "\(numberOfLikes) likes"
-    //            }
-    //
-    //
-    //        })
-    //
-    //
-    //        return noOfLikesString
-    //
-    //    }
-    
+//    func observeForLike(_post: PicturePost) -> String {
+//        
+//        let postID = "\(_post.imagePostID)"
+//        var numberOfLikes : Int = 0
+//        var noOfLikesString = "0 likes"
+//        
+//        ref.child("posts").child(postID).child("likes").observe(.value, with: { (snapshot) in
+//            print("Value : " , snapshot)
+//            
+//            guard let checkedLikes = snapshot.value as? NSDictionary
+//                else {return}
+//            
+//            numberOfLikes = checkedLikes.allValues.count
+//            
+//            if numberOfLikes == 1 {
+//                noOfLikesString = "1 like"
+//            } else if numberOfLikes > 1 {
+//                noOfLikesString = "\(numberOfLikes) likes"
+//            }
+//            
+//            
+//        })
+//        
+//        
+//        return noOfLikesString
+//        
+//    }
+
     
     func likedButtonTapped(sender:UIButton) {
         
@@ -298,14 +270,14 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
                 for (ke, value) in likers {
                     if value as! String == self.currentUserID {
                         hasLiked = true
-                        
+
                         ref.child("posts").child("\(chosenPostID)").child("likes/\(ke)").removeValue()
                         //self.decreaseLikeCount(Int(chosenPostID)!)
                         
                         let likeButtonImg = UIImage(named: "heart-empty")
                         
                         (sender as AnyObject).setImage(likeButtonImg, for: .normal)
-                        
+    
                     }
                 }
             }
@@ -346,33 +318,33 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    //    func increaseLikeCount(_ postID: Int) {
-    //        ref.child("posts").child("\(postID)").child("numberOfLikes").observeSingleEvent(of: .value, with: { (snapshot) in
-    //
-    //            guard let noOfLikes = snapshot.value as? Int else {
-    //                print("print noOfLikes not found. wrong path/observation used")
-    //                return }
-    //
-    //            let newLikesCount = noOfLikes + 1
-    //
-    //            self.ref.child("posts").child("\(postID)").child("numberOfLikes").setValue(newLikesCount)
-    //
-    //        })
-    //    }
-    //
-    //    func decreaseLikeCount(_ postID: Int) {
-    //        ref.child("posts").child("\(postID)").child("numberOfLikes").observeSingleEvent(of: .value, with: { (snapshot) in
-    //
-    //            guard let noOfLikes = snapshot.value as? Int else {
-    //                print("print noOfLikes not found. wrong path/observation used")
-    //                return }
-    //
-    //            let newLikesCount = noOfLikes - 1
-    //
-    //            self.ref.child("posts").child("\(postID)").child("numberOfLikes").setValue(newLikesCount)
-    //
-    //        })
-    //    }
+//    func increaseLikeCount(_ postID: Int) {
+//        ref.child("posts").child("\(postID)").child("numberOfLikes").observeSingleEvent(of: .value, with: { (snapshot) in
+//            
+//            guard let noOfLikes = snapshot.value as? Int else {
+//                print("print noOfLikes not found. wrong path/observation used")
+//                return }
+//
+//            let newLikesCount = noOfLikes + 1
+//            
+//            self.ref.child("posts").child("\(postID)").child("numberOfLikes").setValue(newLikesCount)
+//            
+//        })
+//    }
+//    
+//    func decreaseLikeCount(_ postID: Int) {
+//        ref.child("posts").child("\(postID)").child("numberOfLikes").observeSingleEvent(of: .value, with: { (snapshot) in
+//            
+//            guard let noOfLikes = snapshot.value as? Int else {
+//                print("print noOfLikes not found. wrong path/observation used")
+//                return }
+//
+//            let newLikesCount = noOfLikes - 1
+//            
+//            self.ref.child("posts").child("\(postID)").child("numberOfLikes").setValue(newLikesCount)
+//            
+//        })
+//    }
     
     
     
@@ -392,7 +364,7 @@ extension ViewController : PicturePostDelegate {
     }
     
     
-    
+
 }
 
 

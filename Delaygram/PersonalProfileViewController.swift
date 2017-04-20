@@ -104,9 +104,8 @@ class PersonalProfileViewController: UIViewController {
     func configureOtherProfile () {
         
         editButton.setTitle("Follow", for: .normal)
+        checkFollowing(sender: editButton)
         editButton.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
-        
-        
     }
     
     func setupProfile () {
@@ -266,8 +265,59 @@ class PersonalProfileViewController: UIViewController {
         present(controller!, animated: true, completion: nil)
     }
     
-    func followButtonTapped () {
+    func checkFollowing (sender : UIButton) {
+        let uid = FIRAuth.auth()!.currentUser!.uid
+        let ref = FIRDatabase.database().reference()
         
+        ref.child("users").child(uid).child("following").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            
+            if let following = snapshot.value as? [String : AnyObject] {
+                for (_, value) in following {
+                    if value as! String == self.currentUserID {
+                        
+                        (sender as AnyObject).setTitle("Following", for: .normal)
+                    }
+                }
+            }
+        })
+        ref.removeAllObservers()
+    }
+    
+    func followButtonTapped (sender : UIButton) {
+        
+        let uid = FIRAuth.auth()!.currentUser!.uid
+        let ref = FIRDatabase.database().reference()
+        let key = ref.child("users").childByAutoId().key
+        
+        var isFollower = false
+        
+        ref.child("users").child(uid).child("following").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            
+            if let following = snapshot.value as? [String : AnyObject] {
+                for (ke, value) in following {
+                    if value as! String == self.currentUserID {
+                        isFollower = true
+                        
+                        ref.child("users").child(uid).child("following/\(ke)").removeValue()
+                        ref.child("users").child(self.currentUserID).child("followers/\(ke)").removeValue()
+                        
+                        (sender as AnyObject).setTitle("Follow", for: .normal)
+                        
+                        
+                    }
+                }
+            }
+            if !isFollower {
+                let following = ["following/\(key)" : self.currentUserID]
+                let followers = ["followers/\(key)" : uid]
+                
+                ref.child("users").child(uid).updateChildValues(following)
+                ref.child("users").child(self.currentUserID).updateChildValues(followers)
+                
+                (sender as AnyObject).setTitle("Following", for: .normal)
+            }
+        })
+        ref.removeAllObservers()
     }
     
     func logoutButtonTapped() {
@@ -302,7 +352,7 @@ extension PersonalProfileViewController : UICollectionViewDataSource, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! PersonalPostCollectionViewCell
         
-        let imageName = (indexPath.row % 2 == 0) ? "postedImageURL" : "postedImageURL" // kand hui said we don't need this
+//        let imageName = (indexPath.row % 2 == 0) ? "postedImageURL" : "postedImageURL" // kand hui said we don't need this
         
 //        let currentPost = userPost[indexPath.row]
 //        let userImage = currentPost.imagePostURL

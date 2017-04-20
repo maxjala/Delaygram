@@ -51,6 +51,8 @@ class UploadViewController: UIViewController {
     var personalPosts : [PicturePost] = []
     //var lastID = 0
     
+    let progressIndicatorView = CircularLoaderView(frame: CGRect.zero)
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,6 +136,8 @@ class UploadViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    
+    
     func uploadImage(_ image: UIImage) {
         
         let ref = FIRStorage.storage().reference()
@@ -144,6 +148,7 @@ class UploadViewController: UIViewController {
             
             if let downloadPath = meta?.downloadURL()?.absoluteString {
                 
+               
                 //save to firebase database
                 //self.saveImagePath(downloadPath)
                 self.uploadImageURL = downloadPath
@@ -182,6 +187,7 @@ extension UploadViewController : UIImagePickerControllerDelegate, UINavigationCo
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             return
         }
+        
         
         //display / store
         uploadImage(image)

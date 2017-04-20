@@ -50,6 +50,12 @@ class CircularLoaderView: UIView {
         return UIBezierPath(ovalIn: circleInFrame())
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        circlePathLayer.frame = bounds
+        circlePathLayer.path = circlePath().cgPath
+        
+    }
    
     
     

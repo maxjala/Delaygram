@@ -109,12 +109,11 @@ class UploadViewController: UIViewController {
         
            if let caption = self.captionTextView.text {
             // write to firebase
-            let post : [String : Any] = ["userID": self.currentUserID, "screenName": self.profileScreenName, "caption": caption, "profileImageURL": self.profileImageURL, "postedImageURL" : self.uploadImageURL, "timestamp": timeCreated, "numberOfLikes": 0]
+            let post : [String : Any] = ["userID": self.currentUserID, "screenName": self.profileScreenName, "caption": caption, "profileImageURL": self.profileImageURL, "postedImageURL" : self.uploadImageURL, "timestamp": timeCreated]
             
             let personalReference : [String : Any] = ["userID" : currentUserID, "postID" : uniqueTimeID]
             
             self.ref.child("posts").child("\(uniqueTimeID)").updateChildValues(post)
-            //self.ref.child("users").child(currentUserID).child("posts").child("\(uniqueTimeID)").updateChildValues(post)
             
             self.ref.child("users").child(currentUserID).child("posts").child("\(uniqueTimeID)").updateChildValues(personalReference)
 

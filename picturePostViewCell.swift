@@ -42,7 +42,12 @@ class picturePostViewCell: UITableViewCell {
     
     @IBOutlet weak var captionTextView: UITextView!
     
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton! {
+        didSet{
+            let likeButtonImg = UIImage(named: "heart-empty")
+            likeButton.setImage(likeButtonImg, for: .normal)
+        }
+    }
     
     @IBOutlet weak var commentButton: UIButton!
     

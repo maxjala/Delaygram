@@ -18,9 +18,8 @@ class PicturePost {
     var imagePostURL : String = ""
     var caption : String = ""
     var timestamp : String = ""
-    var numberOfLikes : Int = 0
     
-    init(anID: Int, aUserID: String, aUserScreenName: String, aUserProfileImageURL: String, anImagePostURL: String, aCaption: String, aTimeStamp: String, aNumberOfLikes: Int) {
+    init(anID: Int, aUserID: String, aUserScreenName: String, aUserProfileImageURL: String, anImagePostURL: String, aCaption: String, aTimeStamp: String) {
         imagePostID = anID
         userID = aUserID
         userScreenName = aUserScreenName
@@ -28,7 +27,6 @@ class PicturePost {
         imagePostURL = anImagePostURL
         caption = aCaption
         timestamp = aTimeStamp
-        numberOfLikes = aNumberOfLikes
         
     }
 }

@@ -20,8 +20,6 @@ class UserRelationViewController: UIViewController {
     }
     
     var ref: FIRDatabaseReference!
-//    var filteredUsers: [User] = []
-//    var allUsers: [User] = []
     
     var eitherFollowersOrFollowing : [String] = []
     var imageURL : String? = ""
@@ -31,52 +29,9 @@ class UserRelationViewController: UIViewController {
         super.viewDidLoad()
         
         ref = FIRDatabase.database().reference()
-//        listenToFirebase()
         }
     
-//    func addUser(id: Any , userInfo:NSDictionary){
-//        if
-//            let userName = userInfo["screenName"] as? String,
-//            let userImage = userInfo["imageURL"] as? String,
-//            let userId = id as? String,
-//            let userEmail = userInfo["email"] as? String,
-//            let userDescription = userInfo["desc"] as? String {
-//            
-//            let newUser = User(anId: userId, anEmail: userEmail, aScreenName: userName, aDesc: userDescription, anImageURL: userImage)
-//            self.allUsers.append(newUser)
-//        }
-//    }
-//    
-//    func listenToFirebase() {
-//        ref.child("users").observe(.value, with: { (snapshot) in
-//            print("Value : " , snapshot)
-//        })
-//        
-//        // 2. get the snapshot
-//        ref.child("users").observe(.childAdded, with: { (snapshot) in
-//            print("Value : " , snapshot)
-//            
-//            // 3. convert snapshot to dictionary
-//            guard let info = snapshot.value as? NSDictionary else {return}
-//            // 4. add student to array of messages
-//            self.addUser(id: snapshot.key, userInfo: info)
-//            
-//            // sort
-//            self.allUsers.sort(by: { (user1, user2) -> Bool in
-//                return user1.screenName  < user2.screenName
-//                
-//                //LATER NEED TO CHANGE TO SORT BY POST TIME
-//            })
-//            
-//            self.filteredUsers = self.allUsers
-//            
-//            
-//            // 5. update table view
-//            self.userRelationTableView.reloadData()
-//            
-//        })
-//    }
-
+//End of UserRelationViewController
 }
 
 extension UserRelationViewController : UITableViewDelegate, UITableViewDataSource {
@@ -109,12 +64,7 @@ extension UserRelationViewController : UITableViewDelegate, UITableViewDataSourc
         
         cell.userImageView.loadImageUsingCacheWithUrlString(urlString: userImage!)
         cell.userLabel.text = selectedUser
-            
-//        self.checkFollowing(indexPath: indexPath, sender: cell.followButton)
-//        cell.followButton.tag = indexPath.row
-//        cell.followButton.addTarget(self, action: #selector(self.followButtonTapped(sender:)), for: .touchUpInside)
-//            
-            cell.followButton.isHidden = true
+        cell.followButton.isHidden = true
         })
         return cell
     }
@@ -124,71 +74,11 @@ extension UserRelationViewController : UITableViewDelegate, UITableViewDataSourc
             
             let selectedPerson = eitherFollowersOrFollowing[indexPath.row]
             
-//        controller.selectedProfile = selectedPerson
             controller.profileType = .otherProfile
             controller.currentUserID = selectedPerson
             navigationController?.pushViewController(controller, animated: true)
         }
     }
 
-//    func followButtonTapped(sender:UIButton) {
-//        
-//        let buttonRow = sender.tag
-//        
-//        let uid = FIRAuth.auth()!.currentUser!.uid
-//        let ref = FIRDatabase.database().reference()
-//        let key = ref.child("users").childByAutoId().key
-//        
-//        var isFollower = false
-//        
-//        ref.child("users").child(uid).child("following").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
-//            
-//            if let following = snapshot.value as? [String : AnyObject] {
-//                for (ke, value) in following {
-//                    if value as! String == self.allUsers[buttonRow].id {
-//                        isFollower = true
-//                        
-//                        ref.child("users").child(uid).child("following/\(ke)").removeValue()
-//                        ref.child("users").child(self.allUsers[buttonRow].id).child("followers/\(ke)").removeValue()
-//                        
-//                        (sender as AnyObject).setTitle("Follow", for: .normal)
-//                        
-//                        
-//                    }
-//                }
-//            }
-//            if !isFollower {
-//                let following = ["following/\(key)" : self.allUsers[buttonRow].id]
-//                let followers = ["followers/\(key)" : uid]
-//                
-//                ref.child("users").child(uid).updateChildValues(following)
-//                ref.child("users").child(self.allUsers[buttonRow].id).updateChildValues(followers)
-//                
-//                (sender as AnyObject).setTitle("Following", for: .normal)
-//            }
-//        })
-//        ref.removeAllObservers()
-//    }
-//    
-//    func checkFollowing(indexPath: IndexPath, sender: UIButton) {
-//        
-//        
-//        let uid = FIRAuth.auth()!.currentUser!.uid
-//        let ref = FIRDatabase.database().reference()
-//        
-//        ref.child("users").child(uid).child("following").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
-//            
-//            if let following = snapshot.value as? [String : AnyObject] {
-//                for (_, value) in following {
-//                    if value as! String == self.allUsers[indexPath.row].id {
-//                        //self.userTableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-//                        (sender as AnyObject).setTitle("Following", for: .normal)
-//                    }
-//                }
-//            }
-//        })
-//        ref.removeAllObservers()
-//    }
-//
 }
 

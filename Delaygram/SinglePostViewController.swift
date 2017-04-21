@@ -95,12 +95,10 @@ extension SinglePostViewController : UITableViewDelegate, UITableViewDataSource 
         
         //increaseLikeCount(currentPost.imagePostID)
         
-        
-        
-        
+    
         
         return cell
-}
+    }
 
     func observeForLikes(_post: PicturePost, _label: UILabel) {
         

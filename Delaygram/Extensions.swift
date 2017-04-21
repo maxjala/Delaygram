@@ -24,8 +24,8 @@ extension UIImageView {
         }
         
         // Otherwise fire off a new download
-        let url = NSURL(string: urlString)
-        URLSession.shared.dataTask(with: url as! URL, completionHandler: { (data, response, error) in
+        let url = URL(string: urlString)
+        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
             
             // Dowload hit an error so let's return out
             if error != nil {

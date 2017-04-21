@@ -138,12 +138,12 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         return filteredPictureFeed.count
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-//    {
-//        //return 550//Choose your custom row height
-//        
-//        return UITableViewAutomaticDimension
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 550//Choose your custom row height
+        
+        //return UITableViewAutomaticDimension
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -199,7 +199,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             //numberOfLikes = checkedLikes.allValues.
             
             if numberOfLikes.count == 1 {
-                noOfLikesString = "1 likes"
+                noOfLikesString = "1 like"
             } else if numberOfLikes.count > 1 {
                 noOfLikesString = "\(numberOfLikes) likes"
             }
@@ -209,17 +209,23 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         ref.child("posts").child(postID).child("likes").observe(.childRemoved, with: { (snapshot) in
             print("Value : " , snapshot)
             
-        self.ref.child("posts").child(postID).child("likes").observe(.value, with: { (ss) in
+            _label.text = self.observeLikeCount(_postID: postID)
+        })
+        
+    }
+    
+    func observeLikeCount(_postID: String) -> String {
+        
+        var noOfLikesString = "0 likes"
+        
+        self.ref.child("posts").child(_postID).child("likes").observe(.value, with: { (ss) in
             
             var numberOfLikes : Int = 0
-            var noOfLikesString = "0 likes"
             
             guard let checkedLikes = ss.value as? NSDictionary
                 else {return}
             
             print("CMON")
-//            guard let aLike = SS.value as? String
-//                else {return}
             
             numberOfLikes = checkedLikes.allValues.count
             
@@ -230,40 +236,9 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
             } else if numberOfLikes > 1 {
                 noOfLikesString = "\(numberOfLikes) likes"
             }
-            _label.text = noOfLikesString
         })
-            
-        })
+        return noOfLikesString
     }
-    
-//    func observeForLike(_post: PicturePost) -> String {
-//        
-//        let postID = "\(_post.imagePostID)"
-//        var numberOfLikes : Int = 0
-//        var noOfLikesString = "0 likes"
-//        
-//        ref.child("posts").child(postID).child("likes").observe(.value, with: { (snapshot) in
-//            print("Value : " , snapshot)
-//            
-//            guard let checkedLikes = snapshot.value as? NSDictionary
-//                else {return}
-//            
-//            numberOfLikes = checkedLikes.allValues.count
-//            
-//            if numberOfLikes == 1 {
-//                noOfLikesString = "1 like"
-//            } else if numberOfLikes > 1 {
-//                noOfLikesString = "\(numberOfLikes) likes"
-//            }
-//            
-//            
-//        })
-//        
-//        
-//        return noOfLikesString
-//        
-//    }
-
     
     func likedButtonTapped(sender:UIButton) {
         

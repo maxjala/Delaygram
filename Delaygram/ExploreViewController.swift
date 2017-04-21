@@ -131,28 +131,64 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
     func observeForLikes(_post: PicturePost, _label: UILabel) {
         
         let postID = "\(_post.imagePostID)"
         
-        ref.child("posts").child(postID).child("likes").observe(.value, with: { (snapshot) in
+        ref.child("posts").child(postID).child("likes").observe(.childAdded, with: { (snapshot) in
             print("Value : " , snapshot)
             
-            var numberOfLikes : Int = 0
+            var numberOfLikes : [String] = []
             var noOfLikesString = "0 likes"
             
-            guard let checkedLikes = snapshot.value as? NSDictionary
+            guard let checkedLikes = snapshot.value as? String
                 else {return}
             
+            numberOfLikes.append(checkedLikes)
+            
+            //numberOfLikes = checkedLikes.allValues.
+            
+            if numberOfLikes.count == 1 {
+                noOfLikesString = "1 like"
+            } else if numberOfLikes.count > 1 {
+                noOfLikesString = "\(numberOfLikes) likes"
+            }
+            _label.text = noOfLikesString
+        })
+        
+        ref.child("posts").child(postID).child("likes").observe(.childRemoved, with: { (snapshot) in
+            print("Value : " , snapshot)
+            
+            _label.text = self.observeLikeCount(_postID: postID)
+        })
+        
+    }
+    
+    func observeLikeCount(_postID: String) -> String {
+        
+        var noOfLikesString = "0 likes"
+        
+        self.ref.child("posts").child(_postID).child("likes").observe(.value, with: { (ss) in
+            
+            var numberOfLikes : Int = 0
+            
+            guard let checkedLikes = ss.value as? NSDictionary
+                else {return}
+            
+            print("CMON")
+            
             numberOfLikes = checkedLikes.allValues.count
+            
+            //numberOfLikes = checkedLikes.allValues.
             
             if numberOfLikes == 1 {
                 noOfLikesString = "1 likes"
             } else if numberOfLikes > 1 {
                 noOfLikesString = "\(numberOfLikes) likes"
             }
-            _label.text = noOfLikesString
         })
+        return noOfLikesString
     }
     
     func likedButtonTapped(sender:UIButton) {

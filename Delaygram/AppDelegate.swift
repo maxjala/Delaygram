@@ -13,18 +13,57 @@ import FBSDKLoginKit
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate {
 
     var window: UIWindow?
     var databaseRef : FIRDatabaseReference!
     
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError?) {
-        if let error = error {
-            print(error.localizedDescription)
-            return
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if error == nil {
+            if (FBSDKAccessToken.current() == nil) { dismiss(animated: true, completion: nil) }
+            else {
+                
+                print("Log in complete")
+                
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                let defaultImageURL = "https://firebasestorage.googleapis.com/v0/b/chatapp2-8fc6d.appspot.com/o/icon1.png?alt=media&token=a0c137ff-3053-442b-a6fb-3ef06f818d6a"
+                
+                FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                    // ...
+                    if let err = error {
+                        print("Facebook Loggin Error : \(err.localizedDescription)")
+                        return
+                    }
+                    
+                    print("user signed in to Firebase")
+                    self.databaseRef = FIRDatabase.database().reference()
+                    self.databaseRef.child("users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                        let snapshot = snapshot.value as? NSDictionary
+                        
+                        if(snapshot == nil) {
+                            self.databaseRef.child("users").child(user!.uid).child("imageURL").setValue(defaultImageURL)
+                            self.databaseRef.child("users").child(user!.uid).child("email").setValue(user!.email)
+                            self.databaseRef.child("users").child(user!.uid).child("desc").setValue("Add description")
+                            self.databaseRef.child("users").child(user!.uid).child("screenName").setValue("Anonymous")
+                        }
+                        
+                        let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let initialViewController : UITabBarController = mainStoryboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+                        self.window = UIWindow(frame: UIScreen.main.bounds)
+                        self.window?.rootViewController = initialViewController
+                        self.window?.makeKeyAndVisible()
+                    })
+                }
+            }
         }
-        // ...
-
+        else if let err = error {
+            print("SignIn Error : \(err.localizedDescription)")
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("User logged out")
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

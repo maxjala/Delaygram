@@ -129,23 +129,7 @@ class ViewController: UIViewController {
         }
         self.pictureFeedTableView.reloadData()
     }
-    
-    
-    @IBAction func tempLogoutButton(_ sender: Any) {
-        let firebaseAuth = FIRAuth.auth()
-        
-        do {
-            try firebaseAuth?.signOut()
-            let storyboard = UIStoryboard(name: "LoginStoryBoard", bundle: Bundle.main)
-            //logged out and go to the log in page
-            let logInVC = storyboard.instantiateViewController(withIdentifier: "AuthNavigationController")
-            present(logInVC, animated: true, completion: nil)
-            
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-    }
-    
+
     
 }
 

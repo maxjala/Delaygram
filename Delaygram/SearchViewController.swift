@@ -35,6 +35,10 @@ class SearchViewController: UIViewController,UISearchBarDelegate {
     var currentUserId: String = ""
     var lastUserId: Int = 0
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.userTableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

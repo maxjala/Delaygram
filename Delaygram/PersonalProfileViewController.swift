@@ -24,8 +24,21 @@ class PersonalProfileViewController: UIViewController {
     }
     
     @IBOutlet weak var numberOfPosts: UILabel!
-    @IBOutlet weak var numberOfFollowers: UILabel!
-    @IBOutlet weak var numberOfFollowing: UILabel!
+    @IBOutlet weak var numberOfFollowers: UILabel! {
+        didSet {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(numberOfFollowersTapped))
+            numberOfFollowers.addGestureRecognizer(tap)
+            numberOfFollowers.isUserInteractionEnabled = true
+        }
+    }
+    
+    @IBOutlet weak var numberOfFollowing: UILabel! {
+        didSet {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(numberOfFollowingTapped))
+            numberOfFollowing.addGestureRecognizer(tap)
+            numberOfFollowing.isUserInteractionEnabled = true
+        }
+    }
     
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
@@ -335,6 +348,28 @@ class PersonalProfileViewController: UIViewController {
         }
     }
     
+    func numberOfFollowersTapped () {
+        
+        let controller = storyboard?.instantiateViewController(withIdentifier: "UserRelationViewController") as! UserRelationViewController
+        
+            guard let followers : [String] = profileFollowers
+                else {return}
+        
+        controller.eitherFollowersOrFollowing = followers
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func numberOfFollowingTapped () {
+        
+        let controller = storyboard?.instantiateViewController(withIdentifier: "UserRelationViewController") as! UserRelationViewController
+        
+            guard let following : [String] = profileFollowing
+                else {return}
+        
+        controller.eitherFollowersOrFollowing = following
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
 //End of PersonalProfileViewController
 }
 

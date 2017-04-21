@@ -92,8 +92,8 @@ class LoginViewController: UIViewController {
         facebookLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
         facebookLoginButton.center = self.view.center
         facebookLoginButton.frame = CGRect(x: 107, y: 417, width: 200, height: 42)
+        facebookLoginButton.delegate = self
         
-        facebookLoginButton.delegate = self as! FBSDKLoginButtonDelegate
         self.view.addSubview(facebookLoginButton)
     }
     
@@ -108,11 +108,68 @@ class LoginViewController: UIViewController {
     
     func directToViewController () {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+        let viewController = storyboard.instantiateViewController(withIdentifier: "TabBarController")
         self.present(viewController, animated: true)
     }
     
 //End of LoginViewController
+}
+
+extension LoginViewController : FBSDKLoginButtonDelegate {
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        
+        if error == nil {
+            if (FBSDKAccessToken.current() == nil) {
+                dismiss(animated: true, completion: nil)
+            } else {
+                
+                
+                
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                
+                
+                let defaultImageURL = "https://firebasestorage.googleapis.com/v0/b/chatapp2-8fc6d.appspot.com/o/icon1.png?alt=media&token=a0c137ff-3053-442b-a6fb-3ef06f818d6a"
+                
+                FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                    // ...
+                    if let err = error {
+                        print("Facebook Loggin Error : \(err.localizedDescription)")
+                        return
+                    }
+                    
+                    print("user signed in to Firebase")
+                    
+                    self.databaseRef = FIRDatabase.database().reference()
+                    self.databaseRef.child("users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                        let snapshot = snapshot.value as? NSDictionary
+                        
+                        if(snapshot == nil) {
+                            self.databaseRef.child("users").child(user!.uid).child("imageURL").setValue(defaultImageURL)
+                            self.databaseRef.child("users").child(user!.uid).child("email").setValue(user!.email)
+                            self.databaseRef.child("users").child(user!.uid).child("desc").setValue("Add description")
+                            self.databaseRef.child("users").child(user!.uid).child("screenName").setValue("Anonymous")
+                        }
+                        
+                        
+                        if let user = user {
+                        print("Log in complete")
+                        
+                        self.directToViewController()
+                        }
+                        
+                    })
+                }
+            }
+        } else {
+            print("SignIn Error : \(error.localizedDescription)")
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("User logged out")
+    }
 }
 
 extension LoginViewController : GIDSignInUIDelegate {

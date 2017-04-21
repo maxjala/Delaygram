@@ -30,10 +30,6 @@
 		1AECA3441EA1FE18003236F1 /* picturePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AECA3431EA1FE18003236F1 /* picturePost.swift */; };
 		1AECA3481EA20D4D003236F1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AECA3471EA20D4D003236F1 /* User.swift */; };
 		3D1A47BC1EA7432400749FF3 /* PersonalPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1A47BB1EA7432400749FF3 /* PersonalPostCollectionViewCell.swift */; };
-		3D2DA31B1EA33D5F00F77298 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2DA3171EA33D5F00F77298 /* Bolts.framework */; };
-		3D2DA31C1EA33D6000F77298 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2DA3181EA33D5F00F77298 /* FBSDKCoreKit.framework */; };
-		3D2DA31D1EA33D6000F77298 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2DA3191EA33D5F00F77298 /* FBSDKLoginKit.framework */; };
-		3D2DA31E1EA33D6000F77298 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D2DA31A1EA33D5F00F77298 /* FBSDKShareKit.framework */; };
 		3D2DA3201EA4611A00F77298 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2DA31F1EA4611A00F77298 /* DetailViewController.swift */; };
 		3D5E76CE1EA882E900B02134 /* UserRelationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E76CD1EA882E900B02134 /* UserRelationViewController.swift */; };
 		3D7E9A141EA0D28300492761 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E9A131EA0D28300492761 /* LoginViewController.swift */; };
@@ -108,10 +104,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D315A1FDFE78D09AF8162430 /* Pods_Delaygram.framework in Frameworks */,
-				3D2DA31C1EA33D6000F77298 /* FBSDKCoreKit.framework in Frameworks */,
-				3D2DA31E1EA33D6000F77298 /* FBSDKShareKit.framework in Frameworks */,
-				3D2DA31D1EA33D6000F77298 /* FBSDKLoginKit.framework in Frameworks */,
-				3D2DA31B1EA33D5F00F77298 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +542,7 @@
 				);
 				INFOPLIST_FILE = Delaygram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "/Documents/Programs/FacebookSDKs-iOS-4.21.0";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nextacademy.Delaygram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Delaygram-Bridging-Header.h";
@@ -581,7 +573,7 @@
 				);
 				INFOPLIST_FILE = Delaygram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "/Documents/Programs/FacebookSDKs-iOS-4.21.0";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nextacademy.Delaygram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Delaygram-Bridging-Header.h";

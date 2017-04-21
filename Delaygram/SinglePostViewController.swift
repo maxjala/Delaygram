@@ -20,8 +20,7 @@ class SinglePostViewController: UIViewController {
             
             singlePostTableView.estimatedRowHeight = 550
             singlePostTableView.rowHeight = UITableViewAutomaticDimension
-            
-            singlePostTableView.register(picturePostViewCell.cellNib, forCellReuseIdentifier: picturePostViewCell.cellIdentifier)
+            singlePostTableView.register(PicturePostViewCell.cellNib, forCellReuseIdentifier: PicturePostViewCell.cellIdentifier)
         }
     }
     
@@ -95,12 +94,10 @@ extension SinglePostViewController : UITableViewDelegate, UITableViewDataSource 
         
         //increaseLikeCount(currentPost.imagePostID)
         
-        
-        
-        
+    
         
         return cell
-}
+    }
 
     func observeForLikes(_post: PicturePost, _label: UILabel) {
         

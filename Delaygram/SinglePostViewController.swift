@@ -21,7 +21,7 @@ class SinglePostViewController: UIViewController {
             singlePostTableView.estimatedRowHeight = 550
             singlePostTableView.rowHeight = UITableViewAutomaticDimension
             
-            singlePostTableView.register(picturePostViewCell.cellNib, forCellReuseIdentifier: picturePostViewCell.cellIdentifier)
+            singlePostTableView.register(PicturePostViewCell.cellNib, forCellReuseIdentifier: PicturePostViewCell.cellIdentifier)
         }
     }
     
@@ -82,7 +82,7 @@ extension SinglePostViewController : UITableViewDelegate, UITableViewDataSource 
         
         cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)
         cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: profilePicURL)
-        cell.captionTextView.text = currentPost.caption
+        cell.captionLabel.text = currentPost.caption
         cell.userNameLabel.text = currentPost.userScreenName
         //cell.numberOfLikesLabel.text = observeForLike(_post: currentPost)
         checkifLiked(indexPath: indexPath, sender: cell.likeButton)

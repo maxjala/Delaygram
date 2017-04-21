@@ -166,10 +166,10 @@ extension CommentsViewController : UITableViewDelegate, UITableViewDataSource {
         return self.comments.count
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-//    {
-//        return 110.0;//Choose your custom row height
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 70.0;//Choose your custom row height
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

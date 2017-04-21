@@ -172,7 +172,7 @@
                             <constraint firstItem="zcQ-kz-zki" firstAttribute="top" secondItem="Fjv-bp-Oef" secondAttribute="bottom" id="zYY-bx-vf3"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Upload" id="6uw-tA-Enn"/>
+                    <tabBarItem key="tabBarItem" title="Upload" image="upload" id="6uw-tA-Enn"/>
                     <connections>
                         <outlet property="captionTextView" destination="NFO-O0-EhT" id="VNY-me-J6h"/>
                         <outlet property="chooseImageLabel" destination="ZPO-TV-k8I" id="BlB-SX-Pht"/>
@@ -689,7 +689,7 @@
         <scene sceneID="tTX-Qz-tD1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o4Z-2E-yd3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="rva-dk-cMN"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home" id="rva-dk-cMN"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2KV-Uc-WJk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -716,10 +716,10 @@
                     </tabBar>
                     <connections>
                         <segue destination="o4Z-2E-yd3" kind="relationship" relationship="viewControllers" id="KL7-u4-pTE"/>
-                        <segue destination="mZF-yc-Egh" kind="relationship" relationship="viewControllers" id="rdi-sI-ZMV"/>
                         <segue destination="7gt-GG-lYs" kind="relationship" relationship="viewControllers" id="k4v-Q9-QFK"/>
-                        <segue destination="VV0-NJ-2f5" kind="relationship" relationship="viewControllers" id="Ogo-L5-dWI"/>
+                        <segue destination="mZF-yc-Egh" kind="relationship" relationship="viewControllers" id="rdi-sI-ZMV"/>
                         <segue destination="9GS-5h-uQM" kind="relationship" relationship="viewControllers" id="Oqm-y0-Xpx"/>
+                        <segue destination="VV0-NJ-2f5" kind="relationship" relationship="viewControllers" id="Ogo-L5-dWI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yt9-pE-hKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -748,7 +748,7 @@
         <scene sceneID="nUw-75-DBU">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7gt-GG-lYs" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Explore" id="fNh-A7-h6S"/>
+                    <tabBarItem key="tabBarItem" title="Explore" image="explore" id="fNh-A7-h6S"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="LCX-16-WSm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -767,7 +767,7 @@
         <scene sceneID="VHv-CC-7v0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9GS-5h-uQM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="d47-l5-G0c"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="search" id="d47-l5-G0c"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="h40-rc-cce">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -786,7 +786,7 @@
         <scene sceneID="B8v-6K-hWo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VV0-NJ-2f5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="9IO-Re-xQz"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile" id="9IO-Re-xQz"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="eHh-Xl-Z3i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -803,6 +803,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="explore" width="30" height="30"/>
         <image name="greenGradient" width="300" height="168"/>
+        <image name="home" width="30" height="30"/>
+        <image name="profile" width="30" height="30"/>
+        <image name="search" width="30" height="30"/>
+        <image name="upload" width="30" height="30"/>
     </resources>
 </document>

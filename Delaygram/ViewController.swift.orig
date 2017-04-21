@@ -18,6 +18,9 @@ class ViewController: UIViewController {
             pictureFeedTableView.delegate = self
             pictureFeedTableView.dataSource = self
             
+            pictureFeedTableView.estimatedRowHeight = 550
+            pictureFeedTableView.rowHeight = UITableViewAutomaticDimension
+            
             pictureFeedTableView.register(PicturePostViewCell.cellNib, forCellReuseIdentifier: PicturePostViewCell.cellIdentifier)
         }
     }

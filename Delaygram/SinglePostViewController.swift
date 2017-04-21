@@ -21,7 +21,7 @@ class SinglePostViewController: UIViewController {
             singlePostTableView.estimatedRowHeight = 550
             singlePostTableView.rowHeight = UITableViewAutomaticDimension
             
-            singlePostTableView.register(picturePostViewCell.cellNib, forCellReuseIdentifier: picturePostViewCell.cellIdentifier)
+            singlePostTableView.register(PicturePostViewCell.cellNib, forCellReuseIdentifier: PicturePostViewCell.cellIdentifier)
         }
     }
     

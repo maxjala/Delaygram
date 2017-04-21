@@ -36,11 +36,13 @@ class PicturePostViewCell: UITableViewCell {
     
     @IBOutlet weak var userNameLabel: UILabel!
     
+    @IBOutlet weak var userNameLabelDisplay: UILabel!
     @IBOutlet weak var picturePostImageView: UIImageView!
     
     @IBOutlet weak var numberOfLikesLabel: UILabel!
     
-    @IBOutlet weak var captionTextView: UITextView!
+    
+    @IBOutlet weak var captionLabel: UILabel!
     
     @IBOutlet weak var likeButton: UIButton! {
         didSet{

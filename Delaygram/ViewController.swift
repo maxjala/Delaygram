@@ -134,22 +134,6 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func tempLogoutButton(_ sender: Any) {
-        let firebaseAuth = FIRAuth.auth()
-        
-        do {
-            try firebaseAuth?.signOut()
-            let storyboard = UIStoryboard(name: "LoginStoryBoard", bundle: Bundle.main)
-            //logged out and go to the log in page
-            let logInVC = storyboard.instantiateViewController(withIdentifier: "AuthNavigationController")
-            present(logInVC, animated: true, completion: nil)
-            
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-    }
-    
-    
 }
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
@@ -179,8 +163,9 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         
         cell.picturePostImageView.loadImageUsingCacheWithUrlString(urlString: pictureURL)
         cell.profilePicImageView.loadImageUsingCacheWithUrlString(urlString: profilePicURL)
-        cell.captionTextView.text = currentPost.caption
+        cell.captionLabel.text = currentPost.caption
         cell.userNameLabel.text = currentPost.userScreenName
+        cell.userNameLabelDisplay.text = currentPost.userScreenName
         //cell.numberOfLikesLabel.text = observeForLike(_post: currentPost)
         checkifLiked(indexPath: indexPath, sender: cell.likeButton)
         observeForLikes(_post: currentPost, _label: cell.numberOfLikesLabel)
@@ -203,23 +188,54 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         
         let postID = "\(_post.imagePostID)"
         
-        ref.child("posts").child(postID).child("likes").observe(.value, with: { (snapshot) in
+        ref.child("posts").child(postID).child("likes").observe(.childAdded, with: { (snapshot) in
             print("Value : " , snapshot)
+            
+            var numberOfLikes : [String] = []
+            var noOfLikesString = "0 likes"
+            
+            guard let checkedLikes = snapshot.value as? String
+                else {return}
+            
+            numberOfLikes.append(checkedLikes)
+            
+            //numberOfLikes = checkedLikes.allValues.
+            
+            if numberOfLikes.count == 1 {
+                noOfLikesString = "1 likes"
+            } else if numberOfLikes.count > 1 {
+                noOfLikesString = "\(numberOfLikes) likes"
+            }
+            _label.text = noOfLikesString
+        })
+        
+        ref.child("posts").child(postID).child("likes").observe(.childRemoved, with: { (snapshot) in
+            print("Value : " , snapshot)
+            
+        self.ref.child("posts").child(postID).child("likes").observe(.value, with: { (ss) in
             
             var numberOfLikes : Int = 0
             var noOfLikesString = "0 likes"
             
-            guard let checkedLikes = snapshot.value as? NSDictionary
+            guard let checkedLikes = ss.value as? NSDictionary
                 else {return}
+            
+            print("CMON")
+//            guard let aLike = SS.value as? String
+//                else {return}
             
             numberOfLikes = checkedLikes.allValues.count
             
+            //numberOfLikes = checkedLikes.allValues.
+            
             if numberOfLikes == 1 {
-                noOfLikesString = "1 like"
+                noOfLikesString = "1 likes"
             } else if numberOfLikes > 1 {
                 noOfLikesString = "\(numberOfLikes) likes"
             }
             _label.text = noOfLikesString
+        })
+            
         })
     }
     

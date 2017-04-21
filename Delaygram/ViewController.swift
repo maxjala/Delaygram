@@ -87,8 +87,7 @@ class ViewController: UIViewController {
             // sort
             self.filteredPictureFeed.sort(by: { (picture1, picture2) -> Bool in
                 return picture1.imagePostID > picture2.imagePostID
-                
-                //LATER NEED TO CHANGE TO SORT BY POST TIME
+
             })
             
             self.pictureFeedTableView.reloadData()
@@ -163,16 +162,14 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         cell.captionLabel.text = currentPost.caption
         cell.userNameLabel.text = currentPost.userScreenName
         cell.userNameLabelDisplay.text = currentPost.userScreenName
-        //cell.numberOfLikesLabel.text = observeForLike(_post: currentPost)
-        checkifLiked(indexPath: indexPath, sender: cell.likeButton)
-        observeForLikes(_post: currentPost, _label: cell.numberOfLikesLabel)
         
-        //cell.numberOfLikesLabel.text = "\(currentPost.numberOfLikes) likes"
+        
+        checkifLiked(indexPath: indexPath, sender: cell.likeButton)
+        updateLikeCount(postID: "\(currentPost.imagePostID)", onLabel: cell.numberOfLikesLabel)
         
         cell.likeButton.tag = indexPath.row
         cell.likeButton.addTarget(self, action: #selector(likedButtonTapped(sender:)), for: .touchUpInside)
         
-        //increaseLikeCount(currentPost.imagePostID)
         cell.activityIndicator.startAnimating()
         
         
@@ -180,65 +177,57 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+
     
-    func observeForLikes(_post: PicturePost, _label: UILabel) {
-        
-        let postID = "\(_post.imagePostID)"
-        
+    func updateLikeCount(postID: String, onLabel label: UILabel) {
         ref.child("posts").child(postID).child("likes").observe(.childAdded, with: { (snapshot) in
             print("Value : " , snapshot)
             
-            var numberOfLikes : [String] = []
-            var noOfLikesString = "0 likes"
+            self.observeLikesCount(_postID: postID, onLabel: label)
             
-            guard let checkedLikes = snapshot.value as? String
-                else {return}
             
-            numberOfLikes.append(checkedLikes)
-            
-            //numberOfLikes = checkedLikes.allValues.
-            
-            if numberOfLikes.count == 1 {
-                noOfLikesString = "1 like"
-            } else if numberOfLikes.count > 1 {
-                noOfLikesString = "\(numberOfLikes) likes"
-            }
-            _label.text = noOfLikesString
-        })
+            })
         
         ref.child("posts").child(postID).child("likes").observe(.childRemoved, with: { (snapshot) in
             print("Value : " , snapshot)
             
-            _label.text = self.observeLikeCount(_postID: postID)
+            self.observeLikesCount(_postID: postID, onLabel: label)
+            
+            
         })
+    
         
     }
     
-    func observeLikeCount(_postID: String) -> String {
+    func observeLikesCount(_postID: String, onLabel label: UILabel) {
         
         var noOfLikesString = "0 likes"
+        var numberOfLikes : Int = 0
         
         self.ref.child("posts").child(_postID).child("likes").observe(.value, with: { (ss) in
             
-            var numberOfLikes : Int = 0
-            
             guard let checkedLikes = ss.value as? NSDictionary
-                else {return}
+                else {
+                     label.text = noOfLikesString
+                    return
+            }
             
             print("CMON")
             
             numberOfLikes = checkedLikes.allValues.count
             
-            //numberOfLikes = checkedLikes.allValues.
-            
             if numberOfLikes == 1 {
-                noOfLikesString = "1 likes"
+                noOfLikesString = "1 like"
             } else if numberOfLikes > 1 {
                 noOfLikesString = "\(numberOfLikes) likes"
             }
+            
+            label.text = noOfLikesString
         })
-        return noOfLikesString
+        
+        
     }
+
     
     func likedButtonTapped(sender:UIButton) {
         
@@ -305,36 +294,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         ref.removeAllObservers()
         
     }
-    
-//    func increaseLikeCount(_ postID: Int) {
-//        ref.child("posts").child("\(postID)").child("numberOfLikes").observeSingleEvent(of: .value, with: { (snapshot) in
-//            
-//            guard let noOfLikes = snapshot.value as? Int else {
-//                print("print noOfLikes not found. wrong path/observation used")
-//                return }
-//
-//            let newLikesCount = noOfLikes + 1
-//            
-//            self.ref.child("posts").child("\(postID)").child("numberOfLikes").setValue(newLikesCount)
-//            
-//        })
-//    }
-//    
-//    func decreaseLikeCount(_ postID: Int) {
-//        ref.child("posts").child("\(postID)").child("numberOfLikes").observeSingleEvent(of: .value, with: { (snapshot) in
-//            
-//            guard let noOfLikes = snapshot.value as? Int else {
-//                print("print noOfLikes not found. wrong path/observation used")
-//                return }
-//
-//            let newLikesCount = noOfLikes - 1
-//            
-//            self.ref.child("posts").child("\(postID)").child("numberOfLikes").setValue(newLikesCount)
-//            
-//        })
-//    }
-    
-    
+ 
     
 }
 

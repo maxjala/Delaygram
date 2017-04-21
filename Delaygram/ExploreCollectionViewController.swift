@@ -49,6 +49,7 @@ class ExploreCollectionViewController: UIViewController, UICollectionViewDataSou
         listenToFirebase()
     }
     
+    
     func addPost(id: Any , postInfo:NSDictionary){
         if let userID = postInfo["userID"] as? String,
             let caption = postInfo["caption"] as? String,

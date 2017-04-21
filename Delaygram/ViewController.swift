@@ -21,7 +21,7 @@ class ViewController: UIViewController {
             pictureFeedTableView.estimatedRowHeight = 550
             pictureFeedTableView.rowHeight = UITableViewAutomaticDimension
             
-            pictureFeedTableView.register(picturePostViewCell.cellNib, forCellReuseIdentifier: picturePostViewCell.cellIdentifier)
+            pictureFeedTableView.register(PicturePostViewCell.cellNib, forCellReuseIdentifier: PicturePostViewCell.cellIdentifier)
         }
     }
     
@@ -166,7 +166,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: picturePostViewCell.cellIdentifier) as? picturePostViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PicturePostViewCell.cellIdentifier) as? PicturePostViewCell
             else {return UITableViewCell()}
         
         let currentPost = filteredPictureFeed[indexPath.row]

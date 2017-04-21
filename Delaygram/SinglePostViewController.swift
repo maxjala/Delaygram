@@ -21,7 +21,7 @@ class SinglePostViewController: UIViewController {
             singlePostTableView.estimatedRowHeight = 550
             singlePostTableView.rowHeight = UITableViewAutomaticDimension
             
-            singlePostTableView.register(picturePostViewCell.cellNib, forCellReuseIdentifier: picturePostViewCell.cellIdentifier)
+            singlePostTableView.register(PicturePostViewCell.cellNib, forCellReuseIdentifier: PicturePostViewCell.cellIdentifier)
         }
     }
     
@@ -67,7 +67,7 @@ extension SinglePostViewController : UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: picturePostViewCell.cellIdentifier) as? picturePostViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PicturePostViewCell.cellIdentifier) as? PicturePostViewCell
             else {return UITableViewCell()}
         
         let currentPost = aPost[indexPath.row]

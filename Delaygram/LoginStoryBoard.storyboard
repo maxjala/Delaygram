@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tj5-QO-jRg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tj5-QO-jRg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -76,7 +76,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T5G-fs-Mrb" customClass="GIDSignInButton">
-                                <rect key="frame" x="100" y="418" width="175" height="30"/>
+                                <rect key="frame" x="93" y="418" width="189" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="9Kg-2H-VFI"/>
@@ -94,6 +94,13 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMk-cP-bcX" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="93" y="370" width="189" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="loz-lV-LJL"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -109,8 +116,9 @@
                             <constraint firstItem="yWQ-di-7gV" firstAttribute="top" secondItem="aM7-Ii-VEQ" secondAttribute="bottom" constant="25" id="MPl-qU-kOK"/>
                             <constraint firstItem="U2q-Oc-cE4" firstAttribute="top" secondItem="hFS-Hu-ifF" secondAttribute="bottom" id="MdO-XQ-Rm9"/>
                             <constraint firstItem="dsx-vq-a1c" firstAttribute="top" secondItem="T5G-fs-Mrb" secondAttribute="bottom" constant="60" id="PP2-HA-C06"/>
+                            <constraint firstItem="T5G-fs-Mrb" firstAttribute="top" secondItem="vMk-cP-bcX" secondAttribute="bottom" constant="8" id="QIY-oZ-mJZ"/>
                             <constraint firstItem="T5G-fs-Mrb" firstAttribute="top" secondItem="cof-q5-anQ" secondAttribute="bottom" constant="70" id="TyU-6N-oK1"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="T5G-fs-Mrb" secondAttribute="trailing" constant="84" id="UVG-ii-88n"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="T5G-fs-Mrb" secondAttribute="trailing" constant="77" id="UVG-ii-88n"/>
                             <constraint firstAttribute="trailing" secondItem="h0s-in-cNr" secondAttribute="trailing" id="V7A-pf-Hy3"/>
                             <constraint firstAttribute="trailing" secondItem="aM7-Ii-VEQ" secondAttribute="trailing" constant="16" id="Vnw-54-1iq"/>
                             <constraint firstItem="onm-MV-qRC" firstAttribute="top" secondItem="dsx-vq-a1c" secondAttribute="bottom" id="anr-hV-Wje"/>
@@ -121,8 +129,10 @@
                             <constraint firstItem="aM7-Ii-VEQ" firstAttribute="leading" secondItem="xdF-Gf-R5d" secondAttribute="leading" constant="16" id="hvD-S0-R9Q"/>
                             <constraint firstItem="4gd-8s-lFx" firstAttribute="leading" secondItem="xdF-Gf-R5d" secondAttribute="leading" constant="16" id="iDF-jq-UPK"/>
                             <constraint firstItem="aM7-Ii-VEQ" firstAttribute="top" secondItem="h0s-in-cNr" secondAttribute="bottom" constant="29" id="j4S-mc-uBe"/>
-                            <constraint firstItem="T5G-fs-Mrb" firstAttribute="leading" secondItem="xdF-Gf-R5d" secondAttribute="leadingMargin" constant="84" id="lon-hn-2dB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vMk-cP-bcX" secondAttribute="trailing" constant="77" id="lSX-ua-uyt"/>
+                            <constraint firstItem="T5G-fs-Mrb" firstAttribute="leading" secondItem="xdF-Gf-R5d" secondAttribute="leadingMargin" constant="77" id="lon-hn-2dB"/>
                             <constraint firstItem="hFS-Hu-ifF" firstAttribute="leading" secondItem="xdF-Gf-R5d" secondAttribute="leading" id="n2k-08-vgp"/>
+                            <constraint firstItem="vMk-cP-bcX" firstAttribute="top" secondItem="cof-q5-anQ" secondAttribute="bottom" constant="22" id="n5g-9G-4eB"/>
                             <constraint firstItem="h0s-in-cNr" firstAttribute="top" secondItem="xdF-Gf-R5d" secondAttribute="top" constant="6" id="p0J-HU-sBP"/>
                             <constraint firstAttribute="trailing" secondItem="5Za-Xw-nu8" secondAttribute="trailing" id="ppQ-jN-nNK"/>
                             <constraint firstItem="cof-q5-anQ" firstAttribute="leading" secondItem="xdF-Gf-R5d" secondAttribute="leading" constant="179" id="rJS-5L-Cfq"/>
@@ -130,6 +140,7 @@
                             <constraint firstAttribute="trailing" secondItem="onm-MV-qRC" secondAttribute="trailing" constant="129" id="s8s-u3-bIB"/>
                             <constraint firstItem="5Za-Xw-nu8" firstAttribute="leading" secondItem="xdF-Gf-R5d" secondAttribute="leading" id="sfF-N0-Q9X"/>
                             <constraint firstAttribute="trailing" secondItem="hFS-Hu-ifF" secondAttribute="trailing" id="tMd-LC-ZLq"/>
+                            <constraint firstItem="vMk-cP-bcX" firstAttribute="leading" secondItem="xdF-Gf-R5d" secondAttribute="leadingMargin" constant="77" id="yK2-Co-lXV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Kv8-De-BhU"/>
@@ -137,6 +148,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="emailSigninLabel" destination="aM7-Ii-VEQ" id="wst-fR-BK1"/>
+                        <outlet property="facebookLoginButton" destination="vMk-cP-bcX" id="ujW-5k-9MT"/>
                         <outlet property="loginButton" destination="4gd-8s-lFx" id="bh5-Qk-NMV"/>
                         <outlet property="passwordSigninLabel" destination="yWQ-di-7gV" id="MiT-uu-Y2F"/>
                         <outlet property="registerButton" destination="onm-MV-qRC" id="pYB-1g-4aI"/>
@@ -436,7 +448,7 @@
             <objects>
                 <navigationController storyboardIdentifier="AuthNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="tj5-QO-jRg" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EiU-ai-dUw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EiU-ai-dUw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

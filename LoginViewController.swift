@@ -16,6 +16,7 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailSigninLabel: UITextField!
     @IBOutlet weak var passwordSigninLabel: UITextField!
+    @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
     
     @IBOutlet weak var loginButton: UIButton! {
         didSet {
@@ -94,17 +95,11 @@ class LoginViewController: UIViewController {
 
     // MARK - Facebook loggin
     func facebookLogin () {
-        if (FBSDKAccessToken.current() == nil) { print("Facebook Not logged in") }
-        else { print("Facebook Logged in") }
-        
-        let facebookLoginButton = FBSDKLoginButton()
-        facebookLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
-        facebookLoginButton.center = self.view.center
-        facebookLoginButton.frame = CGRect(x: 107, y: 417, width: 200, height: 42)
         facebookLoginButton.delegate = self
         
-        self.view.addSubview(facebookLoginButton)
-    }
+        if (FBSDKAccessToken.current() == nil) { print("Facebook Not logged in") }
+        else { print("Facebook Logged in") }
+        }
     
      // MARK - Google loggin
     func googleLogin () {

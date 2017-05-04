@@ -122,6 +122,7 @@ class LoginViewController: UIViewController {
     }
     
 //End of LoginViewController
+    
 }
 
 extension LoginViewController : FBSDKLoginButtonDelegate {
